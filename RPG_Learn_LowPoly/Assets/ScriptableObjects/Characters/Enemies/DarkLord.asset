@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e2619e7b8f2494a9a42b844d43a80d, type: 3}
+  m_Name: DarkLord
+  m_EditorClassIdentifier: 
+  _id: 0
+  _name: DarkLord
+  _description: Primeiro Inimigo
+  _type: Bestial
+  _behavior: 2
+  _chaseEnemyBehavior: 1
+  _detectionDistance: 10
+  _attackDistance: 1.5
+  _walkSpeed: 3
+  _chaseSpeed: 5
+  _cooldownTimeAfterChase: 2
+  _arrivalDistance: 0.1
+  _patrolPoints:
+  - {fileID: 6760344762959615713, guid: cc9538b5d64c88c4ca939357723d2889, type: 3}
+  - {fileID: 3195228273982721363, guid: c908fadc9cfc2a448b8f657efab4a502, type: 3}
+  - {fileID: 230802192084505648, guid: dab015a0ef2257d4b96f4139c461f792, type: 3}
+  _damage: 5
+  _maxHealth: 100
+  _animatorOverrideController: {fileID: 22100000, guid: 2f4b3100c9207e445b20bd9d22ea8411, type: 2}
+  _prefab: {fileID: 840192036602899295, guid: 20f893712480346428aade7ebf309aa0, type: 3}
