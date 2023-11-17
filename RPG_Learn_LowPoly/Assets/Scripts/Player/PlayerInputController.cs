@@ -17,7 +17,7 @@ namespace RPG.Player.InputController
 
         private void Awake()
         {
-            // Inicializa os componentes e variáveis necessárias quando o objeto é criado
+            // Inicializa os componentes e variï¿½veis necessï¿½rias quando o objeto ï¿½ criado
             playerInput = new PlayerInput();
             playerMovement = GetComponent<PlayerMovement>();
             playerAttack = GetComponent<PlayerAttack>();
@@ -46,15 +46,17 @@ namespace RPG.Player.InputController
             playerInput.CharacterControls.Run.started += playerMovement.Run; // Callback para iniciar a corrida
             playerInput.CharacterControls.Run.canceled += playerMovement.StopRun; // Callback para parar a corrida
             playerInput.CharacterControls.Jump.started += playerMovement.Jump; // Callback para iniciar a Pulo
-            playerInput.CharacterControls.Jump.canceled += playerMovement.StopJump; // Callback para indicar que soltamos botão de pulo
-            playerInput.CharacterControls.Attack.started += playerAttack.Attack; // Callback para iniciar o Melee Attack
-            playerInput.CharacterControls.Attack.canceled += playerAttack.StopAttack; // Callback para indicar que soltamos botão de melee attack
-            playerInput.CharacterControls.ChangeWeapon.started += playerAttack.ChangeWeapon; // Callback para iniciar a troca de arma
-            playerInput.CharacterControls.ChangeWeapon.canceled += playerAttack.StopChangeWeapon; // Callback para indicar que soltamos botão de troca de arma
+            playerInput.CharacterControls.Jump.canceled += playerMovement.StopJump; // Callback para indicar que soltamos botï¿½o de pulo
+            playerInput.CharacterControls.Roll.started += playerMovement.Roll; // Callback para iniciar a troca de arma
+            playerInput.CharacterControls.Roll.canceled += playerMovement.StopRoll; // Callback para indicar que soltamos botï¿½o de troca de arma
 
+            playerInput.CharacterControls.Attack.started += playerAttack.Attack; // Callback para iniciar o Melee Attack
+            playerInput.CharacterControls.Attack.canceled += playerAttack.StopAttack; // Callback para indicar que soltamos botï¿½o de melee attack
+            playerInput.CharacterControls.ChangeWeapon.started += playerAttack.ChangeWeapon; // Callback para iniciar a troca de arma
+            playerInput.CharacterControls.ChangeWeapon.canceled += playerAttack.StopChangeWeapon; // Callback para indicar que soltamos botï¿½o de troca de arma
         }
 
-        // Cancela o registro de callbacks quando o script é desativado
+        // Cancela o registro de callbacks quando o script ï¿½ desativado
         private void disablePlayerInputs()
         {
             playerInput.Disable();
@@ -66,6 +68,9 @@ namespace RPG.Player.InputController
             playerInput.CharacterControls.Run.canceled -= playerMovement.StopRun;
             playerInput.CharacterControls.Jump.started -= playerMovement.Jump;
             playerInput.CharacterControls.Jump.canceled -= playerMovement.StopJump;
+            playerInput.CharacterControls.Roll.started -= playerMovement.Roll; 
+            playerInput.CharacterControls.Roll.canceled -= playerMovement.StopRoll; 
+
             playerInput.CharacterControls.Attack.started -= playerAttack.Attack;
             playerInput.CharacterControls.Attack.canceled -= playerAttack.StopAttack;
             playerInput.CharacterControls.ChangeWeapon.started -= playerAttack.ChangeWeapon; 

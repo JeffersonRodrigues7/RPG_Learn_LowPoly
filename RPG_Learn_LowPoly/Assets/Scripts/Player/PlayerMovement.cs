@@ -10,15 +10,15 @@ namespace RPG.Player.Movement
     {
         #region VARIABLES DECLARATION
 
-        [Header("Movimentação")]
+        [Header("Movimentaï¿½ï¿½o")]
         [SerializeField] private float walkSpeed = 5.0f; //Velocidade do jogador ao andar
         [SerializeField] private float runSpeed = 10.0f; //Velocidade do jogador ao correr
-        [SerializeField] private float rotationSpeed = 10.0f; //Velocidade de rotação do jogador
+        [SerializeField] private float rotationSpeed = 10.0f; //Velocidade de rotaï¿½ï¿½o do jogador
 
-        [SerializeField] private float jumpForce = 2.0f; //Força com a qual o objeto irá pular
+        [SerializeField] private float jumpForce = 2.0f; //Forï¿½a com a qual o objeto irï¿½ pular
         [SerializeField] private float jumpSlowdown = 1.0f; //Valor com o qual o player vai perdendo a velocidade no pulo
 
-        [SerializeField] private float mouseInputDistance = 50.0f; //Distância com a qual o jogador consegue interagir com o mapa através do mouse
+        [SerializeField] private float mouseInputDistance = 50.0f; //Distï¿½ncia com a qual o jogador consegue interagir com o mapa atravï¿½s do mouse
 
         private Animator animator; //Componente animator
         private Rigidbody rb; //Componente rigidibody
@@ -28,26 +28,29 @@ namespace RPG.Player.Movement
         private Camera cam; //Camera principal do jogo
 
         private Ray ray;
-        private Vector3 movementPosition;  //Posição para qual o player irá se mover
+        private Vector3 movementPosition;  //Posiï¿½ï¿½o para qual o player irï¿½ se mover
 
         private Vector3 mousePosition;
         private Vector3 wantedMousePosition;
 
-        private bool isWalking = false; //Flag que indica que o objetando está se movendo
+        private bool isWalking = false; //Flag que indica que o objetando estï¿½ se movendo
         private float currentSpeed = 3.0f; //Velocidade atual do jogador
         private float currentjumpVelocity = 0; //Velocidade do objeto atual nop ar
         private bool navMeshRemainingPath = false; // Flag que indica se o objeto deve continuar a se movimentar com o navmesh
 
-        private bool isKeyboardMoving = false;  // Flag para determinar se o jogador está andando via teclado
-        private bool isMouseMoving = false;  // Flag para determinar se o jogador está andando via mouse
-        private int isWalkingHash; //Hash da String que se refere a animação de Walk
+        private bool isKeyboardMoving = false;  // Flag para determinar se o jogador estï¿½ andando via teclado
+        private bool isMouseMoving = false;  // Flag para determinar se o jogador estï¿½ andando via mouse
+        private int isWalkingHash; //Hash da String que se refere a animaï¿½ï¿½o de Walk
 
-        private bool isRunning = false; // Flag para determinar se o jogador está correndo
-        private int isRunningHash; //Hash da String que se refere a animação de Running
+        private bool isRunning = false; // Flag para determinar se o jogador estï¿½ correndo
+        private int isRunningHash; //Hash da String que se refere a animaï¿½ï¿½o de Running
 
-        private bool isJumping = false; // Flag para determinar se o jogador está pulando
-        private bool isFalling = false; // Flag para determinar se o jogador está caindo
-        private int isJumpingHash; //Hash da String que se refere a animação de Jumping
+        private bool isJumping = false; // Flag para determinar se o jogador estï¿½ pulando
+        private bool isFalling = false; // Flag para determinar se o jogador estï¿½ caindo
+        private int isJumpingHash; //Hash da String que se refere a animaï¿½ï¿½o de Jumping
+
+        private bool isRolling = false;
+        private int isRollingHash;
 
         #endregion
 
@@ -55,7 +58,7 @@ namespace RPG.Player.Movement
 
         private void Awake()
         {
-            // Inicializa os componentes e variáveis necessárias quando o objeto é criado
+            // Inicializa os componentes e variï¿½veis necessï¿½rias quando o objeto ï¿½ criado
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -64,10 +67,11 @@ namespace RPG.Player.Movement
 
         private void Start()
         {
-            // Inicializa hashes das strings usadas para controlar animações e obtém a câmera principal do jogo
+            // Inicializa hashes das strings usadas para controlar animaï¿½ï¿½es e obtï¿½m a cï¿½mera principal do jogo
             isWalkingHash = Animator.StringToHash("isWalking");
             isRunningHash = Animator.StringToHash("isRunning");
             isJumpingHash = Animator.StringToHash("TriggerJump");
+            isRollingHash = Animator.StringToHash("TriggerRoll");
             cam = Camera.main;
         }
 
@@ -77,18 +81,18 @@ namespace RPG.Player.Movement
 
         private void Update()
         {
-            if (playerAttack.IsRangedAttacking) // Se o jogador está atacando à distância
+            if (playerAttack.IsRangedAttacking) // Se o jogador estï¿½ atacando ï¿½ distï¿½ncia
             {
                 mousePosition = Input.mousePosition;
                 wantedMousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 100f));
-                // Determina a direção para onde o jogador deve olhar
+                // Determina a direï¿½ï¿½o para onde o jogador deve olhar
                 Vector3 direction = wantedMousePosition - transform.position;
 
                 direction.y = 0; // Define o componente y como zero para restringir ao plano XZ
 
-                // Calcula a rotação do jogador para olhar na direção determinada
+                // Calcula a rotaï¿½ï¿½o do jogador para olhar na direï¿½ï¿½o determinada
                 Quaternion novaRotacao = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Euler(0, novaRotacao.eulerAngles.y, 0); // Ajusta a rotação do jogador apenas nos eixos X e Z
+                transform.rotation = Quaternion.Euler(0, novaRotacao.eulerAngles.y, 0); // Ajusta a rotaï¿½ï¿½o do jogador apenas nos eixos X e Z
             }
             else
             {
@@ -99,17 +103,17 @@ namespace RPG.Player.Movement
 
         private void FixedUpdate()
         {
-            if (playerAttack.IsRangedAttacking) //Se o player está atirando, então ele não pode se mover
+            if (playerAttack.IsRangedAttacking) //Se o player estï¿½ atirando, entï¿½o ele nï¿½o pode se mover
             {
                 return;
             }
 
             currentSpeed = isRunning ? runSpeed : walkSpeed;
 
-            if (isJumping) //Player está pulando
+            if (isJumping) //Player estï¿½ pulando
             {
                 currentjumpVelocity -= jumpForce * jumpSlowdown * Time.fixedDeltaTime; //Diminuindo a velocidade do player no ar
-                if (currentjumpVelocity < 0) isFalling = true; //Player começa a cair
+                if (currentjumpVelocity < 0) isFalling = true; //Player comeï¿½a a cair
             }
 
             if (isMouseMoving) //Se estivermos nos movendo via mouse
@@ -125,22 +129,22 @@ namespace RPG.Player.Movement
 
         #endregion
 
-        #region  MOVIMENTAÇÃO 
+        #region  MOVIMENTAï¿½ï¿½O 
 
-        //Faz movimentação via Mouse
+        //Faz movimentaï¿½ï¿½o via Mouse
         private void doMouseMovimentation()
         {
 
-            // Cria um raio a partir da posição do mouse convertida para o espaço da tela.
+            // Cria um raio a partir da posiï¿½ï¿½o do mouse convertida para o espaï¿½o da tela.
             ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            // Realiza um raio para detectar colisões no mundo e armazena as informações na variável 'hit'.
+            // Realiza um raio para detectar colisï¿½es no mundo e armazena as informaï¿½ï¿½es na variï¿½vel 'hit'.
             if (Physics.Raycast(ray, out RaycastHit hit, mouseInputDistance))
             {
-                movementPosition = hit.point; // Define a posição de movimento com base no ponto onde o raio colidiu com o objeto.
+                movementPosition = hit.point; // Define a posiï¿½ï¿½o de movimento com base no ponto onde o raio colidiu com o objeto.
             }
 
-            MoveToPosition(movementPosition); // Chama a função 'MoveToPosition' para mover o jogador até a nova posição definida.
+            MoveToPosition(movementPosition); // Chama a funï¿½ï¿½o 'MoveToPosition' para mover o jogador atï¿½ a nova posiï¿½ï¿½o definida.
 
             navMeshRemainingPath = true; //Indica que temos um caminho a percorrer 
 
@@ -150,13 +154,13 @@ namespace RPG.Player.Movement
             }
         }
 
-        //Faz movimentação via teclado
+        //Faz movimentaï¿½ï¿½o via teclado
         private void doKeyboardMovimentation()
         {
-            // Cria um vetor de direção a partir da posição de movimento do jogador, com a componente y zerada, e normaliza-o.
+            // Cria um vetor de direï¿½ï¿½o a partir da posiï¿½ï¿½o de movimento do jogador, com a componente y zerada, e normaliza-o.
             Vector3 movementInputDirection = new Vector3(movementPosition.x, 0.0f, movementPosition.y).normalized;
 
-            // Transforma a direção do movimento no espaço da câmera
+            // Transforma a direï¿½ï¿½o do movimento no espaï¿½o da cï¿½mera
             Vector3 cameraForward = cam.transform.forward;
             Vector3 cameraRight = cam.transform.right;
 
@@ -164,32 +168,32 @@ namespace RPG.Player.Movement
             cameraForward.y = 0;
             cameraRight.y = 0;
 
-            // Normaliza os vetores da câmera para garantir que tenham comprimento igual a 1.
+            // Normaliza os vetores da cï¿½mera para garantir que tenham comprimento igual a 1.
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            // Calcula a direção de movimento desejada no espaço da câmera.
+            // Calcula a direï¿½ï¿½o de movimento desejada no espaï¿½o da cï¿½mera.
             Vector3 desiredMoveDirection = cameraForward * movementInputDirection.z + cameraRight * movementInputDirection.x;
 
-            // Define a velocidade do Rigidbody com base na direção de movimento desejada e na velocidade atual.
+            // Define a velocidade do Rigidbody com base na direï¿½ï¿½o de movimento desejada e na velocidade atual.
             rb.velocity = new Vector3(desiredMoveDirection.x * currentSpeed, currentjumpVelocity, desiredMoveDirection.z * currentSpeed) ;
 
-            // Se houver uma direção de movimento (diferente de zero), realiza a rotação do jogador.
+            // Se houver uma direï¿½ï¿½o de movimento (diferente de zero), realiza a rotaï¿½ï¿½o do jogador.
             if (movementInputDirection != Vector3.zero)
             {
-                // Calcula uma nova rotação com base na direção de movimento desejada.
+                // Calcula uma nova rotaï¿½ï¿½o com base na direï¿½ï¿½o de movimento desejada.
                 Quaternion newRotation = Quaternion.LookRotation(desiredMoveDirection);
 
-                // Aplica uma rotação suave (Slerp) do jogador em direção à nova rotação.
+                // Aplica uma rotaï¿½ï¿½o suave (Slerp) do jogador em direï¿½ï¿½o ï¿½ nova rotaï¿½ï¿½o.
                 transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.fixedDeltaTime);
 
             }
         }
 
-        //Função responsável por cuidar da animação do jogador
+        //Funï¿½ï¿½o responsï¿½vel por cuidar da animaï¿½ï¿½o do jogador
         private void updateMoveParameters()
         {
-            //Verifica se o player chegou na posição via navmesh
+            //Verifica se o player chegou na posiï¿½ï¿½o via navmesh
             if (navMeshAgent.enabled && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 navMeshAgent.ResetPath();
@@ -212,14 +216,14 @@ namespace RPG.Player.Movement
             }
         }
 
-        //Atualização animação de mvimento
+        //Atualizaï¿½ï¿½o animaï¿½ï¿½o de mvimento
         private void updateMoveAnimation(bool isWalking, bool isRunning)
         {
-            animator.SetBool(isWalkingHash, isWalking);//Para que ele chegue na animação de correr, é necessário que esteja andando
+            animator.SetBool(isWalkingHash, isWalking);//Para que ele chegue na animaï¿½ï¿½o de correr, ï¿½ necessï¿½rio que esteja andando
             animator.SetBool(isRunningHash, isRunning);
         }
 
-        // Move o jogador para a posição de destino usando o NavMeshAgent
+        // Move o jogador para a posiï¿½ï¿½o de destino usando o NavMeshAgent
         private void MoveToPosition(Vector3 destination)
         {
             if (navMeshAgent.enabled)
@@ -230,9 +234,9 @@ namespace RPG.Player.Movement
 
         #endregion
 
-        #region  FUNÇÕES DE ANIMAÇÃO
+        #region  FUNï¿½ï¿½ES DE ANIMAï¿½ï¿½O
 
-        //Função chamada a partir de um determinado frame da animação de Jump
+        //Funï¿½ï¿½o chamada a partir de um determinado frame da animaï¿½ï¿½o de Jump
         public void startJump()
         {
             //Setando valores iniciais do pulo
@@ -242,14 +246,20 @@ namespace RPG.Player.Movement
             isJumping = true;
         }
 
+        public void stopRolling()
+        {
+            Debug.Log("Evento Chamado");
+            isRolling = false;
+        }
+
         #endregion
 
-        #region  COLISÕES
+        #region  COLISï¿½ES
 
-        //Detecta quando o personagem toca no chão
+        //Detecta quando o personagem toca no chï¿½o
         private void OnCollisionEnter(Collision collision)
         {
-            if (isFalling && collision.gameObject.CompareTag("Ground"))  // Para que haja a detecção o player precisa estar caindo, caso contrário ele pode detectar quando o player está tentando pular
+            if (isFalling && collision.gameObject.CompareTag("Ground"))  // Para que haja a detecï¿½ï¿½o o player precisa estar caindo, caso contrï¿½rio ele pode detectar quando o player estï¿½ tentando pular
             {
                 //Reseta valores
                 currentjumpVelocity = 0;
@@ -263,7 +273,7 @@ namespace RPG.Player.Movement
 
         #region  CALLBACKS DE INPUT 
 
-        /**Callback que reseta o caminho do NavMeshAgent, ativa a flag de movimento via teclado e atualiza a posição de movimento, 
+        /**Callback que reseta o caminho do NavMeshAgent, ativa a flag de movimento via teclado e atualiza a posiï¿½ï¿½o de movimento, 
          * Keyboard movemente tem prioridade sobre o MouseMovement*/
         public void KeyboardMove(InputAction.CallbackContext context)
         {
@@ -279,7 +289,7 @@ namespace RPG.Player.Movement
             movementPosition = context.ReadValue<Vector2>();
         }
 
-        // Desativa a flag de movimento via teclado, reseta a posição de movimento e para a animação de corrida
+        // Desativa a flag de movimento via teclado, reseta a posiï¿½ï¿½o de movimento e para a animaï¿½ï¿½o de corrida
         public void StopKeyboardMove(InputAction.CallbackContext context)
         {
             isKeyboardMoving = false;
@@ -287,7 +297,7 @@ namespace RPG.Player.Movement
             navMeshAgent.enabled = true;//Habilita navmesh novamente
         }
 
-        // Ativa a flag de movimento via mouse e a animação de caminhar
+        // Ativa a flag de movimento via mouse e a animaï¿½ï¿½o de caminhar
         public void MouseMove(InputAction.CallbackContext context)
         {
             if (!isKeyboardMoving)
@@ -296,7 +306,7 @@ namespace RPG.Player.Movement
             }
         }
 
-        // Desativa a flag de movimento via mouse, reseta a posição de movimento e para a animação de corrida
+        // Desativa a flag de movimento via mouse, reseta a posiï¿½ï¿½o de movimento e para a animaï¿½ï¿½o de corrida
         public void StopMouseMove(InputAction.CallbackContext context)
         {
             if (isMouseMoving)
@@ -306,13 +316,13 @@ namespace RPG.Player.Movement
             }
         }
 
-        // Define a flag de corrida como verdadeira e inicia a animação de corrida
+        // Define a flag de corrida como verdadeira e inicia a animaï¿½ï¿½o de corrida
         public void Run(InputAction.CallbackContext context)
         {
             isRunning = true;
         }
 
-        // Para a animação de corrida, chamado quando usuário solta o shift ou quando para de andar
+        // Para a animaï¿½ï¿½o de corrida, chamado quando usuï¿½rio solta o shift ou quando para de andar
         public void StopRun(InputAction.CallbackContext context)
         {
             isRunning = false;
@@ -327,11 +337,29 @@ namespace RPG.Player.Movement
             }
         }
 
-        // Chamado quando soltamos o botão de pulo
+        // Chamado quando soltamos o botï¿½o de pulo
         public void StopJump(InputAction.CallbackContext context)
         {
 
         }
+
+                //Inicia pulo
+        public void Roll(InputAction.CallbackContext context)
+        {
+            Debug.Log(isRolling);
+            if (!isRolling)
+            {
+                isRolling = true;
+                animator.SetTrigger(isRollingHash);
+            }
+        }
+
+        // Chamado quando soltamos o botï¿½o de pulo
+        public void StopRoll(InputAction.CallbackContext context)
+        {
+
+        }
+
         #endregion
     }
 }
