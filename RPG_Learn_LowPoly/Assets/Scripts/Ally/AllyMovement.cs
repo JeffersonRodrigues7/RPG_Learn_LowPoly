@@ -26,7 +26,6 @@ namespace RPG.Ally.Movement
         [SerializeField] private bool isRunning = false;
 
         private Animator animator; //Componente animator
-        private Rigidbody rb; //Componente rigidibody
         private NavMeshAgent navMeshAgent; //Componente navMeshAgent
 
         private float currentDistanceToLeader;
@@ -36,11 +35,12 @@ namespace RPG.Ally.Movement
 
         private float currentSpeed;
 
+        private bool isLookingTarget = false;
+
         private void Awake()
         {
             // Inicializa os componentes e vari?veis necess?rias quando o objeto ? criado
             animator = GetComponent<Animator>();
-            rb = GetComponent<Rigidbody>();
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
@@ -52,18 +52,19 @@ namespace RPG.Ally.Movement
 
         // Update is called once per frame
         void Update()
-        { 
-            currentDistanceToLeader = Vector3.Distance(transform.position, leader.position);
+        {
+            if (isLookingTarget) return;
 
-            if(currentDistanceToLeader >= minDistanceToWalk)
-                navMeshAgent.SetDestination(leader.position);
+            currentDistanceToLeader = Vector3.Distance(transform.position, leader.position); 
 
             if (currentDistanceToLeader >= minDistanceToRun) //Correndo
             {
+                navMeshAgent.SetDestination(leader.position);
                 updateMoveAnimation(true, true);
             }
             else if (currentDistanceToLeader >= minDistanceToWalk) //Andando
             {
+                navMeshAgent.SetDestination(leader.position);
                 updateMoveAnimation(true, false);
             }
             else if(navMeshAgent.hasPath) //Parado
@@ -86,6 +87,18 @@ namespace RPG.Ally.Movement
             animator.SetBool(runningHash, isRunning);
         }
 
+        public void lookAt(Vector3 position)
+        {
+            isLookingTarget = true;
+            navMeshAgent.ResetPath();
+            updateMoveAnimation(false, false);
+            transform.LookAt(position);
+        }
+
+        public void stopLookAt()
+        {
+            isLookingTarget = false;
+        }
     }
 
 }
