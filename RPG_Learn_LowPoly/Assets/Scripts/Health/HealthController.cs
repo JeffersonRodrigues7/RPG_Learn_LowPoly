@@ -14,11 +14,21 @@ namespace RPG.Health
         [SerializeField] private float currentHealth; 
         [SerializeField] private Slider healthSlider; // Slider para exibir a barra de vida
 
+        private Animator animator;
+
+        private int deathHash;
+
         public float MaxHealth { set { maxHealth = value; } }
+
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         private void Start()
         {
-            currentHealth = maxHealth; 
+            currentHealth = maxHealth;
+            deathHash = Animator.StringToHash("TriggerDeath");
             updateHealthUI(); 
         }
 
@@ -26,6 +36,13 @@ namespace RPG.Health
         {
             currentHealth -= damage; // Reduz a vida do personagem com base no dano recebido
             updateHealthUI();
+
+            Debug.Log($"{gameObject.name}, DANO LEVADO = {currentHealth}");
+
+            if(currentHealth <= 0)
+            {
+                animator.SetTrigger(deathHash);
+            }
         }
 
         private void updateHealthUI()
@@ -35,6 +52,13 @@ namespace RPG.Health
                 // Atualiza o valor do Slider para refletir a porcentagem de vida restante
                 healthSlider.value = currentHealth / maxHealth;
             }
+        }
+
+        //Chamado através de animacao
+
+        private void destroyObject()
+        {
+            Destroy(gameObject);
         }
     }
 }
