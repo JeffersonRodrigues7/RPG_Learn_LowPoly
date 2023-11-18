@@ -12,9 +12,11 @@ namespace RPG.Ally.Attack
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
         [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private ProjectileController projectileController = null;
+        [SerializeField] private GameObject projectileprefab;
         
         private Transform ArrowParents;
+        private GameObject projectileInstance;
+        private ProjectileController projectileController = null;
 
         private Animator animator;
         private GameObject weapon;
@@ -24,6 +26,8 @@ namespace RPG.Ally.Attack
 
         private bool isRangedAttacking = false; // Flag para determinar se o jogador está usando o melee attack
         private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+
+        public bool IsRangedAttacking { get { return isRangedAttacking; } set { isRangedAttacking = value; } }
 
         private void Awake()
         {
@@ -49,28 +53,24 @@ namespace RPG.Ally.Attack
 
         public void startAttackAnimation(Transform _target)
         {
-            // Inicia a animação de ataque, com base no tipo de arma e estado de ataque do jogador
-            if (!isRangedAttacking) // Se não estiver usando espada e não estiver atacando à distância
-            {
-                animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
-                isRangedAttacking = true; // Define o estado de ataque à distância como verdadeiro
-                target = _target; // Define o alvo do ataque à distância
-            }
+            animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
+            target = _target; // Define o alvo do ataque à distância
         }
 
+        // Chamado pela animação de ataque
         public void shootArrow()
         {
             // Instancia um projétil para ataque à distância, direcionado ao alvo determinado
             //Debug.Log(target.name); // Nome do alvo (apenas para debug)
-            ProjectileController projectileInstance = Instantiate(projectileController, rightHandTransform.position, Quaternion.identity, ArrowParents);
-            projectileInstance.SetTarget(target.position, "Enemy"); // Define o alvo do projétil como o jogador
-            Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado
-        }
+            projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
+            projectileController = projectileInstance?.GetComponent<ProjectileController>();
 
-        // Chamado pela animação de ataque
-        public void activeAttack()
-        {
-            weaponController.IsAttacking = true; // Ativa o ataque da arma
+            if(target != null)
+            {
+                projectileController?.SetTarget(target.position, "Enemy"); // Define o alvo do projétil como o jogador
+            }
+
+            Destroy(projectileInstance?.gameObject, 10f); // Destruir o projétil após um tempo determinado
         }
 
         // Chamado pela animação de ataque

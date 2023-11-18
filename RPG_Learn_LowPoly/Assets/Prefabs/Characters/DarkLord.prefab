@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 8419030035691033661}
   - component: {fileID: 1907282962250674556}
   - component: {fileID: 8963755993720859070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DarkLord
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -951,9 +951,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 6725557814959031245}
   rightHandTransform: {fileID: 2223708592999311814}
-  projectileController: {fileID: 602538487852084214, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
+  projectileprefab: {fileID: 7650706926830519763, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
   isUsingSword: 1
-  ArrowParents: {fileID: 0}
 --- !u!114 &2581092224606167744
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,15 +17,16 @@ namespace RPG.Player.Attack
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform;
         [SerializeField] private Transform rightHandTransform;
-        [SerializeField] private ProjectileController projectileController = null;
+        [SerializeField] private GameObject projectileprefab;
         [SerializeField] private List<string> projectileTagsToExclude = new List<string> { "Weapon", "Detection" };
-        [SerializeField] private Transform ArrowParents;
 
         private Animator animator; //Componente animator
         private GameObject weapon;
         private WeaponController weaponController;
 
-        ProjectileController projectileInstance;
+        private Transform ArrowParents;
+        private GameObject projectileInstance;
+        private ProjectileController projectileController = null;
 
         private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
 
@@ -54,6 +55,8 @@ namespace RPG.Player.Attack
             projectileTagsToExclude.Add(gameObject.tag);
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack");
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
+
+            ArrowParents = GameObject.Find("ArrowsParent").transform;
 
             spawnWeapon(swordPrefab, rightHandTransform);
         }
@@ -102,8 +105,9 @@ namespace RPG.Player.Attack
                 if (!projectileTagsToExclude.Contains(hit.collider.tag))
                 {
                     // Instancia um projétil e define seu alvo, destruindo-o após um tempo
-                    projectileInstance = Instantiate(projectileController, rightHandTransform.position, Quaternion.identity, ArrowParents);
-                    projectileInstance.SetTarget(hit.point, "Enemy");
+                    projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
+                    projectileController = projectileInstance?.GetComponent<ProjectileController>();
+                    projectileController?.SetTarget(hit.point, "Enemy"); // Define o alvo do projétil como o jogador
                     Destroy(projectileInstance.gameObject, 10f);
                     return;
                 }
@@ -118,8 +122,9 @@ namespace RPG.Player.Attack
 
             //Debug.Log($"Atirando aqui {mousePosition}");
             // Instancia um projétil e define seu alvo como a posição do mouse, destruindo-o após um tempo
-            projectileInstance = Instantiate(projectileController, rightHandTransform.position, Quaternion.identity, ArrowParents);
-            projectileInstance.SetTarget(worldMousePosition, "Enemy");
+            projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
+            projectileController = projectileInstance?.GetComponent<ProjectileController>();
+            projectileController?.SetTarget(worldMousePosition, "Enemy"); // Define o alvo do projétil como o jogador
             Destroy(projectileInstance.gameObject, 10f);
         }
 

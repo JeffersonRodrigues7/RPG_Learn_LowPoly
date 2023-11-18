@@ -13,59 +13,59 @@ namespace RPG.Ally.Detection
     {
         [SerializeField] private float detectionRadius = 10f; // Raio de detecção do personagem
         [SerializeField] private float attackDistance = 15f; // Raio de detecção do personagem
+        [SerializeField] private LayerMask enemyLayer; // Layer dos inimigos
 
         private AllyMovement allyMovement;
         private AllyAttack allyAttack;
-        private SphereCollider detectionCollider; // Collider de detecção
 
+        private Collider[] enemies;
         private Transform target; // Alvo atual do personagem
+
+
 
         private void Start()
         {
             allyMovement = GetComponentInParent<AllyMovement>(); // Obtém o componente de movimento do pai
             allyAttack = GetComponentInParent<AllyAttack>();
-
-            detectionCollider = GetComponent<SphereCollider>(); // Obtém o Collider de esfera associado a este objeto
-
-            if (detectionCollider != null)
-            {
-                detectionCollider.radius = detectionRadius; // Define o raio do Collider de detecção com base no valor definido
-            }
         }
 
         private void Update()
         {
-            //Debug.Log(target?.name);
-            if (target != null)
+            if (allyAttack.IsRangedAttacking)
             {
-                // Verifica se a distância entre o personagem e o alvo está dentro da distância de ataque.
-                if (Vector3.Distance(transform.position, target.transform.position) < attackDistance)
-                {
-                    allyAttack.startAttackAnimation(target); // Inicia a animação de ataque no componente de ataque.
-                }
+                if(target)
+                    allyMovement.lookAt(target.position);
 
-                allyMovement.lookAt(target.position);
+                return;
+            }
+
+            enemies = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayer);
+
+            if (enemies.Length > 0)
+            {
+                allyAttack.IsRangedAttacking = true;
+                target = FindClosestEnemy(enemies);
+                allyAttack.startAttackAnimation(target); // Inicia a animação de ataque no componente de ataque.
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private Transform FindClosestEnemy(Collider[] enemies)
         {
-            if(target == null)
+            Transform closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (Collider enemy in enemies)
             {
-                //Debug.Log("Capturando inimigo");
-                // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
-                if (other.CompareTag("Enemy"))
+                float currentDistance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                if (currentDistance < closestDistance)
                 {
-                    target = other.transform; // Define o jogador como alvo.
+                    closestDistance = currentDistance;
+                    closestEnemy = enemy.transform;
                 }
             }
 
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            
-            //allyMovement.stopLookAt();
+            return closestEnemy;
         }
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.

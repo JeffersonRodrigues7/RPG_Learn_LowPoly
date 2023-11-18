@@ -18,9 +18,12 @@ namespace RPG.Character.Attack
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
         [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private ProjectileController projectileController = null;
+        [SerializeField] private GameObject projectileprefab;
         [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
-        [SerializeField] private Transform ArrowParents;
+
+        private Transform ArrowParents;
+        private GameObject projectileInstance;
+        private ProjectileController projectileController = null;
 
         private Animator animator;
         private GameObject weapon; 
@@ -44,6 +47,8 @@ namespace RPG.Character.Attack
             animator = GetComponent<Animator>();
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
+
+            ArrowParents = GameObject.Find("ArrowsParent").transform;
 
             if (isUsingSword) spawnWeapon(swordPrefab, rightHandTransform);
             else spawnWeapon(bowPrefab, leftHandTransform);
@@ -75,8 +80,14 @@ namespace RPG.Character.Attack
         {
             // Instancia um projétil para ataque à distância, direcionado ao alvo determinado
             //Debug.Log(target.name); // Nome do alvo (apenas para debug)
-            ProjectileController projectileInstance = Instantiate(projectileController, rightHandTransform.position, Quaternion.identity, ArrowParents);
-            projectileInstance.SetTarget(target.position, "Player"); // Define o alvo do projétil como o jogador
+            projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
+            projectileController = projectileInstance?.GetComponent<ProjectileController>();
+
+            if (target != null)
+            {
+                projectileController?.SetTarget(target.position, "Player"); // Define o alvo do projétil como o jogador
+            }
+
             Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado
         }
 

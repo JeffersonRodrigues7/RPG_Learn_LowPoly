@@ -3373,7 +3373,7 @@ GameObject:
   - component: {fileID: 5228882029018100496}
   - component: {fileID: 1133858449522274218}
   - component: {fileID: 5782710130942242194}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Erika
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -3470,9 +3470,8 @@ MonoBehaviour:
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 2894410169649403505}
   rightHandTransform: {fileID: 7755984344903220346}
-  projectileController: {fileID: 602538487852084214, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
+  projectileprefab: {fileID: 7650706926830519763, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
   isUsingSword: 0
-  ArrowParents: {fileID: 0}
 --- !u!114 &2677495526454955906
 MonoBehaviour:
   m_ObjectHideFlags: 0

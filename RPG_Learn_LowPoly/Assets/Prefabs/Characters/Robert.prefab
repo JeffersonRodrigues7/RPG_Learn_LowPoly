@@ -1449,11 +1449,12 @@ MonoBehaviour:
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 7792114294305056150}
   rightHandTransform: {fileID: 3434820137381957533}
-  projectileController: {fileID: 602538487852084214, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
+  projectileprefab: {fileID: 7650706926830519763, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
   projectileTagsToExclude:
   - Weapon
   - Detection
-  ArrowParents: {fileID: 0}
+  - Ally
+  - Player
 --- !u!114 &-2459926710300109186
 MonoBehaviour:
   m_ObjectHideFlags: 0

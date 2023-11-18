@@ -95,7 +95,7 @@ namespace RPG.Ally.Movement
             transform.LookAt(position);
         }
 
-        public void stopLookAt()
+        public void desactiveAttack()
         {
             isLookingTarget = false;
         }

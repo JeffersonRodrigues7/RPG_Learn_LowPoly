@@ -37,8 +37,6 @@ namespace RPG.Health
             currentHealth -= damage; // Reduz a vida do personagem com base no dano recebido
             updateHealthUI();
 
-            Debug.Log($"{gameObject.name}, DANO LEVADO = {currentHealth}");
-
             if(currentHealth <= 0)
             {
                 animator.SetTrigger(deathHash);

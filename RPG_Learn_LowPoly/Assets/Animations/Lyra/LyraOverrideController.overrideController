@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ArissaOverrideController
+  m_Name: LyraOverrideController
   m_Controller: {fileID: 9100000, guid: 349b7dc74bf8e37439016abbe3197fd7, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 16488d63c2731a34aa46ba3d5e9a5df3, type: 2}
