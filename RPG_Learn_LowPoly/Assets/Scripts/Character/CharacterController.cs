@@ -37,12 +37,6 @@ namespace RPG.Character.Controll
             characterMovement.CooldownTimeAfterChase = characterData._cooldownTimeAfterChase;
             characterMovement.ArrivalDistance = characterData._arrivalDistance;
 
-            // Define os pontos de patrulha do personagem, se estiverem disponíveis.
-            if (characterData._patrolPoints != null && characterData._patrolPoints.Length > 0)
-            {
-                characterMovement.PatrolPoints = characterData._patrolPoints;
-            }
-
             characterAttack.Damage = characterData._damage;
 
             healthController.MaxHealth = characterData._maxHealth;

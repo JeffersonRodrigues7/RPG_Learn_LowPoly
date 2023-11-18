@@ -85,7 +85,7 @@ namespace RPG.Character.Attack
 
             if (target != null)
             {
-                projectileController?.SetTarget(target.position, "Player"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(target.position+ new Vector3(0,1f,0), "Player"); // Define o alvo do projétil como o jogador
             }
 
             Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado

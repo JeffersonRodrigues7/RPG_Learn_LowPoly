@@ -25,7 +25,6 @@ namespace RPG.Character
         public float _chaseSpeed = 5f;
         public float _cooldownTimeAfterChase = 2f;
         public float _arrivalDistance = 0.1f;
-        public Transform[] _patrolPoints;
 
         [Header("Attack")]
         public float _damage = 5f;

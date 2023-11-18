@@ -933,7 +933,10 @@ MonoBehaviour:
   chaseSpeed: 0
   cooldownTimeAfterChase: 2
   arrivalDistance: 0.1
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &637647177613866302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,7 +3930,7 @@ GameObject:
   - component: {fileID: 2831141904987750260}
   - component: {fileID: 7618887959828277385}
   - component: {fileID: 5297766761987115654}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyDetection
   m_TagString: Detection
   m_Icon: {fileID: 0}
