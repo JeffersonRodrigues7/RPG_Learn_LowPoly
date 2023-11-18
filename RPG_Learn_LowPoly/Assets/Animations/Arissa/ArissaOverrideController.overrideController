@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ArissaOverrideController
+  m_Controller: {fileID: 9100000, guid: 349b7dc74bf8e37439016abbe3197fd7, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 16488d63c2731a34aa46ba3d5e9a5df3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0b15e1e59ef8db54cae0d1fe77aa22b0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b01e1c35d4b9bce439ea5a7a372150b6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 567f1bec975ba2948b69ef8613c4ef8d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9c11a3a6b21fa0d4b9575a1f496ddffa, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 905194aee8518524b8a051068a8f4d20, type: 2}
