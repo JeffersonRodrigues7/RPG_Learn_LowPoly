@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Weapon
   - Detection
+  - Ally
   layers:
   - Default
   - TransparentFX

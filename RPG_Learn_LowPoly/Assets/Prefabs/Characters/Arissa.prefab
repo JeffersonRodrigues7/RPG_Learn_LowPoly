@@ -1331,7 +1331,7 @@ GameObject:
   - component: {fileID: 5239921898680337858}
   m_Layer: 0
   m_Name: Arissa
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1409,8 +1409,7 @@ MonoBehaviour:
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
-  projectileController: {fileID: 0}
-  ArrowParents: {fileID: 0}
+  projectileController: {fileID: 602538487852084214, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
 --- !u!54 &3831385985572265550
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2000,8 +1999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a3b602caf6ac144ae03e9443f160f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 15
-  attackDistance: 15
+  detectionRadius: 25
+  attackDistance: 25
 --- !u!1 &5376801860798017788
 GameObject:
   m_ObjectHideFlags: 0

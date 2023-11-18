@@ -16,6 +16,7 @@ namespace RPG.Ally.Detection
 
         private AllyMovement allyMovement;
         private AllyAttack allyAttack;
+        private SphereCollider detectionCollider; // Collider de detecção
 
         private Transform target; // Alvo atual do personagem
 
@@ -23,11 +24,18 @@ namespace RPG.Ally.Detection
         {
             allyMovement = GetComponentInParent<AllyMovement>(); // Obtém o componente de movimento do pai
             allyAttack = GetComponentInParent<AllyAttack>();
+
+            detectionCollider = GetComponent<SphereCollider>(); // Obtém o Collider de esfera associado a este objeto
+
+            if (detectionCollider != null)
+            {
+                detectionCollider.radius = detectionRadius; // Define o raio do Collider de detecção com base no valor definido
+            }
         }
 
         private void Update()
         {
-            Debug.Log(target?.name);
+            //Debug.Log(target?.name);
             if (target != null)
             {
                 // Verifica se a distância entre o personagem e o alvo está dentro da distância de ataque.
@@ -42,16 +50,22 @@ namespace RPG.Ally.Detection
 
         private void OnTriggerEnter(Collider other)
         {
-            // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
-            if (other.CompareTag("Enemy"))
+            if(target == null)
             {
-                target = other.transform; // Define o jogador como alvo.
+                //Debug.Log("Capturando inimigo");
+                // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
+                if (other.CompareTag("Enemy"))
+                {
+                    target = other.transform; // Define o jogador como alvo.
+                }
             }
+
         }
 
         private void OnTriggerExit(Collider other)
         {
-                //target = null; // Remove o alvo.
+            
+            //allyMovement.stopLookAt();
         }
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
