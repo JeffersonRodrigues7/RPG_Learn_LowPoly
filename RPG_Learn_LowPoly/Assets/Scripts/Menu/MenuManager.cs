@@ -4,16 +4,23 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    public Text feedbackText;
+    [SerializeField] private GameObject painelMenuPrincipal;
+    [SerializeField] private GameObject painelSettings;
 
     public void Play()
     {
         SceneManager.LoadScene("Gameplay");
     }
 
-    public void Settings()
+    public void OpenSettings()
     {
-        SceneManager.LoadScene("Settings");
+        
+        painelSettings.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        painelSettings.SetActive(false);
     }
 
     public void Credits()
