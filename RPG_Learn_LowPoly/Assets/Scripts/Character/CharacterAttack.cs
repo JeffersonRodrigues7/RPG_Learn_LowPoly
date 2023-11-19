@@ -59,7 +59,7 @@ namespace RPG.Character.Attack
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
             weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
-            weaponController.EnemyTag = "Ally"; // Define a tag do inimigo
+            weaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
         }
 
         public void startAttackAnimation(Transform _target)

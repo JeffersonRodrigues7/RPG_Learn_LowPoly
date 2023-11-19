@@ -19,6 +19,8 @@ namespace RPG.Weapon
         public bool IsAttacking { set { isAttacking = value; } }
         public string EnemyTag { set { enemyTag = value; } }
 
+        public string EnemyTag2 { set { enemyTag2 = value; } }
+
         private void OnTriggerEnter(Collider other)
         {
             if (isAttacking)
