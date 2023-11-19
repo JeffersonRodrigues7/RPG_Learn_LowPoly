@@ -10,6 +10,7 @@ namespace RPG.Weapon
     {
         [SerializeField] private float damage = 10f;
         [SerializeField] private string enemyTag = "Enemy";
+        [SerializeField] private string enemyTag2 = "Enemy";
 
         HealthController healthController;
 
@@ -22,7 +23,7 @@ namespace RPG.Weapon
         {
             if (isAttacking)
             {
-                if(other.tag.Equals(enemyTag))
+                if(other.tag.Equals(enemyTag) || other.tag.Equals(enemyTag2))
                 {
                     healthController = other.gameObject?.GetComponent<HealthController>();
 

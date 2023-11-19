@@ -58,20 +58,30 @@ namespace RPG.Character.Detection
 
         private void OnTriggerEnter(Collider other)
         {
-            // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
-            if (other.CompareTag("Player") || other.CompareTag("Ally"))
+            if(target == null)
             {
-                target = other.transform; // Define o jogador como alvo.
-
-                if (chaseEnemyBehavior)
+                // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
+                if (other.CompareTag("Player") || other.CompareTag("Ally"))
                 {
-                    characterMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
+                    target = other.transform; // Define o jogador como alvo.
+
+                    if (chaseEnemyBehavior)
+                    {
+                        characterMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
+                    }
                 }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
+            //Antes de parar a perseguição, vamos verificar se ele ainda tem alguém que pode perseguir no range dele
+            Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
+            foreach(Collider enemy in enemies)
+            {
+                if (enemy.CompareTag("Player") || enemy.CompareTag("Ally")) return;
+            }
+
             // Verifica se o objeto que saiu do campo de detecção tem a tag "Player" (jogador) e se o comportamento de perseguição está ativado.
             if (target && chaseEnemyBehavior)
             {

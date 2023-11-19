@@ -59,6 +59,7 @@ namespace RPG.Character.Attack
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
             weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
+            weaponController.EnemyTag = "Ally"; // Define a tag do inimigo
         }
 
         public void startAttackAnimation(Transform _target)
@@ -87,7 +88,7 @@ namespace RPG.Character.Attack
 
             if (target != null)
             {
-                projectileController?.SetTarget(tag, target.position + new Vector3(0,1f,0), "Player"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position + new Vector3(0,1f,0), target.tag); // Define o alvo do projétil como o jogador
             }
 
             Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado
