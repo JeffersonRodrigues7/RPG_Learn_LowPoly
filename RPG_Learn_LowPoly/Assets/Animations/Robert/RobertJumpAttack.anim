@@ -57809,15 +57809,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4
-    functionName: stopJump
+  - time: 1
+    functionName: desactiveAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.4333333
-    functionName: desactiveAttack
+  - time: 1.4
+    functionName: stopJump
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

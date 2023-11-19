@@ -116,6 +116,12 @@ namespace RPG.Player.Attack
 
         #region FUNÇÕES DE ANIMAÇÃO
 
+        //Preciso avisar que o player entrou na animação de idle para que ele possa ataca novamente
+        public void idleBegin()
+        {
+            isMeleeAttacking = false;
+        }
+
         public void triggerAttack(int value)
         {
             isMeleeAttacking = true;
@@ -179,7 +185,6 @@ namespace RPG.Player.Attack
         // Desativar ataque - Chamado pela animação de ataque
         public void desactiveAttack()
         {
-            isMeleeAttacking = false;
             isRangedAttacking = false;
             weaponController.IsAttacking = false;
         }
@@ -204,6 +209,7 @@ namespace RPG.Player.Attack
                 {
                     if (actualAttackAnimation == 0 && !isMeleeAttacking)
                     {
+                        Debug.Log($"Trigando primeiro ataque: {actualAttackAnimation} - {isMeleeAttacking}");
                         animator.SetTrigger("TriggerAttack01");
                     }
                     else if (actualAttackAnimation == 1)

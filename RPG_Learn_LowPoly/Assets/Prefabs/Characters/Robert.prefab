@@ -1352,8 +1352,8 @@ GameObject:
   - component: {fileID: 3228677563412066543}
   - component: {fileID: -4418741519796253928}
   - component: {fileID: -2459926710300109186}
+  - component: {fileID: 2695146724596640442}
   - component: {fileID: -7717843599399497145}
-  - component: {fileID: 2945058975374511271}
   - component: {fileID: -7403677544778492674}
   m_Layer: 0
   m_Name: Robert
@@ -1427,12 +1427,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b568b82abf762b04c910fa6081d48411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingSpeed: 2
   walkSpeed: 5
   runSpeed: 10
+  rollingSpeed: 15
   rotationSpeed: 10
   jumpForce: 2
   jumpSlowdown: 1.5
   mouseInputDistance: 50
+  isJumping: 0
+  isFalling: 0
 --- !u!114 &-4418741519796253928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1448,6 +1452,7 @@ MonoBehaviour:
   swordFirstAttackDamage: 25
   swordSecondAttackDamage: 30
   swordThirdAttackDamage: 35
+  swordJumpAttackDamage: 50
   projectileDamage: 15
   swordAnimator: {fileID: 22100000, guid: c41cfb7597e5d2e468ca458df50504d7, type: 2}
   bowAnimator: {fileID: 22100000, guid: 6df650b9d309c364f98511a848be3d1d, type: 2}
@@ -1477,6 +1482,19 @@ MonoBehaviour:
   maxHealth: 300
   currentHealth: 0
   healthSlider: {fileID: 0}
+--- !u!65 &2695146724596640442
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241875920008531204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &-7717843599399497145
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1493,20 +1511,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &2945058975374511271
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4241875920008531204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.9267161
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.886642, z: 0}
 --- !u!195 &-7403677544778492674
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1514,7 +1518,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4241875920008531204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
