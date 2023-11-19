@@ -11,8 +11,10 @@ namespace RPG.Player.Movement
         #region VARIABLES DECLARATION
 
         [Header("Movimenta��o")]
+        [SerializeField] private float attackingSpeed = 2.0f; //Velocidade do jogador ao andar
         [SerializeField] private float walkSpeed = 5.0f; //Velocidade do jogador ao andar
         [SerializeField] private float runSpeed = 10.0f; //Velocidade do jogador ao correr
+        [SerializeField] private float rollingSpeed = 15.0f; //Velocidade do jogador ao correr
         [SerializeField] private float rotationSpeed = 10.0f; //Velocidade de rota��o do jogador
 
         [SerializeField] private float jumpForce = 2.0f; //For�a com a qual o objeto ir� pular
@@ -45,12 +47,16 @@ namespace RPG.Player.Movement
         private bool isRunning = false; // Flag para determinar se o jogador est� correndo
         private int isRunningHash; //Hash da String que se refere a anima��o de Running
 
-        private bool isJumping = false; // Flag para determinar se o jogador est� pulando
-        private bool isFalling = false; // Flag para determinar se o jogador est� caindo
+        [SerializeField]  private bool isJumping = false; // Flag para determinar se o jogador est� pulando
+        [SerializeField]  private bool isFalling = false; // Flag para determinar se o jogador est� caindo
         private int isJumpingHash; //Hash da String que se refere a anima��o de Jumping
 
         private bool isRolling = false;
         private int isRollingHash;
+
+        public bool IsJumping { get { return isJumping; } }
+
+
 
         #endregion
 
@@ -108,7 +114,11 @@ namespace RPG.Player.Movement
                 return;
             }
 
-            currentSpeed = isRunning ? runSpeed : walkSpeed;
+            if (playerAttack.IsMeleeAttacking) currentSpeed = attackingSpeed;
+            else if (isRolling) currentSpeed = rollingSpeed;
+            else if (isRunning) currentSpeed = runSpeed;
+            else currentSpeed = walkSpeed;
+
 
             if (isJumping) //Player est� pulando
             {
@@ -246,27 +256,20 @@ namespace RPG.Player.Movement
             isJumping = true;
         }
 
-        public void stopRolling()
+        //Chamado da animação de pulo e ataque com pulo
+        public void stopJump()
         {
-            Debug.Log("Evento Chamado");
-            isRolling = false;
+            //Reseta valores
+            currentjumpVelocity = 0;
+            isJumping = false;
+            isFalling = false;
+            navMeshAgent.enabled = true;
         }
 
-        #endregion
-
-        #region  COLIS�ES
-
-        //Detecta quando o personagem toca no ch�o
-        private void OnCollisionEnter(Collision collision)
+        public void stopRolling()
         {
-            if (isFalling && collision.gameObject.CompareTag("Ground"))  // Para que haja a detec��o o player precisa estar caindo, caso contr�rio ele pode detectar quando o player est� tentando pular
-            {
-                //Reseta valores
-                currentjumpVelocity = 0;
-                isJumping = false;
-                isFalling = false;
-                navMeshAgent.enabled = true;
-            }
+            isRolling = false;
+            currentSpeed = walkSpeed;
         }
 
         #endregion
@@ -349,6 +352,7 @@ namespace RPG.Player.Movement
             Debug.Log(isRolling);
             if (!isRolling)
             {
+                currentSpeed = rollingSpeed;
                 isRolling = true;
                 animator.SetTrigger(isRollingHash);
             }
