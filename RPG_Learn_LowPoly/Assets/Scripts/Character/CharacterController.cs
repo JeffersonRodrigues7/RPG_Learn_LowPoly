@@ -28,24 +28,24 @@ namespace RPG.Character.Controll
             animator = GetComponent<Animator>();
 
             // Define os parâmetros dos componentes com base nos dados em characterData.
-            characterDetection.DetectionRadius = characterData._detectionDistance;
-            characterDetection.AttackDistance = characterData._attackDistance;
-            characterDetection.ChaseEnemyBehavior = characterData._chaseEnemyBehavior;
+            //characterDetection.DetectionRadius = characterData._detectionDistance;
+            //characterDetection.AttackDistance = characterData._attackDistance;
+            //characterDetection.ChaseEnemyBehavior = characterData._chaseEnemyBehavior;
 
-            characterMovement.WalkSpeed = characterData._walkSpeed;
-            characterMovement.ChaseSpeed = characterData._chaseSpeed;
-            characterMovement.CooldownTimeAfterChase = characterData._cooldownTimeAfterChase;
-            characterMovement.ArrivalDistance = characterData._arrivalDistance;
+            //characterMovement.WalkSpeed = characterData._walkSpeed;
+            //characterMovement.ChaseSpeed = characterData._chaseSpeed;
+            //characterMovement.CooldownTimeAfterChase = characterData._cooldownTimeAfterChase;
+            //characterMovement.ArrivalDistance = characterData._arrivalDistance;
 
-            characterAttack.Damage = characterData._damage;
+            //characterAttack.Damage = characterData._damage;
 
-            healthController.MaxHealth = characterData._maxHealth;
+            //healthController.MaxHealth = characterData._maxHealth;
 
             // Define o controlador de animação do personagem, se estiver disponível.
-            if (characterData._animatorOverrideController != null)
-            {
-                animator.runtimeAnimatorController = characterData._animatorOverrideController;
-            }
+            //if (characterData._animatorOverrideController != null)
+            //{
+            //    animator.runtimeAnimatorController = characterData._animatorOverrideController;
+            //}
         }
     }
 }

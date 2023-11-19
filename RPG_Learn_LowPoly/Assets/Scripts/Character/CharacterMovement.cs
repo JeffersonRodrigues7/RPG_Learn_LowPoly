@@ -8,10 +8,12 @@ namespace RPG.Character.Movement
     public class CharacterMovement : MonoBehaviour
     {
         [Header("CharacterData")]
-        [SerializeField] private float walkSpeed = 0; // Velocidade de caminhada do personagem
-        [SerializeField] private float chaseSpeed = 0; // Velocidade de persegui��o do personagem
+        [SerializeField] private float walkSpeed = 5; // Velocidade de caminhada do personagem
+        [SerializeField] private float chaseSpeed = 10; // Velocidade de persegui��o do personagem
         [SerializeField] private float cooldownTimeAfterChase = 2f; // Tempo de espera ap�s a persegui��o
-        [SerializeField] private float arrivalDistance = 0.1f; // Dist�ncia para considerar que o personagem chegou � posi��o final
+        [SerializeField] private float minDistanceToTarget = 2f;//Vai parar de seguir qnd chegar a essa distancia
+        
+        private float arrivalDistance = 0.1f; // Dist�ncia para considerar que o personagem chegou � posi��o final
         [SerializeField] private Transform[] patrolPoints; // Pontos de patrulha do personagem
 
         private enum CharacterState // Estados possiveis
@@ -70,7 +72,15 @@ namespace RPG.Character.Movement
 
                 case CharacterState.Chasing: // Perseguindo algum alvo
                     if (target == null) stopChase();
-                    else navMeshAgent.SetDestination(target.position);
+                    else
+                    {
+                        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                        if(distanceToTarget > minDistanceToTarget)
+                            navMeshAgent.SetDestination(target.position);
+                        else
+                            transform.LookAt(target.position);
+                    }
+
                     break;
 
                 case CharacterState.MovingToLastKnownEnemyPosition: // Movendo-se para a �ltima posi��o conhecida do inimigo.

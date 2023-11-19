@@ -16,9 +16,9 @@ namespace RPG.Weapon
 
         private bool isAttacking = false; // Flag para determinar se a arma está atacando
 
+        public float Damage { set { damage = value; } }
         public bool IsAttacking { set { isAttacking = value; } }
         public string EnemyTag { set { enemyTag = value; } }
-
         public string EnemyTag2 { set { enemyTag2 = value; } }
 
         private void OnTriggerEnter(Collider other)

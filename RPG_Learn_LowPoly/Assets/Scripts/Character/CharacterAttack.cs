@@ -10,8 +10,8 @@ namespace RPG.Character.Attack
 {
     public class CharacterAttack : MonoBehaviour
     {
-        [Header("CharacterData")]
-        [SerializeField] private float damage = 100f; 
+        [Header("Data")]
+        [SerializeField] private float damage = 10f; 
 
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
@@ -60,6 +60,7 @@ namespace RPG.Character.Attack
             weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
             weaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
+            weaponController.Damage = damage;
         }
 
         public void startAttackAnimation(Transform _target)
