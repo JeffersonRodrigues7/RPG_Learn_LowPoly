@@ -13,6 +13,11 @@ namespace RPG.Player.Attack
     public class PlayerAttack : MonoBehaviour
     {
         #region VARIABLES DECLARATION
+        [Header("DATA")]
+        [SerializeField] private float swordDamage = 25f;
+        [SerializeField] private float projectileDamage = 15f;
+
+        [Header("Objects")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform;
@@ -78,6 +83,8 @@ namespace RPG.Player.Attack
                 weapon = Instantiate(weaponPrefab, hand);
                 weaponController = weapon.GetComponent<WeaponController>();
                 weaponController.EnemyTag = "Enemy";
+
+                if (isUsingSword) weaponController.Damage = swordDamage;
             }
         }
         #endregion
@@ -108,6 +115,7 @@ namespace RPG.Player.Attack
                     projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
                     projectileController = projectileInstance?.GetComponent<ProjectileController>();
                     projectileController?.SetTarget(tag, hit.point, "Enemy"); // Define o alvo do projétil como o jogador
+                    projectileController.Damage = projectileDamage;
                     Destroy(projectileInstance.gameObject, 10f);
                     return;
                 }

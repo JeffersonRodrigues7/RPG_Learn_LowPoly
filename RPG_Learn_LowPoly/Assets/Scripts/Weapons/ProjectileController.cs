@@ -16,6 +16,8 @@ namespace RPG.Projectile
 
         HealthController healthController;
 
+        public float Damage { set { damage = value; } }
+
         public string EnemyTag { set { enemyTag = value; } }
 
         void Update()

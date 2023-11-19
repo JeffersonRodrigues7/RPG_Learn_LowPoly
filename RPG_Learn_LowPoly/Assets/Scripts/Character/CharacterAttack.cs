@@ -10,8 +10,9 @@ namespace RPG.Character.Attack
 {
     public class CharacterAttack : MonoBehaviour
     {
-        [Header("Data")]
-        [SerializeField] private float damage = 10f; 
+        [Header("DATA")]
+        [SerializeField] private float swordDamage = 25f;
+        [SerializeField] private float projectileDamage = 15f;
 
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
@@ -40,7 +41,7 @@ namespace RPG.Character.Attack
         public bool IsMeleeAttacking { get { return isMeleeAttacking; } }
         public bool IsRangedAttacking { get { return isRangedAttacking; } }
 
-        public float Damage { set { damage = value; } }
+        public float Damage { set { swordDamage = value; } }
 
         private void Start()
         {
@@ -60,7 +61,7 @@ namespace RPG.Character.Attack
             weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
             weaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
-            weaponController.Damage = damage;
+            weaponController.Damage = swordDamage;
         }
 
         public void startAttackAnimation(Transform _target)
@@ -86,6 +87,7 @@ namespace RPG.Character.Attack
             //Debug.Log(target.name); // Nome do alvo (apenas para debug)
             projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
             projectileController = projectileInstance?.GetComponent<ProjectileController>();
+            projectileController.Damage = projectileDamage;
 
             if (target != null)
             {

@@ -9,6 +9,10 @@ namespace RPG.Ally.Attack
 
     public class AllyAttack : MonoBehaviour
     {
+        [Header("DATA")]
+        [SerializeField] private float swordDamage = 25f;
+        [SerializeField] private float projectileDamage = 15f;
+
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
         [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
@@ -67,7 +71,8 @@ namespace RPG.Ally.Attack
 
             if(target != null)
             {
-                projectileController?.SetTarget(tag, target.position, "Enemy"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position + new Vector3(0,1,0), "Enemy"); // Define o alvo do projétil como o jogador
+                projectileController.Damage = projectileDamage;
             }
 
             Destroy(projectileInstance?.gameObject, 10f); // Destruir o projétil após um tempo determinado
