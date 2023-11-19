@@ -1540,7 +1540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 20
-  attackDistance: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1575,10 +1574,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2789cb09c5d82bf48b340aef5ee74b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordDamage: 0
+  projectileDamage: 25
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
-  projectileprefab: {fileID: 7650706926830519763, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
+  projectileprefab: {fileID: 7650706926830519763, guid: 8437aa17fe757b84da0a96c2490a48dc, type: 3}
 --- !u!54 &3831385985572265550
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1643,7 +1644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   healthSlider: {fileID: 8330427179651512874}
 --- !u!1 &3284555193264165315

@@ -1052,7 +1052,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750957903}
-  m_LocalRotation: {x: 0.10917738, y: 0.000000017629906, z: -0.0000000019363622, w: 0.9940223}
+  m_LocalRotation: {x: 0.10917738, y: -0.00000001762991, z: 0.0000000019363626, w: 0.9940223}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1348,18 +1348,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 984010128, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: attackDistance
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 984010128, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: detectionRadius
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 984010128, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: chaseEnemyBehavior
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2655243028010987070, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1369,25 +1357,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2669788780259592307, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: damage
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2669788780259592307, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: swordDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2669788780259592307, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: projectileDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: walkSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: patrolPoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
+      propertyPath: bowPrefab
+      value: 
+      objectReference: {fileID: 6663683016408734395, guid: 5e19d9fc6be4b274a99d33e6ea729f97, type: 3}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
@@ -1396,14 +1368,6 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1736199790}
-    - target: {fileID: 6002933398867577178, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6011337240300463248, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
-      propertyPath: m_Mass
-      value: 35
-      objectReference: {fileID: 0}
     - target: {fileID: 7205762486623292117, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2471,7 +2435,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086606345}
-  m_LocalRotation: {x: 0.14521313, y: -0.000000032966827, z: 0.0000000048385016, w: 0.98940045}
+  m_LocalRotation: {x: 0.14521313, y: -0.00000003296683, z: 0.000000004838502, w: 0.98940045}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2656,21 +2620,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 279473914240133546, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
-      propertyPath: maxHealth
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 428715542685881112, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: leader
       value: 
       objectReference: {fileID: 3746171276757210560}
     - target: {fileID: 1146662344511180001, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.333
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1146662344511180001, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2764082351520244456, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_RootOrder
@@ -2717,32 +2677,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3116864467279428630, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
-      propertyPath: swordDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3116864467279428630, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
-      propertyPath: projectileDamage
-      value: 25
-      objectReference: {fileID: 0}
+      propertyPath: bowPrefab
+      value: 
+      objectReference: {fileID: 6663683016408734395, guid: 439f991fb12d66e4d9ea02b14725a5be, type: 3}
     - target: {fileID: 3247146929443453010, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_Name
       value: Lyra
       objectReference: {fileID: 0}
-    - target: {fileID: 3247146929443453010, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 7257080816543512493, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7257080816543512493, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.333
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257080816543512493, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7257080816543512493, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.333
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
@@ -3236,6 +3188,10 @@ PrefabInstance:
       propertyPath: damage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 9208208121542246608, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: swordPrefab
+      value: 
+      objectReference: {fileID: 1032590170434083731, guid: 63c65c7046ed7374c9744345a8f19f40, type: 3}
     - target: {fileID: 9208208121542246608, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: projectileDamage
       value: 0
