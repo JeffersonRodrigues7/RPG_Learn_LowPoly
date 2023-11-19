@@ -63,6 +63,8 @@ namespace RPG.Character.Movement
             switch (currentCharacterState)
             {
                 case CharacterState.Patrolling: // Personagem parado na posi��o original.
+                    if (target != null) return;
+
                     if (patrolPointsLength > 1 && !isWalking) // Se existir mais de um ponto de patrulha e o personagem n�o estiver caminhando
                     {
                         setWalkingAnimation(true);
@@ -77,7 +79,7 @@ namespace RPG.Character.Movement
                         float distanceToTarget = Vector3.Distance(transform.position, target.position);
                         if(distanceToTarget > minDistanceToTarget)
                             navMeshAgent.SetDestination(target.position);
-                        else
+                        else //Se estiver muito proximo do alvo vai parar de perseguir e começar a olhar na direção dele
                             transform.LookAt(target.position);
                     }
 
@@ -186,9 +188,12 @@ namespace RPG.Character.Movement
             setWalkingAnimation(true);
         }
 
-        public void lookAt(Vector3 position)
+        public void lookAt(Transform _target)
         {
-            transform.LookAt(position);
+            target = _target;
+
+            if(target != null)
+                transform.LookAt(_target.position);
         }
     }
 }

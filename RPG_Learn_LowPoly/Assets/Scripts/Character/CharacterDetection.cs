@@ -41,7 +41,8 @@ namespace RPG.Character.Detection
                 if (distance > detectionRadius)
                 {
                     target = null; // Remove o alvo.
-                    if(chaseEnemyBehavior) characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
+                    if (!chaseEnemyBehavior) characterMovement.lookAt(target); //Se for arqueiro, ele só vai parar de olhar
+                    if (chaseEnemyBehavior) characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
                 }
                 
             }
@@ -82,7 +83,7 @@ namespace RPG.Character.Detection
 
                 if (!chaseEnemyBehavior) //Se for um inimigo que fica parado, ele vai ficar sempre olhando pro alvo
                 {
-                    characterMovement.lookAt(target.position);
+                    characterMovement.lookAt(target);
                 }
             }
         }
