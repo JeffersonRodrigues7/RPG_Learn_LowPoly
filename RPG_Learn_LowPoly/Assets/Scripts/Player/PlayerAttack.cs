@@ -1,4 +1,5 @@
 using RPG.Health;
+using RPG.Player.Movement;
 using RPG.Projectile;
 using RPG.Weapon;
 using System.Collections;
@@ -14,10 +15,15 @@ namespace RPG.Player.Attack
     {
         #region VARIABLES DECLARATION
         [Header("DATA")]
-        [SerializeField] private float swordDamage = 25f;
+        [SerializeField] private float swordFirstAttackDamage = 25f;
+        [SerializeField] private float swordSecondAttackDamage = 30f;
+        [SerializeField] private float swordThirdAttackDamage = 35f;
+        [SerializeField] private float swordJumpAttackDamage = 50f;
         [SerializeField] private float projectileDamage = 15f;
 
         [Header("Objects")]
+        [SerializeField] private AnimatorOverrideController swordAnimator;
+        [SerializeField] private AnimatorOverrideController bowAnimator;
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform;
@@ -27,6 +33,8 @@ namespace RPG.Player.Attack
 
         [Header("Debug")]
         [SerializeField] private int actualAttackAnimation = 0;
+
+        private PlayerMovement playerMovement;
 
         private Animator animator; //Componente animator
         private GameObject weapon;
@@ -55,6 +63,8 @@ namespace RPG.Player.Attack
         {
             // Inicializa os componentes e variáveis necessárias quando o objeto é criado
             animator = GetComponent<Animator>();
+            playerMovement = GetComponent<PlayerMovement>();
+            animator.runtimeAnimatorController = swordAnimator;
         }
 
         private void Start()
@@ -87,14 +97,36 @@ namespace RPG.Player.Attack
                 weaponController = weapon.GetComponent<WeaponController>();
                 weaponController.EnemyTag = "Enemy";
 
-                if (isUsingSword) weaponController.Damage = swordDamage;
+                if (isUsingSword) 
+                {
+                    weaponController.Damage = swordFirstAttackDamage; 
+                    animator.runtimeAnimatorController = swordAnimator;
+                }
+                else
+                {
+                    animator.runtimeAnimatorController = bowAnimator;
+                }
+                
             }
         }
+
+
+
         #endregion
 
         #region FUNÇÕES DE ANIMAÇÃO
 
         public void triggerAttack(int value)
+        {
+            isMeleeAttacking = true;
+            actualAttackAnimation = value;
+            if(value == 0 || value == 1) weaponController.Damage = swordFirstAttackDamage;
+            else if (value == 2) weaponController.Damage = swordSecondAttackDamage;
+            else if (value == 3) weaponController.Damage = swordThirdAttackDamage;
+            else if (value == 4) weaponController.Damage = swordJumpAttackDamage;
+        }
+
+        public void desactiveTriggerAttack(int value)
         {
             actualAttackAnimation = value;
         }
@@ -147,8 +179,6 @@ namespace RPG.Player.Attack
         // Desativar ataque - Chamado pela animação de ataque
         public void desactiveAttack()
         {
-            // Desativa flags de ataque
-            actualAttackAnimation = 0;
             isMeleeAttacking = false;
             isRangedAttacking = false;
             weaponController.IsAttacking = false;
@@ -164,20 +194,28 @@ namespace RPG.Player.Attack
             // Inicia o ataque, com base no tipo de arma sendo usada
             if (isUsingSword)
             {
-                //animator.SetTrigger(meleeAttackingHash);
-                //isMeleeAttacking = true;
 
-                if(actualAttackAnimation == 0)
+                if (playerMovement.IsJumping)
                 {
-                    animator.SetTrigger("TriggerAttack01");
-                }else if(actualAttackAnimation == 1)
-                {
-                    animator.SetTrigger("TriggerAttack02");
+                    animator.SetTrigger("TriggerJumpAttack");
                 }
-                else if (actualAttackAnimation == 2)
+
+                else
                 {
-                    animator.SetTrigger("TriggerAttack03");
+                    if (actualAttackAnimation == 0 && !isMeleeAttacking)
+                    {
+                        animator.SetTrigger("TriggerAttack01");
+                    }
+                    else if (actualAttackAnimation == 1)
+                    {
+                        animator.SetTrigger("TriggerAttack02");
+                    }
+                    else if (actualAttackAnimation == 2)
+                    {
+                        animator.SetTrigger("TriggerAttack03");
+                    }
                 }
+
             }
             else
             {

@@ -1445,6 +1445,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe26b9ecfe0fbb45b3692ce04a1560b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordFirstAttackDamage: 25
+  swordSecondAttackDamage: 30
+  swordThirdAttackDamage: 35
+  projectileDamage: 15
+  swordAnimator: {fileID: 22100000, guid: c41cfb7597e5d2e468ca458df50504d7, type: 2}
+  bowAnimator: {fileID: 22100000, guid: 6df650b9d309c364f98511a848be3d1d, type: 2}
   swordPrefab: {fileID: 1032590170434083731, guid: 0d5dba551d6ce4a44ba5bda4e7f986aa, type: 3}
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 7792114294305056150}
@@ -1455,6 +1461,7 @@ MonoBehaviour:
   - Detection
   - Ally
   - Player
+  actualAttackAnimation: 0
 --- !u!114 &-2459926710300109186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1467,7 +1474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 300
   currentHealth: 0
   healthSlider: {fileID: 0}
 --- !u!54 &-7717843599399497145
