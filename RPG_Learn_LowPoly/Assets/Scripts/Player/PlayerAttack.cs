@@ -99,6 +99,11 @@ namespace RPG.Player.Attack
             actualAttackAnimation = value;
         }
 
+        public void desactiveTriggerAttack(int value)
+        {
+            actualAttackAnimation = value;
+        }
+
         // Ativar ataque - Chamado pela animação de ataque
         public void activeAttack()
         {
@@ -147,8 +152,6 @@ namespace RPG.Player.Attack
         // Desativar ataque - Chamado pela animação de ataque
         public void desactiveAttack()
         {
-            // Desativa flags de ataque
-            actualAttackAnimation = 0;
             isMeleeAttacking = false;
             isRangedAttacking = false;
             weaponController.IsAttacking = false;

@@ -28,14 +28,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1032590170434083731}
-  m_LocalRotation: {x: 0.49096397, y: 0.29077235, z: 0.03562205, w: 0.82044923}
+  m_LocalRotation: {x: 0.56572187, y: -0.074518375, z: 0.5347141, w: 0.623287}
   m_LocalPosition: {x: -0.214, y: 0.381, z: -0.106}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 51.712, y: 55.74, z: 110}
 --- !u!114 &4538611450434205513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f926902df6c504881293909f0b020d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  enemyTag: Enemy
+  enemyTag2: Enemy
 --- !u!65 &6208536890906358246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -59,7 +62,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1474466, y: 0.44542676, z: 1.7541418}
+  m_Size: {x: 0.2, y: 0.5, z: 1.8}
   m_Center: {x: 0.000000036544836, y: 0.00000008195641, z: -0.31749427}
 --- !u!33 &4995653268501779382
 MeshFilter:

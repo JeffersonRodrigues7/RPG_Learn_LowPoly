@@ -2829,7 +2829,7 @@ MonoBehaviour:
   walkSpeed: 0
   chaseSpeed: 0
   cooldownTimeAfterChase: 2
-  arrivalDistance: 0.1
+  minDistanceToTarget: 2
   patrolPoints: []
 --- !u!114 &2669788780259592307
 MonoBehaviour:
@@ -2843,7 +2843,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ba1234ff668e3408797e5405f49b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  swordDamage: 25
+  projectileDamage: 15
   swordPrefab: {fileID: 3964347541132674574, guid: 223daaca244fbc044b88967b86d54a77, type: 3}
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 4158756939626166525}
@@ -2892,9 +2893,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.9267161
+  m_Height: 2.3251705
   m_Direction: 1
-  m_Center: {x: 0, y: 0.886642, z: 0}
+  m_Center: {x: -0, y: 1.0858686, z: 0}
 --- !u!195 &5038862099241665896
 NavMeshAgent:
   m_ObjectHideFlags: 0
