@@ -85,14 +85,17 @@ namespace RPG.Character.Detection
         }
 
         //Quando o inimigo é atingido ele aumenta seu raio de detecção
-        public void reactToProjectile(Transform target)
+        public void reactToProjectile(Transform _target)
         {
-            float newDetectionRadius = Vector3.Distance(target.position, transform.position);
-            detectionRadius = newDetectionRadius + 5f;
-            detectionCollider.radius = detectionRadius;
+            if (!target) //Se não tivemos um target, significa que ele levou um golpe sem estar em batalha, logo precisamos aumentar seu raio de detecção
+            {
+                float newDetectionRadius = Vector3.Distance(_target.position, transform.position);
+                detectionRadius = newDetectionRadius + 5f;
+                detectionCollider.radius = detectionRadius;
 
-            if(!chaseEnemyBehavior)//se for arqueiro
-                attackDistance = detectionRadius;
+                if (!chaseEnemyBehavior)//se for arqueiro
+                    attackDistance = detectionRadius;
+            }
         }
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
