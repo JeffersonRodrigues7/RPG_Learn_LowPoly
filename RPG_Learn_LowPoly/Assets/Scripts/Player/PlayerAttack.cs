@@ -25,6 +25,9 @@ namespace RPG.Player.Attack
         [SerializeField] private GameObject projectileprefab;
         [SerializeField] private List<string> projectileTagsToExclude = new List<string> { "Weapon", "Detection" };
 
+        [Header("Debug")]
+        [SerializeField] private int actualAttackAnimation = 0;
+
         private Animator animator; //Componente animator
         private GameObject weapon;
         private WeaponController weaponController;
@@ -91,6 +94,11 @@ namespace RPG.Player.Attack
 
         #region FUNÇÕES DE ANIMAÇÃO
 
+        public void triggerAttack(int value)
+        {
+            actualAttackAnimation = value;
+        }
+
         // Ativar ataque - Chamado pela animação de ataque
         public void activeAttack()
         {
@@ -140,6 +148,7 @@ namespace RPG.Player.Attack
         public void desactiveAttack()
         {
             // Desativa flags de ataque
+            actualAttackAnimation = 0;
             isMeleeAttacking = false;
             isRangedAttacking = false;
             weaponController.IsAttacking = false;
@@ -155,8 +164,20 @@ namespace RPG.Player.Attack
             // Inicia o ataque, com base no tipo de arma sendo usada
             if (isUsingSword)
             {
-                animator.SetTrigger(meleeAttackingHash);
-                isMeleeAttacking = true;
+                //animator.SetTrigger(meleeAttackingHash);
+                //isMeleeAttacking = true;
+
+                if(actualAttackAnimation == 0)
+                {
+                    animator.SetTrigger("TriggerAttack01");
+                }else if(actualAttackAnimation == 1)
+                {
+                    animator.SetTrigger("TriggerAttack02");
+                }
+                else if (actualAttackAnimation == 2)
+                {
+                    animator.SetTrigger("TriggerAttack03");
+                }
             }
             else
             {
