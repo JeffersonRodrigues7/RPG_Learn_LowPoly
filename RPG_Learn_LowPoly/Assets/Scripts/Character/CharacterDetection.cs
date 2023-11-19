@@ -59,7 +59,7 @@ namespace RPG.Character.Detection
         private void OnTriggerEnter(Collider other)
         {
             // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") || other.CompareTag("Ally"))
             {
                 target = other.transform; // Define o jogador como alvo.
 
@@ -73,7 +73,7 @@ namespace RPG.Character.Detection
         private void OnTriggerExit(Collider other)
         {
             // Verifica se o objeto que saiu do campo de detecção tem a tag "Player" (jogador) e se o comportamento de perseguição está ativado.
-            if (other.CompareTag("Player") && chaseEnemyBehavior)
+            if (target && chaseEnemyBehavior)
             {
                 target = null; // Remove o alvo.
 
@@ -82,6 +82,17 @@ namespace RPG.Character.Detection
                     characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
                 }
             }
+        }
+
+        //Quando o inimigo é atingido ele aumenta seu raio de detecção
+        public void reactToProjectile(Transform target)
+        {
+            float newDetectionRadius = Vector3.Distance(target.position, transform.position);
+            detectionRadius = newDetectionRadius + 5f;
+            detectionCollider.radius = detectionRadius;
+
+            if(!chaseEnemyBehavior)//se for arqueiro
+                attackDistance = detectionRadius;
         }
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.

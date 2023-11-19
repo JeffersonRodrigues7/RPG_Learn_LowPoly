@@ -7,6 +7,7 @@ namespace RPG.Projectile
 {
     public class ProjectileController : MonoBehaviour
     {
+        [SerializeField] private string ownerTag = "";
         [SerializeField] private float speed = 1;
         [SerializeField] private string enemyTag = "";
         [SerializeField] private float damage = 15f;
@@ -25,8 +26,9 @@ namespace RPG.Projectile
             }
         }
 
-        public void SetTarget(Vector3 _target, string _enemyTag)
+        public void SetTarget(string _ownerTag, Vector3 _target, string _enemyTag)
         {
+            ownerTag = _ownerTag;
             target = _target;
             enemyTag = _enemyTag;
             transform.LookAt(target);
@@ -40,7 +42,7 @@ namespace RPG.Projectile
 
                 if (healthController != null)
                 {
-                    healthController.takeDamage(damage);
+                    healthController.takeDamage(ownerTag, damage);
                 }
                 Destroy(gameObject);
             }

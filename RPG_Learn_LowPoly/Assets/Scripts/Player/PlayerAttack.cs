@@ -107,7 +107,7 @@ namespace RPG.Player.Attack
                     // Instancia um projétil e define seu alvo, destruindo-o após um tempo
                     projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
                     projectileController = projectileInstance?.GetComponent<ProjectileController>();
-                    projectileController?.SetTarget(hit.point, "Enemy"); // Define o alvo do projétil como o jogador
+                    projectileController?.SetTarget(tag, hit.point, "Enemy"); // Define o alvo do projétil como o jogador
                     Destroy(projectileInstance.gameObject, 10f);
                     return;
                 }
@@ -124,7 +124,7 @@ namespace RPG.Player.Attack
             // Instancia um projétil e define seu alvo como a posição do mouse, destruindo-o após um tempo
             projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
             projectileController = projectileInstance?.GetComponent<ProjectileController>();
-            projectileController?.SetTarget(worldMousePosition, "Enemy"); // Define o alvo do projétil como o jogador
+            projectileController?.SetTarget(tag, worldMousePosition, "Enemy"); // Define o alvo do projétil como o jogador
             Destroy(projectileInstance.gameObject, 10f);
         }
 

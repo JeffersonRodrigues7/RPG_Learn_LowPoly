@@ -1,5 +1,8 @@
+using RPG.Character.Detection;
+using RPG.Character.Movement;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +18,8 @@ namespace RPG.Health
         [SerializeField] private Slider healthSlider; // Slider para exibir a barra de vida
 
         private Animator animator;
+        private CharacterDetection characterDetection;
+        private Transform attacker;
 
         private int deathHash;
 
@@ -23,6 +28,7 @@ namespace RPG.Health
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            characterDetection = GetComponentInChildren<CharacterDetection>();
         }
 
         private void Start()
@@ -38,6 +44,25 @@ namespace RPG.Health
             updateHealthUI();
 
             if(currentHealth <= 0)
+            {
+                animator.SetTrigger(deathHash);
+            }
+        }
+
+        public void takeDamage(string ownerTag, float damage)
+        {
+            currentHealth -= damage; // Reduz a vida do personagem com base no dano recebido
+            updateHealthUI();
+
+            if (characterDetection)
+            {
+                attacker = GameObject.FindGameObjectWithTag(ownerTag).transform;
+
+                if(attacker != null)
+                    characterDetection.reactToProjectile(attacker);
+            }
+
+            if (currentHealth <= 0)
             {
                 animator.SetTrigger(deathHash);
             }

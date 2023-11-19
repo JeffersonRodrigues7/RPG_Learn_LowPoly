@@ -67,7 +67,7 @@ namespace RPG.Ally.Attack
 
             if(target != null)
             {
-                projectileController?.SetTarget(target.position, "Enemy"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position, "Enemy"); // Define o alvo do projétil como o jogador
             }
 
             Destroy(projectileInstance?.gameObject, 10f); // Destruir o projétil após um tempo determinado

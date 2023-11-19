@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 19054
+  controlID: 21418
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 19055
+  controlID: 21390
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -388,7 +388,7 @@ MonoBehaviour:
       layout: 4
     m_OverlaysVisible: 1
   m_WindowGUID: 412b802eeaaa34546b9634c1b8fccd81
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 18987
+  controlID: 21419
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -703,7 +703,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04d5feff10d5feff16f2feff1af2feff1ef2feff82f2feff86f2feff8ef2feff92f2feff96f2feffe4f2feff9cf5feffa0f5feffa4f5feffa8f5feffacf5feffb0f5feffdcf5feff72fafeff92fcfeff2a10fffff418ffff1a3effff043fffff3248ffff3a6effff7079ffff6892ffff16fbffff88a50400
+      m_ExpandedIDs: 04d5feff10d5feff16f2feff1af2feff1ef2feff82f2feff86f2feff8ef2feff92f2feff96f2feffe4f2feff9cf5feffa0f5feffa4f5feffa8f5feffacf5feffb0f5feffdcf5feff92fcfeff2a10fffff418ffff1a3effff043fffff3248ffff3a6effff7079ffff6892ffff16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -746,14 +746,14 @@ MonoBehaviour:
     y: 518
     width: 580
     height: 429
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 13}
   - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -794,23 +794,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Projectiles
+    - Assets/Scripts/Character
     m_Globs: []
     m_OriginalText: 
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Prefabs/Projectiles
+  - Assets/Scripts/Character
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Desktop\Trabalho\RPG_Learn_LowPoly\RPG_Learn_LowPoly
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: 1e6a0000
-    m_LastClickedID: 27166
-    m_ExpandedIDs: 000000003e680000a0690000b6690000b8690000be690000c6690000006a0000026a0000046a0000d0d90300d6d90300d8d903001ca9040018ea040090ea0400
+    scrollPos: {x: 0, y: 144}
+    m_SelectedIDs: 82ef0400
+    m_LastClickedID: 323458
+    m_ExpandedIDs: 000000003e680000b6690000b8690000be690000c6690000006a0000026a0000046a0000d0d90300d6d90300d8d903001ca9040018ea040090ea0400
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -863,8 +863,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4c600000
-    m_LastClickedInstanceID: 24652
+    m_SelectedInstanceIDs: 8e660000
+    m_LastClickedInstanceID: 26254
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: fc7b020000000000fe75000002760000fa750000
     m_RenameOverlay:
@@ -985,7 +985,7 @@ MonoBehaviour:
     m_CachedPref: 278
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 24652
+  m_LastInspectedObjectInstanceID: -79740
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

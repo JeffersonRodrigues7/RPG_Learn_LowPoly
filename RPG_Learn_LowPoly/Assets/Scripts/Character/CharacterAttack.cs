@@ -60,6 +60,7 @@ namespace RPG.Character.Attack
             weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
         }
+
         public void startAttackAnimation(Transform _target)
         {
             // Inicia a animação de ataque, com base no tipo de arma e estado de ataque do jogador
@@ -68,6 +69,7 @@ namespace RPG.Character.Attack
                 animator.SetTrigger(meleeAttackingHash); // Inicia a animação de ataque corpo a corpo
                 isMeleeAttacking = true; // Define o estado de ataque corpo a corpo como verdadeiro
             }
+
             else if (!isUsingSword && !isRangedAttacking) // Se não estiver usando espada e não estiver atacando à distância
             {
                 animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
@@ -85,7 +87,7 @@ namespace RPG.Character.Attack
 
             if (target != null)
             {
-                projectileController?.SetTarget(target.position+ new Vector3(0,1f,0), "Player"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position + new Vector3(0,1f,0), "Player"); // Define o alvo do projétil como o jogador
             }
 
             Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado

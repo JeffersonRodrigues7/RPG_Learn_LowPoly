@@ -20,11 +20,10 @@ MonoBehaviour:
   _chaseEnemyBehavior: 0
   _detectionDistance: 20
   _attackDistance: 20
-  _walkSpeed: 0
-  _chaseSpeed: 0
+  _walkSpeed: 5
+  _chaseSpeed: 5
   _cooldownTimeAfterChase: 0
   _arrivalDistance: 0
-  _patrolPoints: []
   _damage: 10
   _maxHealth: 50
   _animatorOverrideController: {fileID: 22100000, guid: 459ed6e6f8bd7fd4ab685fb7d4c4d7b0, type: 2}
