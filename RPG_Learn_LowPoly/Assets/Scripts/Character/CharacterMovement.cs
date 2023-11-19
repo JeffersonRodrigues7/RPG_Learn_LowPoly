@@ -69,8 +69,8 @@ namespace RPG.Character.Movement
                     break;
 
                 case CharacterState.Chasing: // Perseguindo algum alvo
-                    if(target != null)
-                        navMeshAgent.SetDestination(target.position);
+                    if (target == null) stopChase();
+                    else navMeshAgent.SetDestination(target.position);
                     break;
 
                 case CharacterState.MovingToLastKnownEnemyPosition: // Movendo-se para a �ltima posi��o conhecida do inimigo.

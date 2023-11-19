@@ -108,6 +108,8 @@ namespace RPG.Character.Detection
             }
         }
 
+
+
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
         private void OnDrawGizmos()
         {

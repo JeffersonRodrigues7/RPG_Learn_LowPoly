@@ -54,7 +54,8 @@ namespace RPG.Ally.Movement
         void Update()
         {
             if (isLookingTarget) return;
-
+            if (leader == null) return;
+           
             currentDistanceToLeader = Vector3.Distance(transform.position, leader.position); 
 
             if (currentDistanceToLeader >= minDistanceToRun) //Correndo
