@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using RPG.Character.Attack;
 using RPG.Character.Movement;
+using RPG.Ally.Attack;
+using RPG.Ally.Movement;
 
 namespace RPG.Character.Detection
 {
@@ -13,8 +15,6 @@ namespace RPG.Character.Detection
         [SerializeField] private float detectionRadius = 10f; // Raio de detecção do personagem
         [SerializeField] private float attackDistance = 1f; // Distância de ataque
         [SerializeField] private bool chaseEnemyBehavior = true; // Define se o personagem deve perseguir o inimigo
-
-        private SphereCollider detectionCollider; // Collider de detecção
 
         private CharacterMovement characterMovement; // Referência ao componente de movimento do personagem
         private CharacterAttack characterAttack; // Referência ao componente de ataque do personagem
@@ -28,19 +28,50 @@ namespace RPG.Character.Detection
 
         private void Start()
         {
-            characterMovement = GetComponentInParent<CharacterMovement>(); // Obtém o componente de movimento do pai
-            characterAttack = GetComponentInParent<CharacterAttack>(); // Obtém o componente de ataque do pai
-
-            detectionCollider = GetComponent<SphereCollider>(); // Obtém o Collider de esfera associado a este objeto
-
-            if (detectionCollider != null)
-            {
-                detectionCollider.radius = detectionRadius; // Define o raio do Collider de detecção com base no valor definido
-            }
+            characterMovement = GetComponent<CharacterMovement>(); // Obtém o componente de movimento do pai
+            characterAttack = GetComponent<CharacterAttack>(); // Obtém o componente de ataque do pai
         }
 
         private void Update()
         {
+            if(target != null)
+            {
+                float distance = Vector3.Distance(target.position, transform.position);
+
+                if (distance > detectionRadius)
+                {
+                    target = null; // Remove o alvo.
+                    if(chaseEnemyBehavior) characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
+                }
+                
+            }
+
+            if(target == null)
+            {
+                Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
+
+                List<Collider> filteredColliders = new List<Collider>();
+
+                foreach (Collider col in enemies)
+                {
+                    // Verificar se o collider tem a tag "Player" ou "Ally"
+                    if (col.CompareTag("Player") || col.CompareTag("Ally"))
+                    {
+                        filteredColliders.Add(col);
+                    }
+                }
+
+                if (filteredColliders.Count > 0)
+                {
+                    target = FindClosestEnemy(filteredColliders.ToArray());
+
+                    if (chaseEnemyBehavior)
+                    {
+                        characterMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
+                    }
+                }
+            }
+
             if (target != null)
             {
                 // Verifica se a distância entre o personagem e o alvo está dentro da distância de ataque.
@@ -56,42 +87,23 @@ namespace RPG.Character.Detection
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private Transform FindClosestEnemy(Collider[] enemies)
         {
-            if(target == null)
-            {
-                // Verifica se o objeto que entrou no campo de detecção tem a tag "Player" (jogador).
-                if (other.CompareTag("Player") || other.CompareTag("Ally"))
-                {
-                    target = other.transform; // Define o jogador como alvo.
+            Transform closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
 
-                    if (chaseEnemyBehavior)
-                    {
-                        characterMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
-                    }
+            foreach (Collider enemy in enemies)
+            {
+                float currentDistance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                if (currentDistance < closestDistance)
+                {
+                    closestDistance = currentDistance;
+                    closestEnemy = enemy.transform;
                 }
             }
-        }
 
-        private void OnTriggerExit(Collider other)
-        {
-            //Antes de parar a perseguição, vamos verificar se ele ainda tem alguém que pode perseguir no range dele
-            Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
-            foreach(Collider enemy in enemies)
-            {
-                if (enemy.CompareTag("Player") || enemy.CompareTag("Ally")) return;
-            }
-
-            // Verifica se o objeto que saiu do campo de detecção tem a tag "Player" (jogador) e se o comportamento de perseguição está ativado.
-            if (target && chaseEnemyBehavior)
-            {
-                target = null; // Remove o alvo.
-
-                if (chaseEnemyBehavior)
-                {
-                    characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
-                }
-            }
+            return closestEnemy;
         }
 
         //Quando o inimigo é atingido ele aumenta seu raio de detecção
@@ -101,14 +113,11 @@ namespace RPG.Character.Detection
             {
                 float newDetectionRadius = Vector3.Distance(_target.position, transform.position);
                 detectionRadius = newDetectionRadius + 5f;
-                detectionCollider.radius = detectionRadius;
 
                 if (!chaseEnemyBehavior)//se for arqueiro
                     attackDistance = detectionRadius;
             }
         }
-
-
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
         private void OnDrawGizmos()

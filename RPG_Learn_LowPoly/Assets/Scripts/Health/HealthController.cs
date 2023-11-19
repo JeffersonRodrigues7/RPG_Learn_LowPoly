@@ -1,3 +1,4 @@
+using RPG.Ally.Detection;
 using RPG.Character.Detection;
 using RPG.Character.Movement;
 using System.Collections;
@@ -19,6 +20,7 @@ namespace RPG.Health
 
         private Animator animator;
         private CharacterDetection characterDetection;
+        private AllyDetection allyDetection;
         private Transform attacker;
 
         private int deathHash;
@@ -28,7 +30,8 @@ namespace RPG.Health
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            characterDetection = GetComponentInChildren<CharacterDetection>();
+            characterDetection = GetComponent<CharacterDetection>();
+            allyDetection = GetComponent<AllyDetection>();
         }
 
         private void Start()
@@ -60,6 +63,11 @@ namespace RPG.Health
 
                 if(attacker != null)
                     characterDetection.reactToProjectile(attacker);
+            }
+            
+            else if (allyDetection)
+            {
+                allyDetection.reactToProjectile();
             }
 
             if (currentHealth <= 0)

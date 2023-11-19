@@ -12,7 +12,6 @@ namespace RPG.Ally.Detection
     public class AllyDetection : MonoBehaviour
     {
         [SerializeField] private float detectionRadius = 10f; // Raio de detecção do personagem
-        [SerializeField] private float attackDistance = 15f; // Raio de detecção do personagem
         [SerializeField] private LayerMask enemyLayer; // Layer dos inimigos
 
         private AllyMovement allyMovement;
@@ -21,12 +20,10 @@ namespace RPG.Ally.Detection
         private Collider[] enemies;
         private Transform target; // Alvo atual do personagem
 
-
-
         private void Start()
         {
-            allyMovement = GetComponentInParent<AllyMovement>(); // Obtém o componente de movimento do pai
-            allyAttack = GetComponentInParent<AllyAttack>();
+            allyMovement = GetComponent<AllyMovement>(); // Obtém o componente de movimento do pai
+            allyAttack = GetComponent<AllyAttack>();
         }
 
         private void Update()
@@ -66,6 +63,12 @@ namespace RPG.Ally.Detection
             }
 
             return closestEnemy;
+        }
+
+        //Quando o inimigo é atingido ele aumenta seu raio de detecção
+        public void reactToProjectile()
+        {
+            detectionRadius = detectionRadius + 5f;
         }
 
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
