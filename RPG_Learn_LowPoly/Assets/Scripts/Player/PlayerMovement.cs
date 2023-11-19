@@ -349,7 +349,7 @@ namespace RPG.Player.Movement
                 //Inicia pulo
         public void Roll(InputAction.CallbackContext context)
         {
-            Debug.Log(isRolling);
+            //Debug.Log(isRolling);
             if (!isRolling)
             {
                 currentSpeed = rollingSpeed;

@@ -118,6 +118,7 @@ namespace RPG.Player.Attack
 
         public void triggerAttack(int value)
         {
+            isMeleeAttacking = true;
             actualAttackAnimation = value;
             if(value == 0 || value == 1) weaponController.Damage = swordFirstAttackDamage;
             else if (value == 2) weaponController.Damage = swordSecondAttackDamage;
@@ -196,17 +197,13 @@ namespace RPG.Player.Attack
 
                 if (playerMovement.IsJumping)
                 {
-                    isMeleeAttacking = true;
                     animator.SetTrigger("TriggerJumpAttack");
                 }
 
                 else
                 {
-                    //animator.SetTrigger(meleeAttackingHash);
-
                     if (actualAttackAnimation == 0 && !isMeleeAttacking)
                     {
-                        isMeleeAttacking = true;
                         animator.SetTrigger("TriggerAttack01");
                     }
                     else if (actualAttackAnimation == 1)
