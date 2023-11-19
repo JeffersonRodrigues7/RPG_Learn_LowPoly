@@ -74,7 +74,7 @@ namespace RPG.Ally.Detection
         // Função para desenhar um raio de detecção no Editor para fins de depuração.
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, detectionRadius); // Desenha um raio de detecção em torno do objeto no Editor.
         }
     }
