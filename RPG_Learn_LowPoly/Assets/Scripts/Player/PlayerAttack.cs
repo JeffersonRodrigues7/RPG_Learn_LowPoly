@@ -14,7 +14,9 @@ namespace RPG.Player.Attack
     {
         #region VARIABLES DECLARATION
         [Header("DATA")]
-        [SerializeField] private float swordDamage = 25f;
+        [SerializeField] private float swordFirstAttackDamage = 25f;
+        [SerializeField] private float swordSecondAttackDamage = 30f;
+        [SerializeField] private float swordThirdAttackDamage = 35f;
         [SerializeField] private float projectileDamage = 15f;
 
         [Header("Objects")]
@@ -87,9 +89,12 @@ namespace RPG.Player.Attack
                 weaponController = weapon.GetComponent<WeaponController>();
                 weaponController.EnemyTag = "Enemy";
 
-                if (isUsingSword) weaponController.Damage = swordDamage;
+                if (isUsingSword) weaponController.Damage = swordFirstAttackDamage;
             }
         }
+
+
+
         #endregion
 
         #region FUNÇÕES DE ANIMAÇÃO
@@ -97,6 +102,9 @@ namespace RPG.Player.Attack
         public void triggerAttack(int value)
         {
             actualAttackAnimation = value;
+            if(value == 0 || value == 1) weaponController.Damage = swordFirstAttackDamage;
+            else if (value == 2) weaponController.Damage = swordSecondAttackDamage;
+            else weaponController.Damage = swordThirdAttackDamage;
         }
 
         public void desactiveTriggerAttack(int value)
