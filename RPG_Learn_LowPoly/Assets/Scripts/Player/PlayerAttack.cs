@@ -20,6 +20,8 @@ namespace RPG.Player.Attack
         [SerializeField] private float projectileDamage = 15f;
 
         [Header("Objects")]
+        [SerializeField] private AnimatorOverrideController swordAnimator;
+        [SerializeField] private AnimatorOverrideController bowAnimator;
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject bowPrefab;
         [SerializeField] private Transform leftHandTransform;
@@ -57,6 +59,7 @@ namespace RPG.Player.Attack
         {
             // Inicializa os componentes e variáveis necessárias quando o objeto é criado
             animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = swordAnimator;
         }
 
         private void Start()
@@ -89,7 +92,16 @@ namespace RPG.Player.Attack
                 weaponController = weapon.GetComponent<WeaponController>();
                 weaponController.EnemyTag = "Enemy";
 
-                if (isUsingSword) weaponController.Damage = swordFirstAttackDamage;
+                if (isUsingSword) 
+                {
+                    weaponController.Damage = swordFirstAttackDamage; 
+                    animator.runtimeAnimatorController = swordAnimator;
+                }
+                else
+                {
+                    animator.runtimeAnimatorController = bowAnimator;
+                }
+                
             }
         }
 
