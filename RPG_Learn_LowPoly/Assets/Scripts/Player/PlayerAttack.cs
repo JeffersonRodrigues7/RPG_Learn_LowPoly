@@ -205,8 +205,7 @@ namespace RPG.Player.Attack
         #endregion
 
         #region CALLBACKS DE INPUT
-        GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().usePotion(value);
-        public void usePotion()
+        
 
         // Inicia anima��o de ataque
         public void Attack(InputAction.CallbackContext context)

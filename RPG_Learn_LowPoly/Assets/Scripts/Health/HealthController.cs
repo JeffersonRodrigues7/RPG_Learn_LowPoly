@@ -85,7 +85,7 @@ namespace RPG.Health
         }
 
         public void usePotion(float value){
-            currentHealth += value*MaxHealth;
+            currentHealth += value * maxHealth;
             updateHealthUI();
         }
 
