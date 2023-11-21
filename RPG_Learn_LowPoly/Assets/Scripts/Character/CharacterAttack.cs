@@ -100,6 +100,7 @@ namespace RPG.Character.Attack
         // Chamado pela animação de ataque
         public void activeAttack()
         {
+
             weaponController.IsAttacking = true; // Ativa o ataque da arma
         }
 
