@@ -44,13 +44,13 @@ namespace RPG.Player.Attack
         private GameObject projectileInstance;
         private ProjectileController projectileController = null;
 
-        private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
+        private bool isUsingSword = false;//ï¿½true-> weapon atual ï¿½ a espada; false -> weapon atuaï¿½l ï¿½ o arco
 
-        private bool isMeleeAttacking = false; // Flag para determinar se o jogador está usando o melee attack
-        private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private bool isMeleeAttacking = false; // Flag para determinar se o jogador estï¿½ usando o melee attack
+        private int meleeAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
-        private bool isRangedAttacking = false; // Flag para determinar se o jogador está usando o melee attack
-        private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private bool isRangedAttacking = false; // Flag para determinar se o jogador estï¿½ usando o melee attack
+        private int rangedAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
         public bool IsMeleeAttacking { get { return isMeleeAttacking; } }
         public bool IsRangedAttacking { get { return isRangedAttacking; } }
@@ -61,7 +61,7 @@ namespace RPG.Player.Attack
 
         private void Awake()
         {
-            // Inicializa os componentes e variáveis necessárias quando o objeto é criado
+            // Inicializa os componentes e variï¿½veis necessï¿½rias quando o objeto ï¿½ criado
             animator = GetComponent<Animator>();
             playerMovement = GetComponent<PlayerMovement>();
             animator.runtimeAnimatorController = swordAnimator;
@@ -69,7 +69,7 @@ namespace RPG.Player.Attack
 
         private void Start()
         {
-            // Inicializa hashes das strings usadas para controlar animações
+            // Inicializa hashes das strings usadas para controlar animaï¿½ï¿½es
             projectileTagsToExclude.Add(gameObject.tag);
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack");
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
@@ -110,13 +110,22 @@ namespace RPG.Player.Attack
             }
         }
 
+        public void increaseAttack(float value){
+            swordFirstAttackDamage += value;
+            swordSecondAttackDamage += value;
+            swordThirdAttackDamage += value;
+            swordJumpAttackDamage += value;
+            projectileDamage += value;
+
+        }
+
 
 
         #endregion
 
-        #region FUNÇÕES DE ANIMAÇÃO
+        #region FUNï¿½ï¿½ES DE ANIMAï¿½ï¿½O
 
-        //Preciso avisar que o player entrou na animação de idle para que ele possa ataca novamente
+        //Preciso avisar que o player entrou na animaï¿½ï¿½o de idle para que ele possa ataca novamente
         public void idleBegin()
         {
             isMeleeAttacking = false;
@@ -137,14 +146,14 @@ namespace RPG.Player.Attack
             actualAttackAnimation = value;
         }
 
-        // Ativar ataque - Chamado pela animação de ataque
+        // Ativar ataque - Chamado pela animaï¿½ï¿½o de ataque
         public void activeAttack()
         {
-            // Configurar a variável de controle de ataque da arma
+            // Configurar a variï¿½vel de controle de ataque da arma
             weaponController.IsAttacking = true;
         }
 
-        // Atirar flecha - Chamado pela animação de ataque à distância
+        // Atirar flecha - Chamado pela animaï¿½ï¿½o de ataque ï¿½ distï¿½ncia
         public void shootArrow()
         {
             // Realiza um raycast para identificar um alvo
@@ -154,13 +163,13 @@ namespace RPG.Player.Attack
 
             foreach (RaycastHit hit in hits)
             {
-                // Se o alvo não estiver em uma tag excluída, atira na direção identificada
+                // Se o alvo nï¿½o estiver em uma tag excluï¿½da, atira na direï¿½ï¿½o identificada
                 if (!projectileTagsToExclude.Contains(hit.collider.tag))
                 {
-                    // Instancia um projétil e define seu alvo, destruindo-o após um tempo
+                    // Instancia um projï¿½til e define seu alvo, destruindo-o apï¿½s um tempo
                     projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
                     projectileController = projectileInstance?.GetComponent<ProjectileController>();
-                    projectileController?.SetTarget(tag, hit.point, "Enemy"); // Define o alvo do projétil como o jogador
+                    projectileController?.SetTarget(tag, hit.point, "Enemy"); // Define o alvo do projï¿½til como o jogador
                     projectileController.Damage = projectileDamage;
                     Destroy(projectileInstance.gameObject, 10f);
                     return;
@@ -169,20 +178,20 @@ namespace RPG.Player.Attack
 
 
             
-            // Se nenhum alvo foi identificado pelo raycast, atira na direção do mouse
+            // Se nenhum alvo foi identificado pelo raycast, atira na direï¿½ï¿½o do mouse
             Vector3 mousePosition = Input.mousePosition;
             mousePosition.z = 100;
             Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
             //Debug.Log($"Atirando aqui {mousePosition}");
-            // Instancia um projétil e define seu alvo como a posição do mouse, destruindo-o após um tempo
+            // Instancia um projï¿½til e define seu alvo como a posiï¿½ï¿½o do mouse, destruindo-o apï¿½s um tempo
             projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
             projectileController = projectileInstance?.GetComponent<ProjectileController>();
-            projectileController?.SetTarget(tag, worldMousePosition, "Enemy"); // Define o alvo do projétil como o jogador
+            projectileController?.SetTarget(tag, worldMousePosition, "Enemy"); // Define o alvo do projï¿½til como o jogador
             Destroy(projectileInstance.gameObject, 10f);
         }
 
-        // Desativar ataque - Chamado pela animação de ataque
+        // Desativar ataque - Chamado pela animaï¿½ï¿½o de ataque
         public void desactiveAttack()
         {
             isRangedAttacking = false;
@@ -192,8 +201,10 @@ namespace RPG.Player.Attack
         #endregion
 
         #region CALLBACKS DE INPUT
+        GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>().usePotion(value);
+        public void usePotion()
 
-        // Inicia animação de ataque
+        // Inicia animaï¿½ï¿½o de ataque
         public void Attack(InputAction.CallbackContext context)
         {
             // Inicia o ataque, com base no tipo de arma sendo usada
@@ -230,10 +241,10 @@ namespace RPG.Player.Attack
             }
         }
 
-        // Chamado quando soltamos o botão de ataque
+        // Chamado quando soltamos o botï¿½o de ataque
         public void StopAttack(InputAction.CallbackContext context)
         {
-            // Lógica para encerrar o ataque (se necessário)
+            // Lï¿½gica para encerrar o ataque (se necessï¿½rio)
         }
 
         // Inicia a troca de arma
@@ -250,10 +261,10 @@ namespace RPG.Player.Attack
             }
         }
 
-        // Chamado quando soltamos o botão de troca de arma
+        // Chamado quando soltamos o botï¿½o de troca de arma
         public void StopChangeWeapon(InputAction.CallbackContext context)
         {
-            // Lógica para encerrar a troca de arma (se necessário)
+            // Lï¿½gica para encerrar a troca de arma (se necessï¿½rio)
         }
 
         #endregion
