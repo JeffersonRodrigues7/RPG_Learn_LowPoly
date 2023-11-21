@@ -69,7 +69,7 @@ namespace RPG.Health
             {
                 attacker = GameObject.FindGameObjectWithTag(ownerTag).transform;
 
-                if(attacker != null)
+                if(attacker != null)//faz inimigo rreagir a um dano de projÃ©til
                     characterDetection.reactToProjectile(attacker);
             }
             
@@ -82,6 +82,11 @@ namespace RPG.Health
             {
                 animator.SetTrigger(deathHash);
             }
+        }
+
+        public void usePotion(float value){
+            currentHealth += value;
+            updateHealthUI();
         }
 
         private void updateHealthUI()
@@ -119,7 +124,7 @@ namespace RPG.Health
             }
         }
 
-        //Chamado através de animacao
+        //Chamado atravï¿½s de animacao
 
         private void destroyObject()
         {
