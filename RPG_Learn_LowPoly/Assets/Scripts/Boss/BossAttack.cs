@@ -4,8 +4,17 @@ using RPG.Projectile;
 
 namespace RPG.Boss.Attack
 {
+    public enum BossAttackStage // Estados possiveis
+    {
+        Stage01,
+        Stage02,
+        Stage03,
+        Stage04,
+        Stage05
+    }
     public class BossAttack : MonoBehaviour
     {
+
         [Header("DATA")]
         [SerializeField] private float handDamage = 30f;
         [SerializeField] private float swordDamage = 50f;
@@ -18,6 +27,7 @@ namespace RPG.Boss.Attack
         [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
         [SerializeField] private GameObject projectileprefab;
         [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
+        [SerializeField] public BossAttackStage bossStage = BossAttackStage.Stage01;
 
         private Transform ArrowParents;
         private GameObject projectileInstance;
@@ -31,13 +41,11 @@ namespace RPG.Boss.Attack
         private bool isMeleeAttacking = false; // Flag para determinar se o jogador está usando o melee attack
         private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
 
-        private bool isRangedAttacking = false; // Flag para determinar se o jogador está usando o melee attack
         private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
 
         private Transform target;
 
         public bool IsMeleeAttacking { get { return isMeleeAttacking; } }
-        public bool IsRangedAttacking { get { return isRangedAttacking; } }
 
         public float Damage { set { swordDamage = value; } }
 
@@ -66,20 +74,32 @@ namespace RPG.Boss.Attack
             rightWeaponController.Damage = swordDamage;
         }
 
+        public void setStage(BossAttackStage stage)
+        {
+            Debug.Log("Iniciando estado: " + stage);
+            bossStage = stage;
+
+            if (bossStage == BossAttackStage.Stage02) spawnWeapon(swordPrefab, rightHandTransform);
+        }
+
         public void startAttackAnimation(Transform _target)
         {
-            // Inicia a animação de ataque, com base no tipo de arma e estado de ataque do jogador
-            if (isUsingSword && !isMeleeAttacking) // Se estiver usando espada e não estiver atacando
+            switch (bossStage)
             {
-                animator.SetTrigger(meleeAttackingHash); // Inicia a animação de ataque corpo a corpo
-                isMeleeAttacking = true; // Define o estado de ataque corpo a corpo como verdadeiro
-            }
-
-            else if (!isUsingSword && !isRangedAttacking) // Se não estiver usando espada e não estiver atacando à distância
-            {
-                animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
-                isRangedAttacking = true; // Define o estado de ataque à distância como verdadeiro
-                target = _target; // Define o alvo do ataque à distância
+                case BossAttackStage.Stage01:
+                    animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
+                    isMeleeAttacking = true; // Define o estado de ataque à distância como verdadeiro
+                    break;
+                case BossAttackStage.Stage02:
+                    animator.SetTrigger(meleeAttackingHash); // Inicia a animação de ataque à distância
+                    isMeleeAttacking = true; // Define o estado de ataque à distância como verdadeiro
+                    break;
+                case BossAttackStage.Stage03:
+                    break;
+                case BossAttackStage.Stage04:
+                    break;
+                case BossAttackStage.Stage05:
+                    break;
             }
         }
 
@@ -105,13 +125,18 @@ namespace RPG.Boss.Attack
             leftWeaponController.IsAttacking = true; // Ativa o ataque da arma
         }
 
+        public void activeRightAttack()
+        {
+            rightWeaponController.IsAttacking = true; // Ativa o ataque da arma
+        }
+
         // Chamado pela animação de ataque
         public void desactiveAttack()
         {
             isMeleeAttacking = false; // Desativa o ataque corpo a corpo
-            isRangedAttacking = false;
             target = null;
             leftWeaponController.IsAttacking = false; // Desativa o ataque da arma
+            if(rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
         }
     }
 }

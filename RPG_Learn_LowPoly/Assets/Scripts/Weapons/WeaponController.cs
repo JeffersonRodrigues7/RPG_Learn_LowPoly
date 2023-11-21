@@ -28,7 +28,7 @@ namespace RPG.Weapon
                 
                 if (other.tag.Equals(enemyTag) || other.tag.Equals(enemyTag2))
                 {
-                    Debug.Log(other.tag);
+                    //Debug.Log(other.tag);
                     healthController = other.gameObject?.GetComponent<HealthController>();
 
                     if (healthController != null)

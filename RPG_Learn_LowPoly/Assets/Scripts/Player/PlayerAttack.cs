@@ -209,7 +209,7 @@ namespace RPG.Player.Attack
                 {
                     if (actualAttackAnimation == 0 && !isMeleeAttacking)
                     {
-                        Debug.Log($"Trigando primeiro ataque: {actualAttackAnimation} - {isMeleeAttacking}");
+                        //Debug.Log($"Trigando primeiro ataque: {actualAttackAnimation} - {isMeleeAttacking}");
                         animator.SetTrigger("TriggerAttack01");
                     }
                     else if (actualAttackAnimation == 1)

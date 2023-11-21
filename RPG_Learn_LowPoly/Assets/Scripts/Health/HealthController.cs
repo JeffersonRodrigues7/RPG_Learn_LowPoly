@@ -1,4 +1,5 @@
 using RPG.Ally.Detection;
+using RPG.Boss.Attack;
 using RPG.Character.Detection;
 using RPG.Character.Movement;
 using System.Collections;
@@ -22,6 +23,7 @@ namespace RPG.Health
         private CharacterDetection characterDetection;
         private AllyDetection allyDetection;
         private Transform attacker;
+        private BossAttack bossAttack;
 
         private int deathHash;
 
@@ -32,6 +34,7 @@ namespace RPG.Health
             animator = GetComponent<Animator>();
             characterDetection = GetComponent<CharacterDetection>();
             allyDetection = GetComponent<AllyDetection>();
+            bossAttack = GetComponent<BossAttack>();
         }
 
         private void Start()
@@ -45,6 +48,11 @@ namespace RPG.Health
         {
             currentHealth -= damage; // Reduz a vida do personagem com base no dano recebido
             updateHealthUI();
+
+            if (bossAttack)
+            {
+                changeBossStage();
+            }
 
             if(currentHealth <= 0)
             {
@@ -82,6 +90,32 @@ namespace RPG.Health
             {
                 // Atualiza o valor do Slider para refletir a porcentagem de vida restante
                 healthSlider.value = currentHealth / maxHealth;
+            }
+        }
+
+        private void changeBossStage()
+        {
+            float perHealth = (currentHealth / maxHealth);
+            Debug.Log(perHealth);
+
+            if(perHealth > 0.8 && bossAttack.bossStage != BossAttackStage.Stage01)
+            {
+                bossAttack.setStage(BossAttackStage.Stage01);
+            }else if(perHealth <= 0.8 && perHealth > 0.6 && bossAttack.bossStage != BossAttackStage.Stage02)
+            {
+                bossAttack.setStage(BossAttackStage.Stage02);
+            }
+            else if (perHealth <= 0.6 && perHealth > 0.4 && bossAttack.bossStage != BossAttackStage.Stage03)
+            {
+                bossAttack.setStage(BossAttackStage.Stage02);
+            }
+            else if (perHealth <= 0.4 && perHealth > 0.2 && bossAttack.bossStage != BossAttackStage.Stage04)
+            {
+                bossAttack.setStage(BossAttackStage.Stage02);
+            }
+            else if(perHealth <= 0.2 && bossAttack.bossStage != BossAttackStage.Stage05)
+            {
+                bossAttack.setStage(BossAttackStage.Stage02);
             }
         }
 
