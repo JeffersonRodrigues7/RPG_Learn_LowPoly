@@ -110,11 +110,15 @@ namespace RPG.Player.Attack
             }
         }
 
-        public void increaseAttack(float value){
+        public void increaseSwordAttack(float value){
             swordFirstAttackDamage += value;
             swordSecondAttackDamage += value;
             swordThirdAttackDamage += value;
             swordJumpAttackDamage += value;
+
+        }
+
+        public void increaseBowAttack(float value){
             projectileDamage += value;
 
         }
