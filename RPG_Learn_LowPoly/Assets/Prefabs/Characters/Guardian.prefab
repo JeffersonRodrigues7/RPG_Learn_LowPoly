@@ -2369,10 +2369,10 @@ MonoBehaviour:
   handDamage: 30
   swordDamage: 50
   projectileDamage: 15
-  swordPrefab: {fileID: 8591273635324488586, guid: 7c6073bcf9a5e7d4e966e8536e0d9d21, type: 3}
+  swordPrefab: {fileID: 7901973476606195368, guid: 96a69130569cfbd47975ed8260a90e24, type: 3}
   handPrefab: {fileID: 8782240002588734737}
   leftHandTransform: {fileID: 1612996494651248115}
-  rightHandTransform: {fileID: 6191125512206297080}
+  rightHandTransform: {fileID: 8056299795228241304}
   projectileprefab: {fileID: 0}
   isUsingSword: 0
   bossStage: 0

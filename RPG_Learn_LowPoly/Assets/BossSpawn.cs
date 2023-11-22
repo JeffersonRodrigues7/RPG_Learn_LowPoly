@@ -31,8 +31,8 @@ namespace RPG.Boss
                 if(player != null)
                 {
                     Vector3 targetPosition = player.position;
-                    targetPosition.y = transform.position.y;
-                    transform.LookAt(targetPosition);
+                    targetPosition.y = boss.transform.position.y;
+                    boss.transform.LookAt(targetPosition);
                 }
 
                 // Verifica se atingiu a altura máxima
@@ -64,7 +64,7 @@ namespace RPG.Boss
         {
             if (other.CompareTag("Player") && boss == null)
             {
-                boss = Instantiate(bossPrefab, spawnLocation.position, Quaternion.identity, transform);
+                boss = Instantiate(bossPrefab, spawnLocation.position, Quaternion.identity, spawnLocation);
                 boss.transform.position = new Vector3(boss.transform.position.x, initialPosition, boss.transform.position.z);
 
                 isRising = true;
