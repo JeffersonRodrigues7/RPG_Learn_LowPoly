@@ -2356,6 +2356,8 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   TeleportEffect: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  Thrall: {fileID: 2576088012148106625, guid: 720136e6493fcb64284e8bfc0995a2ac, type: 3}
+  ThrallConjureEffect: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
   currentBossState: 0
 --- !u!114 &6411898076330289151
 MonoBehaviour:
@@ -2394,6 +2396,7 @@ MonoBehaviour:
   maxHealth: 1000
   currentHealth: 0
   healthSlider: {fileID: 66686306}
+  healing: {fileID: 0}
 --- !u!54 &2373142834247962203
 Rigidbody:
   m_ObjectHideFlags: 0

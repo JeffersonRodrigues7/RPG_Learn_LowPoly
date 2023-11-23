@@ -29,6 +29,8 @@ namespace RPG.Boss.Movement
         private float arrivalDistance = 0.1f; // Dist�ncia para considerar que o personagem chegou � posi��o final
         [SerializeField] private Transform[] patrolPoints; // Pontos de patrulha do personagem
         [SerializeField] private GameObject TeleportEffect; // Pontos de patrulha do personagem
+        [SerializeField] private GameObject Thrall; // Pontos de patrulha do personagem
+        [SerializeField] private GameObject ThrallConjureEffect; // Pontos de patrulha do personagem
 
 
         public BossState currentBossState;
@@ -49,6 +51,7 @@ namespace RPG.Boss.Movement
         private GameObject player;
         private GameObject teleportPoints;
         private bool isTeleporting = false;
+        private Vector3 positionBeforeTeleport;
 
         private BossDetection bossDetection;
 
@@ -141,9 +144,8 @@ namespace RPG.Boss.Movement
                     if (Vector3.Distance(transform.position, player.transform.position) < bossDetection.detectionRadius && !isTeleporting)
                     {
                         animator.SetBool("Conjuring", false);
+                        positionBeforeTeleport = transform.position;           
                         isTeleporting = true;
-                        Debug.Log("HJere");
-                        Instantiate(TeleportEffect, transform);
                         animator.SetTrigger("TriggerTeleport");
                     }
                     else
@@ -160,16 +162,41 @@ namespace RPG.Boss.Movement
         //função chamada através da animação de teleport
         public void doTeleport() 
         {
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
             Vector3 nextPosition = FindOtherPoint();
             transform.position = nextPosition;
             isTeleporting = false;
         }
 
+        //ConjuraMinion, chamada através de animação
+        void conjureThrall()
+        {
+            // Gera pos e rotacao aleatoria
+            float angle = Random.Range(0f, 2f * Mathf.PI); 
+            float distance = Random.Range(0f, 10f); 
+
+            // Calcula a distancia
+            float offsetX = distance * Mathf.Cos(angle);
+            float offsetZ = distance * Mathf.Sin(angle);
+
+            // nova pos
+            Vector3 pos = player.transform.position + new Vector3(offsetX, 0f, offsetZ);
+
+            Instantiate(ThrallConjureEffect, pos + new Vector3(0,1.5f,0), Quaternion.identity);
+            GameObject Tharall = Instantiate(Thrall, pos, Quaternion.identity);
+            Destroy(Tharall, 20);
+        }
+
         private void lookToPlayer()
         {
-            Vector3 targetPosition = target.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
+            if(target != null)
+            {
+                Vector3 targetPosition = target.position;
+                targetPosition.y = transform.position.y;
+                transform.LookAt(targetPosition);
+            }
         }
 
         //Encontra ponto mais distante do player
