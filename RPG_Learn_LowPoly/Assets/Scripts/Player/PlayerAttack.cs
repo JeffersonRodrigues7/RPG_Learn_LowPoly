@@ -5,6 +5,7 @@ using RPG.Weapon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
@@ -30,6 +31,10 @@ namespace RPG.Player.Attack
         [SerializeField] private Transform rightHandTransform;
         [SerializeField] private GameObject projectileprefab;
         [SerializeField] private List<string> projectileTagsToExclude = new List<string> { "Weapon", "Detection" };
+        
+        [Header("Effects")]
+        [SerializeField] private GameObject buff;
+        [SerializeField] private GameObject starEffect;
 
         [Header("Debug")]
         [SerializeField] private int actualAttackAnimation = 0;
@@ -110,12 +115,37 @@ namespace RPG.Player.Attack
             }
         }
 
+        public void carregarEfeito(string efeito)
+        {
+            GameObject efeitoParaInstanciar;
+
+            if (efeito == "Buff") efeitoParaInstanciar = buff;
+            else efeitoParaInstanciar = starEffect;
+
+            // Instanciar o prefab acoplado ao jogador
+            GameObject novoObjeto = Instantiate(efeitoParaInstanciar, transform.position, Quaternion.identity);
+            novoObjeto.transform.parent = transform;
+
+            StartCoroutine(destroyEffect(novoObjeto));
+        }
+
+
+
+        IEnumerator destroyEffect(GameObject effect)
+        {
+            yield return new WaitForSeconds(2.0f);
+            Destroy(effect);
+        }
+
+
+
         public void increaseSwordAttack(float value){
             swordFirstAttackDamage += value;
             swordSecondAttackDamage += value;
             swordThirdAttackDamage += value;
             swordJumpAttackDamage += value;
 
+            carregarEfeito("Buff");
             
 
 
@@ -123,6 +153,8 @@ namespace RPG.Player.Attack
 
         public void increaseBowAttack(float value){
             projectileDamage += value;
+
+            carregarEfeito("Bow");
 
         }
 

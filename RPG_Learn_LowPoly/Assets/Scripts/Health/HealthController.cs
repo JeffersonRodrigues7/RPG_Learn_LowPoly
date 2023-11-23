@@ -17,7 +17,10 @@ namespace RPG.Health
 
         [Header("Other")]
         [SerializeField] private float currentHealth; 
-        [SerializeField] private Slider healthSlider; // Slider para exibir a barra de vida
+        [SerializeField] private Slider healthSlider;// Slider para exibir a barra de vida
+
+        [Header("effects")]
+        [SerializeField] private GameObject healing;
 
         private Animator animator;
         private CharacterDetection characterDetection;
@@ -87,6 +90,26 @@ namespace RPG.Health
         public void usePotion(float value){
             currentHealth += value * maxHealth;
             updateHealthUI();
+            carregarEfeito();
+        }
+
+
+        public void carregarEfeito()
+        {
+
+            // Instanciar o prefab acoplado ao jogador
+            GameObject novoObjeto = Instantiate(healing, transform.position, Quaternion.identity);
+            novoObjeto.transform.parent = transform;
+
+            StartCoroutine(destroyEffect(novoObjeto));
+        }
+
+
+
+        IEnumerator destroyEffect(GameObject effect)
+        {
+            yield return new WaitForSeconds(2.0f);
+            Destroy(effect);
         }
 
         private void updateHealthUI()
