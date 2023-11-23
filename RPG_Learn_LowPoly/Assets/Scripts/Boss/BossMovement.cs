@@ -1,3 +1,4 @@
+using RPG.Boss.Detection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,17 @@ using UnityEngine.AI;
 
 namespace RPG.Boss.Movement
 {
+
+    public enum BossState // Estados possiveis
+    {
+        Patrolling,
+        Chasing,
+        MovingToLastKnownEnemyPosition,
+        Searching,
+        ReturningToOriginalPosition,
+        Teleporting
+    }
+
     public class BossMovement : MonoBehaviour
     {
         [Header("BossData")]
@@ -12,20 +24,14 @@ namespace RPG.Boss.Movement
         [SerializeField] private float chaseSpeed = 10; // Velocidade de persegui��o do personagem
         [SerializeField] private float cooldownTimeAfterChase = 2f; // Tempo de espera ap�s a persegui��o
         [SerializeField] private float minDistanceToTarget = 2f;//Vai parar de seguir qnd chegar a essa distancia
-        
+
+        [Header("Effects")]
         private float arrivalDistance = 0.1f; // Dist�ncia para considerar que o personagem chegou � posi��o final
         [SerializeField] private Transform[] patrolPoints; // Pontos de patrulha do personagem
+        [SerializeField] private GameObject TeleportEffect; // Pontos de patrulha do personagem
 
-        private enum BossState // Estados possiveis
-        {
-            Patrolling,
-            Chasing,
-            MovingToLastKnownEnemyPosition,
-            Searching,
-            ReturningToOriginalPosition
-        }
 
-        private BossState currentBossState;
+        public BossState currentBossState;
 
         private Animator animator; 
         private NavMeshAgent navMeshAgent;
@@ -40,20 +46,37 @@ namespace RPG.Boss.Movement
         private int currentPatrolPoint = 0;
         private int patrolPointsLength = 0;
 
+        private GameObject player;
+        private GameObject teleportPoints;
+        private bool isTeleporting = false;
+
+        private BossDetection bossDetection;
+
         public float WalkSpeed { set { walkSpeed = value; } }
         public float ChaseSpeed { set { chaseSpeed = value; } }
         public float CooldownTimeAfterChase { set { cooldownTimeAfterChase = value; } }
         public float ArrivalDistance { set { arrivalDistance = value; } }
         public Transform[] PatrolPoints { set { patrolPoints = value; } }
 
-        private void Start()
+        private void Awake()
         {
+            bossDetection = GetComponent<BossDetection>();
             navMeshAgent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+
             isWalkingHash = Animator.StringToHash("isWalking"); // Obt�m o hash da string da anima��o de caminhada
             originalPosition = transform.position; // Registra a posi��o original do personagem
             currentBossState = BossState.Patrolling; // Define o estado inicial como "Patrolling"
-            navMeshAgent.speed = walkSpeed; 
+            navMeshAgent.speed = walkSpeed;
+
+            player = GameObject.FindGameObjectWithTag("Player");
+            teleportPoints = GameObject.Find("BossTeleportPoints");
+
+            patrolPoints = teleportPoints.GetComponentsInChildren<Transform>();
 
             if (patrolPoints != null) patrolPointsLength = patrolPoints.Length; // Registra o n�mero de pontos de patrulha se existirem.
         }
@@ -81,9 +104,7 @@ namespace RPG.Boss.Movement
                             navMeshAgent.SetDestination(target.position);
                         else
                         { //Se estiver muito proximo do alvo vai parar de perseguir e começar a olhar na direção dele
-                            Vector3 targetPosition = target.position;
-                            targetPosition.y = transform.position.y;
-                            transform.LookAt(targetPosition);
+                            lookToPlayer();
                         }
                     }
 
@@ -113,9 +134,55 @@ namespace RPG.Boss.Movement
                     }
                     break;
 
+                case BossState.Teleporting: // Personagem est� parado atento ao inimigo que saiu de seu alcance de persegui��o
+                    navMeshAgent.ResetPath();
+                    lookToPlayer();
+                    setWalkingAnimation(false);
+                    if (Vector3.Distance(transform.position, player.transform.position) < bossDetection.detectionRadius && !isTeleporting)
+                    {
+                        animator.SetBool("Conjuring", false);
+                        isTeleporting = true;
+                        Debug.Log("HJere");
+                        Instantiate(TeleportEffect, transform);
+                        animator.SetTrigger("TriggerTeleport");
+                    }
+                    else
+                    {
+                        animator.SetBool("Conjuring", true);
+                    }
+                    break;
+
                 default:
                     break;
             }
+        }
+
+        //função chamada através da animação de teleport
+        public void doTeleport() 
+        {
+            Vector3 nextPosition = FindOtherPoint();
+            transform.position = nextPosition;
+            isTeleporting = false;
+        }
+
+        private void lookToPlayer()
+        {
+            Vector3 targetPosition = target.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+
+        //Encontra ponto mais distante do player
+        public Vector3 FindOtherPoint()
+        {
+            if (patrolPoints == null || patrolPoints.Length == 0)
+            {
+                // Handle the case where the Transform array is empty
+                return Vector3.zero;
+            }
+
+            int randomIndex = Random.Range(0, patrolPoints.Length);
+            return patrolPoints[randomIndex].position;
         }
 
         // Fun��o que realizar a patrulha do personagem
@@ -198,9 +265,7 @@ namespace RPG.Boss.Movement
 
             if(target != null)
             {
-                Vector3 targetPosition = target.position;
-                targetPosition.y = transform.position.y;
-                transform.LookAt(targetPosition);
+                lookToPlayer();
             }
 
         }

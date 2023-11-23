@@ -1,6 +1,7 @@
 using UnityEngine;
 using RPG.Weapon;
 using RPG.Projectile;
+using RPG.Boss.Movement;
 
 namespace RPG.Boss.Attack
 {
@@ -29,6 +30,8 @@ namespace RPG.Boss.Attack
         [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
         [SerializeField] public BossAttackStage bossStage = BossAttackStage.Stage01;
 
+        private BossMovement bossMovement;
+
         private Transform ArrowParents;
         private GameObject projectileInstance;
         private ProjectileController projectileController = null;
@@ -49,9 +52,14 @@ namespace RPG.Boss.Attack
 
         public float Damage { set { swordDamage = value; } }
 
+        private void Awake()
+        {
+            bossMovement = GetComponent<BossMovement>();
+            animator = GetComponent<Animator>();
+        }
+
         private void Start()
         {
-            animator = GetComponent<Animator>();
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
@@ -79,7 +87,7 @@ namespace RPG.Boss.Attack
             Debug.Log("Iniciando estado: " + stage);
             bossStage = stage;
 
-            if (bossStage == BossAttackStage.Stage02) spawnWeapon(swordPrefab, rightHandTransform);
+            //if (bossStage == BossAttackStage.Stage02) spawnWeapon(swordPrefab, rightHandTransform);
         }
 
         public void startAttackAnimation(Transform _target)
@@ -87,12 +95,13 @@ namespace RPG.Boss.Attack
             switch (bossStage)
             {
                 case BossAttackStage.Stage01:
-                    animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
-                    isMeleeAttacking = true; // Define o estado de ataque à distância como verdadeiro
+                    animator.SetTrigger(rangedAttackingHash); 
+                    isMeleeAttacking = true; 
                     break;
                 case BossAttackStage.Stage02:
-                    animator.SetTrigger(meleeAttackingHash); // Inicia a animação de ataque à distância
-                    isMeleeAttacking = true; // Define o estado de ataque à distância como verdadeiro
+                    bossMovement.currentBossState = BossState.Teleporting;
+                    //animator.SetTrigger(meleeAttackingHash); 
+                    //isMeleeAttacking = true; 
                     break;
                 case BossAttackStage.Stage03:
                     break;

@@ -2353,7 +2353,10 @@ MonoBehaviour:
   chaseSpeed: 10
   cooldownTimeAfterChase: 0
   minDistanceToTarget: 2
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  TeleportEffect: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  currentBossState: 0
 --- !u!114 &6411898076330289151
 MonoBehaviour:
   m_ObjectHideFlags: 0
