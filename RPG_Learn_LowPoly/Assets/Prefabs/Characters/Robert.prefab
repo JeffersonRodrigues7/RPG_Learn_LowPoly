@@ -1437,6 +1437,7 @@ MonoBehaviour:
   mouseInputDistance: 50
   isJumping: 0
   isFalling: 0
+  runningSound: {fileID: 8300000, guid: 0fbd9f9ea9dffeb4cb2e337c9f59d10d, type: 3}
 --- !u!114 &-4418741519796253928
 MonoBehaviour:
   m_ObjectHideFlags: 0

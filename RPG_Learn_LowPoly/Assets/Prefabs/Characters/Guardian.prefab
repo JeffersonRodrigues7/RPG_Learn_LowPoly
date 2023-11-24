@@ -2359,6 +2359,7 @@ MonoBehaviour:
   Thrall: {fileID: 2576088012148106625, guid: 720136e6493fcb64284e8bfc0995a2ac, type: 3}
   ThrallConjureEffect: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
   currentBossState: 0
+  teleportSound: {fileID: 8300000, guid: 65eb7501ed3b201469112165e5a55059, type: 3}
 --- !u!114 &6411898076330289151
 MonoBehaviour:
   m_ObjectHideFlags: 0

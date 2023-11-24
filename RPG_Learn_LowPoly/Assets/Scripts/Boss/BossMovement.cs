@@ -61,6 +61,10 @@ namespace RPG.Boss.Movement
         public float ArrivalDistance { set { arrivalDistance = value; } }
         public Transform[] PatrolPoints { set { patrolPoints = value; } }
 
+        // SONS
+        [SerializeField] private AudioClip teleportSound;
+        private AudioSource audioSource;
+
         private void Awake()
         {
             bossDetection = GetComponent<BossDetection>();
@@ -70,6 +74,11 @@ namespace RPG.Boss.Movement
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
 
             isWalkingHash = Animator.StringToHash("isWalking"); // Obt�m o hash da string da anima��o de caminhada
             originalPosition = transform.position; // Registra a posi��o original do personagem
@@ -162,6 +171,10 @@ namespace RPG.Boss.Movement
         //função chamada através da animação de teleport
         public void doTeleport() 
         {
+            if (teleportSound != null)
+            {
+                audioSource.PlayOneShot(teleportSound);
+            }
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
