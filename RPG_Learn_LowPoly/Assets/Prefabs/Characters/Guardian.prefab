@@ -2291,7 +2291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 25, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2329,7 +2329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b276f73856b435a4299a5a3a6d97d94d, type: 3}
   m_Name: 
@@ -2344,7 +2344,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee95955f384ed2749ace806aa6bd5649, type: 3}
   m_Name: 
@@ -2353,7 +2353,12 @@ MonoBehaviour:
   chaseSpeed: 10
   cooldownTimeAfterChase: 0
   minDistanceToTarget: 2
-  patrolPoints: []
+  patrolPoints:
+  - {fileID: 0}
+  TeleportEffect: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
+  Thrall: {fileID: 2576088012148106625, guid: 720136e6493fcb64284e8bfc0995a2ac, type: 3}
+  ThrallConjureEffect: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
+  currentBossState: 0
 --- !u!114 &6411898076330289151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2361,7 +2366,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e15c988973c8f71408eddfd1a342a769, type: 3}
   m_Name: 
@@ -2369,12 +2374,13 @@ MonoBehaviour:
   handDamage: 30
   swordDamage: 50
   projectileDamage: 15
-  swordPrefab: {fileID: 8591273635324488586, guid: 7c6073bcf9a5e7d4e966e8536e0d9d21, type: 3}
+  swordPrefab: {fileID: 7901973476606195368, guid: 96a69130569cfbd47975ed8260a90e24, type: 3}
   handPrefab: {fileID: 8782240002588734737}
   leftHandTransform: {fileID: 1612996494651248115}
-  rightHandTransform: {fileID: 6191125512206297080}
+  rightHandTransform: {fileID: 8056299795228241304}
   projectileprefab: {fileID: 0}
   isUsingSword: 0
+  bossStage: 0
 --- !u!114 &6920343365046394103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,7 +2388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
@@ -2390,6 +2396,7 @@ MonoBehaviour:
   maxHealth: 1000
   currentHealth: 0
   healthSlider: {fileID: 66686306}
+  healing: {fileID: 0}
 --- !u!54 &2373142834247962203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2401,7 +2408,7 @@ Rigidbody:
   m_Mass: 200
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -2415,7 +2422,7 @@ BoxCollider:
   m_GameObject: {fileID: 4656597505202251105}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.7, y: 2, z: 0.65}
   m_Center: {x: 0, y: 1, z: 0}
@@ -2426,7 +2433,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656597505202251105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3

@@ -12,7 +12,7 @@ namespace RPG.Boss.Detection
     public class BossDetection : MonoBehaviour
     {
         [Header("BossData")]
-        [SerializeField] private float detectionRadius = 10f; // Raio de detecção do personagem
+        [SerializeField] public float detectionRadius = 10f; // Raio de detecção do personagem
         [SerializeField] private float attackDistance = 1f; // Distância de ataque
         [SerializeField] private bool chaseEnemyBehavior = true; // Define se o personagem deve perseguir o inimigo
 
@@ -34,58 +34,63 @@ namespace RPG.Boss.Detection
 
         private void Update()
         {
-            if(target != null)
+            if(BossMovement.currentBossState != BossState.Teleporting)
             {
-                float distance = Vector3.Distance(target.position, transform.position);
-
-                if (distance > detectionRadius)
+                if (target != null)
                 {
-                    target = null; // Remove o alvo.
-                    if (!chaseEnemyBehavior) BossMovement.lookAt(target); //Se for arqueiro, ele só vai parar de olhar
-                    if (chaseEnemyBehavior) BossMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
-                }
-                
-            }
+                    float distance = Vector3.Distance(target.position, transform.position);
 
-            if(target == null)
-            {
-                Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
-
-                List<Collider> filteredColliders = new List<Collider>();
-
-                foreach (Collider col in enemies)
-                {
-                    // Verificar se o collider tem a tag "Player" ou "Ally"
-                    if (col.CompareTag("Player") || col.CompareTag("Ally"))
+                    if (distance > detectionRadius)
                     {
-                        filteredColliders.Add(col);
+                        target = null; // Remove o alvo.
+                        if (!chaseEnemyBehavior) BossMovement.lookAt(target); //Se for arqueiro, ele só vai parar de olhar
+                        if (chaseEnemyBehavior) BossMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
+                    }
+
+                }
+
+                if (target == null)
+                {
+                    Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
+
+                    List<Collider> filteredColliders = new List<Collider>();
+
+                    foreach (Collider col in enemies)
+                    {
+                        // Verificar se o collider tem a tag "Player" ou "Ally"
+                        if (col.CompareTag("Player") || col.CompareTag("Ally"))
+                        {
+                            filteredColliders.Add(col);
+                        }
+                    }
+
+                    if (filteredColliders.Count > 0)
+                    {
+                        target = FindClosestEnemy(filteredColliders.ToArray());
+
+                        if (chaseEnemyBehavior)
+                        {
+                            BossMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
+                        }
                     }
                 }
 
-                if (filteredColliders.Count > 0)
+                if (target != null)
                 {
-                    target = FindClosestEnemy(filteredColliders.ToArray());
-
-                    if (chaseEnemyBehavior)
+                    // Verifica se a distância entre o personagem e o alvo está dentro da distância de ataque.
+                    if (Vector3.Distance(transform.position, target.transform.position) < attackDistance)
                     {
-                        BossMovement.startChase(target); // Inicia a perseguição se o comportamento de perseguição estiver ativado.
+                        BossAttack.startAttackAnimation(target); // Inicia a animação de ataque no componente de ataque.
+                    }
+
+                    if (!chaseEnemyBehavior) //Se for um inimigo que fica parado, ele vai ficar sempre olhando pro alvo
+                    {
+                        BossMovement.lookAt(target);
                     }
                 }
             }
 
-            if (target != null)
-            {
-                // Verifica se a distância entre o personagem e o alvo está dentro da distância de ataque.
-                if (Vector3.Distance(transform.position, target.transform.position) < attackDistance)
-                {
-                    BossAttack.startAttackAnimation(target); // Inicia a animação de ataque no componente de ataque.
-                }
-
-                if (!chaseEnemyBehavior) //Se for um inimigo que fica parado, ele vai ficar sempre olhando pro alvo
-                {
-                    BossMovement.lookAt(target);
-                }
-            }
+           
         }
 
         private Transform FindClosestEnemy(Collider[] enemies)

@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RPG.Health;
+using RPG.Player.Attack;
 
 public class InventoryItemController : MonoBehaviour
 {
     Item item;
 
     public Button RemoveButton;
+    HealthController health;
+    PlayerAttack force;
+
+    public void Awake()
+    {   
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthController>();
+        force = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack>();
+    }
 
     public void RemoveItem()
     {
@@ -23,13 +33,17 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseItem()
     {
+        
         switch (item.itemType)
         {
             case Item.ItemType.PotionHealth:
-                Debug.Log("AUMENTAR A VIDA DO PLAYER");
+                health.usePotion(0.2f);
                 break;
-            case Item.ItemType.Ring:
-                Debug.Log("AUMENTAR FORÇA DO HIT");
+            case Item.ItemType.PotionForceSword:
+                force.increaseSwordAttack(10f);
+                break;
+            case Item.ItemType.PotionForceArrow:
+                force.increaseBowAttack(10f);
                 break;
         }
 

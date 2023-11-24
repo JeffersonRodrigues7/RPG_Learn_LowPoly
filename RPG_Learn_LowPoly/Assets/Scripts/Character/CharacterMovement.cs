@@ -77,10 +77,14 @@ namespace RPG.Character.Movement
                     else
                     {
                         float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                        if(distanceToTarget > minDistanceToTarget)
+                        if (distanceToTarget > minDistanceToTarget)
                             navMeshAgent.SetDestination(target.position);
-                        else //Se estiver muito proximo do alvo vai parar de perseguir e começar a olhar na direção dele
-                            transform.LookAt(target.position);
+                        else
+                        {  //Se estiver muito proximo do alvo vai parar de perseguir e começar a olhar na direção dele
+                            Vector3 targetPosition = target.position;
+                            targetPosition.y = transform.position.y;
+                            transform.LookAt(targetPosition);
+                        }
                     }
 
                     break;
@@ -193,7 +197,11 @@ namespace RPG.Character.Movement
             target = _target;
 
             if(target != null)
-                transform.LookAt(_target.position);
+            {
+                Vector3 targetPosition = target.position;
+                targetPosition.y = transform.position.y;
+                transform.LookAt(targetPosition);
+            }
         }
     }
 }

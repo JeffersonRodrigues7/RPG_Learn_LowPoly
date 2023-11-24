@@ -17,7 +17,10 @@ namespace RPG.Health
 
         [Header("Other")]
         [SerializeField] private float currentHealth; 
-        [SerializeField] private Slider healthSlider; // Slider para exibir a barra de vida
+        [SerializeField] private Slider healthSlider;// Slider para exibir a barra de vida
+
+        [Header("effects")]
+        [SerializeField] private GameObject healing;
 
         private Animator animator;
         private CharacterDetection characterDetection;
@@ -69,7 +72,7 @@ namespace RPG.Health
             {
                 attacker = GameObject.FindGameObjectWithTag(ownerTag).transform;
 
-                if(attacker != null)
+                if(attacker != null)//faz inimigo rreagir a um dano de projÃ©til
                     characterDetection.reactToProjectile(attacker);
             }
             
@@ -82,6 +85,31 @@ namespace RPG.Health
             {
                 animator.SetTrigger(deathHash);
             }
+        }
+
+        public void usePotion(float value){
+            currentHealth += value * maxHealth;
+            updateHealthUI();
+            carregarEfeito();
+        }
+
+
+        public void carregarEfeito()
+        {
+
+            // Instanciar o prefab acoplado ao jogador
+            GameObject novoObjeto = Instantiate(healing, transform.position, Quaternion.identity);
+            novoObjeto.transform.parent = transform;
+
+            StartCoroutine(destroyEffect(novoObjeto));
+        }
+
+
+
+        IEnumerator destroyEffect(GameObject effect)
+        {
+            yield return new WaitForSeconds(2.0f);
+            Destroy(effect);
         }
 
         private void updateHealthUI()
@@ -119,7 +147,7 @@ namespace RPG.Health
             }
         }
 
-        //Chamado através de animacao
+        //Chamado atravï¿½s de animacao
 
         private void destroyObject()
         {
