@@ -51,7 +51,7 @@ namespace RPG.Player.Attack
 
         private bool isUsingSword = false;//�true-> weapon atual � a espada; false -> weapon atua�l � o arco
 
-        private bool isMeleeAttacking = false; // Flag para determinar se o jogador est� usando o melee attack
+        [SerializeField] private bool isMeleeAttacking = false; // Flag para determinar se o jogador est� usando o melee attack
         private int meleeAttackingHash; //Hash da String que se refere a anima��o de Melee Attacking
 
         private bool isRangedAttacking = false; // Flag para determinar se o jogador est� usando o melee attack
@@ -280,7 +280,7 @@ namespace RPG.Player.Attack
 
                 else
                 {
-                    if (actualAttackAnimation == 0 && !isMeleeAttacking)
+                    if ((actualAttackAnimation == 0 || actualAttackAnimation == 1) && !isMeleeAttacking)
                     {
                         //Debug.Log($"Trigando primeiro ataque: {actualAttackAnimation} - {isMeleeAttacking}");
                         animator.SetTrigger("TriggerAttack01");

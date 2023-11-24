@@ -87,7 +87,7 @@ namespace RPG.Boss.Attack
             Debug.Log("Iniciando estado: " + stage);
             bossStage = stage;
 
-            //if (bossStage == BossAttackStage.Stage02) spawnWeapon(swordPrefab, rightHandTransform);
+            if (bossStage == BossAttackStage.Stage02) spawnWeapon(swordPrefab, rightHandTransform);
         }
 
         public void startAttackAnimation(Transform _target)
@@ -99,9 +99,9 @@ namespace RPG.Boss.Attack
                     isMeleeAttacking = true; 
                     break;
                 case BossAttackStage.Stage02:
-                    bossMovement.currentBossState = BossState.Teleporting;
-                    //animator.SetTrigger(meleeAttackingHash); 
-                    //isMeleeAttacking = true; 
+                    //bossMovement.currentBossState = BossState.Teleporting;
+                    animator.SetTrigger(meleeAttackingHash); 
+                    isMeleeAttacking = true; 
                     break;
                 case BossAttackStage.Stage03:
                     break;
