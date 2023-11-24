@@ -14,10 +14,12 @@ namespace RPG.Ally.Attack
         [SerializeField] private float projectileDamage = 15f;
 
         [SerializeField] private GameObject bowPrefab;
-        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
+        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma serï¿½ anexada
+        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma serï¿½ anexada
         [SerializeField] private GameObject projectileprefab;
-        
+        [SerializeField] private AudioClip hitComArma;
+
+        private AudioSource audioSource;
         private Transform ArrowParents;
         private GameObject projectileInstance;
         private ProjectileController projectileController = null;
@@ -28,8 +30,8 @@ namespace RPG.Ally.Attack
 
         private Transform target;
 
-        private bool isRangedAttacking = false; // Flag para determinar se o jogador está usando o melee attack
-        private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private bool isRangedAttacking = false; // Flag para determinar se o jogador estï¿½ usando o melee attack
+        private int rangedAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
         public bool IsRangedAttacking { get { return isRangedAttacking; } set { isRangedAttacking = value; } }
 
@@ -40,6 +42,12 @@ namespace RPG.Ally.Attack
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+
             animator = GetComponent<Animator>();
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
@@ -51,34 +59,38 @@ namespace RPG.Ally.Attack
         private void spawnWeapon(GameObject weaponPrefab, Transform hand)
         {
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
-            weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
+            weaponController = weapon.GetComponent<WeaponController>(); // Obtï¿½m o controlador da arma
             weaponController.EnemyTag = "Enemy"; // Define a tag do inimigo
         }
 
         public void startAttackAnimation(Transform _target)
         {
-            animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
-            target = _target; // Define o alvo do ataque à distância
+            if (hitComArma != null)
+            {
+                audioSource.PlayOneShot(hitComArma);
+            }
+            animator.SetTrigger(rangedAttackingHash); // Inicia a animaï¿½ï¿½o de ataque ï¿½ distï¿½ncia
+            target = _target; // Define o alvo do ataque ï¿½ distï¿½ncia
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void shootArrow()
         {
-            // Instancia um projétil para ataque à distância, direcionado ao alvo determinado
+            // Instancia um projï¿½til para ataque ï¿½ distï¿½ncia, direcionado ao alvo determinado
             //Debug.Log(target.name); // Nome do alvo (apenas para debug)
             projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
             projectileController = projectileInstance?.GetComponent<ProjectileController>();
 
             if(target != null)
             {
-                projectileController?.SetTarget(tag, target.position + new Vector3(0,1,0), "Enemy"); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position + new Vector3(0,1,0), "Enemy"); // Define o alvo do projï¿½til como o jogador
                 projectileController.Damage = projectileDamage;
             }
 
-            Destroy(projectileInstance?.gameObject, 10f); // Destruir o projétil após um tempo determinado
+            Destroy(projectileInstance?.gameObject, 10f); // Destruir o projï¿½til apï¿½s um tempo determinado
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void desactiveAttack()
         {
             isRangedAttacking = false;

@@ -1580,6 +1580,7 @@ MonoBehaviour:
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
   projectileprefab: {fileID: 7650706926830519763, guid: 8437aa17fe757b84da0a96c2490a48dc, type: 3}
+  hitComArma: {fileID: 8300000, guid: 893df23872ddcfd4887828ed9bc93a3d, type: 3}
 --- !u!54 &3831385985572265550
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1647,6 +1648,7 @@ MonoBehaviour:
   maxHealth: 200
   currentHealth: 0
   healthSlider: {fileID: 8330427179651512874}
+  healing: {fileID: 0}
 --- !u!1 &3284555193264165315
 GameObject:
   m_ObjectHideFlags: 0

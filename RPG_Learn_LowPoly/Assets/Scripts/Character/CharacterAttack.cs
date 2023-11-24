@@ -17,11 +17,14 @@ namespace RPG.Character.Attack
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject bowPrefab;
-        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
+        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma serï¿½ anexada
+        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma serï¿½ anexada
         [SerializeField] private GameObject projectileprefab;
-        [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
+        [SerializeField] private bool isUsingSword = false;//ï¿½true-> weapon atual ï¿½ a espada; false -> weapon atuaï¿½l ï¿½ o arco
+        [SerializeField] private AudioClip hitSemArma;
+        [SerializeField] private AudioClip hitComArma;
 
+        private AudioSource audioSource;
         private Transform ArrowParents;
         private GameObject projectileInstance;
         private ProjectileController projectileController = null;
@@ -30,11 +33,11 @@ namespace RPG.Character.Attack
         private GameObject weapon; 
         private WeaponController weaponController; // Controlador da arma
 
-        private bool isMeleeAttacking = false; // Flag para determinar se o jogador está usando o melee attack
-        private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private bool isMeleeAttacking = false; // Flag para determinar se o jogador estï¿½ usando o melee attack
+        private int meleeAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
-        private bool isRangedAttacking = false; // Flag para determinar se o jogador está usando o melee attack
-        private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private bool isRangedAttacking = false; // Flag para determinar se o jogador estï¿½ usando o melee attack
+        private int rangedAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
         private Transform target;
 
@@ -45,8 +48,14 @@ namespace RPG.Character.Attack
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
+
             animator = GetComponent<Animator>();
-            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
+            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtï¿½m o hash da string da animaï¿½ï¿½o de ataque corpo a corpo
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
             ArrowParents = GameObject.Find("ArrowsParent").transform;
@@ -58,7 +67,7 @@ namespace RPG.Character.Attack
         private void spawnWeapon(GameObject weaponPrefab, Transform hand)
         {
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
-            weaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
+            weaponController = weapon.GetComponent<WeaponController>(); // Obtï¿½m o controlador da arma
             weaponController.EnemyTag = "Player"; // Define a tag do inimigo
             weaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
             weaponController.Damage = swordDamage;
@@ -66,24 +75,32 @@ namespace RPG.Character.Attack
 
         public void startAttackAnimation(Transform _target)
         {
-            // Inicia a animação de ataque, com base no tipo de arma e estado de ataque do jogador
-            if (isUsingSword && !isMeleeAttacking) // Se estiver usando espada e não estiver atacando
+            // Inicia a animaï¿½ï¿½o de ataque, com base no tipo de arma e estado de ataque do jogador
+            if (isUsingSword && !isMeleeAttacking) // Se estiver usando espada e nï¿½o estiver atacando
             {
-                animator.SetTrigger(meleeAttackingHash); // Inicia a animação de ataque corpo a corpo
+                animator.SetTrigger(meleeAttackingHash); // Inicia a animaï¿½ï¿½o de ataque corpo a corpo
                 isMeleeAttacking = true; // Define o estado de ataque corpo a corpo como verdadeiro
+                if (hitSemArma != null)
+                {
+                    audioSource.PlayOneShot(hitSemArma);
+                }
             }
 
-            else if (!isUsingSword && !isRangedAttacking) // Se não estiver usando espada e não estiver atacando à distância
+            else if (!isUsingSword && !isRangedAttacking) // Se nï¿½o estiver usando espada e nï¿½o estiver atacando ï¿½ distï¿½ncia
             {
-                animator.SetTrigger(rangedAttackingHash); // Inicia a animação de ataque à distância
-                isRangedAttacking = true; // Define o estado de ataque à distância como verdadeiro
-                target = _target; // Define o alvo do ataque à distância
+                animator.SetTrigger(rangedAttackingHash); // Inicia a animaï¿½ï¿½o de ataque ï¿½ distï¿½ncia
+                isRangedAttacking = true; // Define o estado de ataque ï¿½ distï¿½ncia como verdadeiro
+                target = _target; // Define o alvo do ataque ï¿½ distï¿½ncia
+                if (hitComArma != null)
+                {
+                    audioSource.PlayOneShot(hitComArma);
+                }
             }
         }
 
         public void shootArrow()
         {
-            // Instancia um projétil para ataque à distância, direcionado ao alvo determinado
+            // Instancia um projï¿½til para ataque ï¿½ distï¿½ncia, direcionado ao alvo determinado
             //Debug.Log(target.name); // Nome do alvo (apenas para debug)
             projectileInstance = Instantiate(projectileprefab, rightHandTransform.position, Quaternion.identity, ArrowParents);
             projectileController = projectileInstance?.GetComponent<ProjectileController>();
@@ -91,20 +108,20 @@ namespace RPG.Character.Attack
 
             if (target != null)
             {
-                projectileController?.SetTarget(tag, target.position + new Vector3(0,1f,0), target.tag); // Define o alvo do projétil como o jogador
+                projectileController?.SetTarget(tag, target.position + new Vector3(0,1f,0), target.tag); // Define o alvo do projï¿½til como o jogador
             }
 
-            Destroy(projectileInstance.gameObject, 10f); // Destruir o projétil após um tempo determinado
+            Destroy(projectileInstance.gameObject, 10f); // Destruir o projï¿½til apï¿½s um tempo determinado
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void activeAttack()
         {
 
             weaponController.IsAttacking = true; // Ativa o ataque da arma
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void desactiveAttack()
         {
             isMeleeAttacking = false; // Desativa o ataque corpo a corpo

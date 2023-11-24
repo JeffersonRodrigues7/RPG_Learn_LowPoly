@@ -2853,6 +2853,8 @@ MonoBehaviour:
   rightHandTransform: {fileID: 8808785212953776886}
   projectileprefab: {fileID: 7650706926830519763, guid: 4dc60b54ef3650e49ba9bac46656649e, type: 3}
   isUsingSword: 0
+  hitSemArma: {fileID: 8300000, guid: e982341ab8bf20c4db31e73fed2808b1, type: 3}
+  hitComArma: {fileID: 8300000, guid: 893df23872ddcfd4887828ed9bc93a3d, type: 3}
 --- !u!114 &6002933398867577178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2868,6 +2870,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthSlider: {fileID: 4786342570408402770}
+  healing: {fileID: 0}
 --- !u!54 &6011337240300463248
 Rigidbody:
   m_ObjectHideFlags: 0
