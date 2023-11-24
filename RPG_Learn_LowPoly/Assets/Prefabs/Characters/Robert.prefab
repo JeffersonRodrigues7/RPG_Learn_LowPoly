@@ -1466,7 +1466,12 @@ MonoBehaviour:
   - Detection
   - Ally
   - Player
+  buff: {fileID: 0}
+  starEffect: {fileID: 0}
   actualAttackAnimation: 0
+  swordHitSound: {fileID: 8300000, guid: 66e16537aa41fa041a3960541d595b74, type: 3}
+  swordDrawSound: {fileID: 8300000, guid: c5b6c1a53ddc994469b11a00af6fefc9, type: 3}
+  bowShotSound: {fileID: 8300000, guid: 893df23872ddcfd4887828ed9bc93a3d, type: 3}
 --- !u!114 &-2459926710300109186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,6 +1487,7 @@ MonoBehaviour:
   maxHealth: 300
   currentHealth: 0
   healthSlider: {fileID: 0}
+  healing: {fileID: 0}
 --- !u!65 &2695146724596640442
 BoxCollider:
   m_ObjectHideFlags: 0
