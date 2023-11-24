@@ -63,6 +63,8 @@ namespace RPG.Player.Attack
         #endregion
         [SerializeField] private AudioClip swordHitSound;
         [SerializeField] private AudioClip swordDrawSound;
+        [SerializeField] private AudioClip bowShotSound;
+
         private AudioSource audioSource;
         #region  BEGIN/END SCRIPT
 
@@ -216,6 +218,7 @@ namespace RPG.Player.Attack
         // Atirar flecha - Chamado pela anima��o de ataque � dist�ncia
         public void shootArrow()
         {
+           
             // Realiza um raycast para identificar um alvo
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(ray);
@@ -298,7 +301,10 @@ namespace RPG.Player.Attack
             {
                 animator.SetTrigger(rangedAttackingHash);
                 isRangedAttacking = true;
-
+                if (!audioSource.isPlaying && bowShotSound != null)
+                {
+                    audioSource.PlayOneShot(bowShotSound);
+                }
             }
         }
 
