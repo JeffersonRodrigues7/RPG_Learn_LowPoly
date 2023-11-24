@@ -78,15 +78,12 @@ namespace RPG.Player.Attack
 
         private void Start()
         {
-<<<<<<< HEAD
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
             {
                 audioSource = gameObject.AddComponent<AudioSource>();
             }
 
-=======
->>>>>>> fa44a85b6266a1b3bc04c7f3230b95f99bd0f07e
             // Inicializa hashes das strings usadas para controlar anima��es
             projectileTagsToExclude.Add(gameObject.tag);
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack");
@@ -204,11 +201,7 @@ namespace RPG.Player.Attack
 
         // Ativar ataque - Chamado pela anima��o de ataque
         public void activeAttack()
-<<<<<<< HEAD
         {   
-=======
-        {
->>>>>>> fa44a85b6266a1b3bc04c7f3230b95f99bd0f07e
             // Configurar a vari�vel de controle de ataque da arma
             weaponController.IsAttacking = true;
 
