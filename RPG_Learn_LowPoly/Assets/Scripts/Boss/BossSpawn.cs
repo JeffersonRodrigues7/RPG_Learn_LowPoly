@@ -8,6 +8,7 @@ namespace RPG.Boss
     public class BossSpawn : MonoBehaviour
     {
         [SerializeField] private GameObject bossPrefab;
+        [SerializeField] private Transform portal;
         [SerializeField] private Transform spawnLocation;
         [SerializeField] float riseSpeed = 0.5f;  // Velocidade de subida do boss
         [SerializeField] float initialPosition = -3.5f;  // Velocidade de subida do boss
@@ -64,7 +65,7 @@ namespace RPG.Boss
         {
             if (other.CompareTag("Player") && boss == null)
             {
-                boss = Instantiate(bossPrefab, spawnLocation.position, Quaternion.identity, spawnLocation);
+                boss = Instantiate(bossPrefab, portal.position, Quaternion.identity, spawnLocation);
                 boss.transform.position = new Vector3(boss.transform.position.x, initialPosition, boss.transform.position.z);
 
                 isRising = true;

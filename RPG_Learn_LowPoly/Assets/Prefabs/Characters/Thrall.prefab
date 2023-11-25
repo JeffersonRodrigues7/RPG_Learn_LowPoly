@@ -1396,8 +1396,8 @@ GameObject:
   - component: {fileID: 3387115613074946630}
   - component: {fileID: 3387115613074946629}
   - component: {fileID: 3387115613074946628}
-  - component: {fileID: 3387115613074946683}
   - component: {fileID: 3387115613074946682}
+  - component: {fileID: 6712912178274052704}
   m_Layer: 7
   m_Name: Thrall
   m_TagString: Enemy
@@ -1509,6 +1509,8 @@ MonoBehaviour:
   rightHandTransform: {fileID: 3942021307580557080}
   projectileprefab: {fileID: 7650706926830519763, guid: ca711863b166dcb4da8f12ea09ed336b, type: 3}
   isUsingSword: 1
+  hitSemArma: {fileID: 0}
+  hitComArma: {fileID: 0}
 --- !u!114 &3387115613074946629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1526,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthSlider: {fileID: 1541635345}
+  healing: {fileID: 0}
 --- !u!54 &3387115613074946628
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1540,20 +1543,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &3387115613074946683
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2576088012148106625}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.26467
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.055619, z: -0}
 --- !u!195 &3387115613074946682
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1576,6 +1565,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &6712912178274052704
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2576088012148106625}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.53, y: 1.9, z: 0.46}
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!1 &3079985059143119088
 GameObject:
   m_ObjectHideFlags: 0

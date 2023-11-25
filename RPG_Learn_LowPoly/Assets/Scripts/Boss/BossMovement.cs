@@ -42,7 +42,7 @@ namespace RPG.Boss.Movement
         private int isWalkingHash; // Hash da String que se refere � anima��o de Walk
 
         private GameObject player;
-        private GameObject teleportPoints;
+        
         private bool isTeleporting = false;
         private Vector3 positionBeforeTeleport;
 
@@ -55,6 +55,13 @@ namespace RPG.Boss.Movement
         // SONS
         [SerializeField] private AudioClip teleportSound;
         private AudioSource audioSource;
+
+        private GameObject teleportPoints;
+        private Transform thrallsParent;
+        private Transform portalsParent;
+        private Transform meteorsParent;
+        private Transform effectsParent;
+
 
         private void Awake()
         {
@@ -75,7 +82,12 @@ namespace RPG.Boss.Movement
             currentBossState = BossState.Chasing; // Define o estado inicial como "Patrolling"
 
             player = GameObject.FindGameObjectWithTag("Player");
+
             teleportPoints = GameObject.Find("BossTeleportPoints");
+            thrallsParent = GameObject.Find("Thralls").transform;
+            portalsParent = GameObject.Find("Portals").transform;
+            meteorsParent = GameObject.Find("Meteors").transform;
+            effectsParent = GameObject.Find("Effects").transform;
 
             patrolPoints = teleportPoints.GetComponentsInChildren<Transform>();
 
@@ -158,9 +170,9 @@ namespace RPG.Boss.Movement
                 audioSource.PlayOneShot(teleportSound);
             }
 
-            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
-            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
-            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity, effectsParent);
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity, effectsParent);
+            Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity, effectsParent);
 
 
             Vector3 nextPosition = FindOtherPoint();
@@ -185,9 +197,9 @@ namespace RPG.Boss.Movement
             // nova pos
             Vector3 pos = player.transform.position + new Vector3(offsetX, 0f, offsetZ);
 
-            GameObject portal = Instantiate(ThrallConjureEffect, pos + new Vector3(0,1.5f,0), Quaternion.identity);
+            GameObject portal = Instantiate(ThrallConjureEffect, pos + new Vector3(0,1.5f,0), Quaternion.identity, portalsParent);
             lookToPlayer(portal.transform, player.transform);
-            GameObject Tharall = Instantiate(Thrall, pos, Quaternion.identity);
+            GameObject Tharall = Instantiate(Thrall, pos, Quaternion.identity, thrallsParent);
             lookToPlayer(Tharall.transform, player.transform);
             Destroy(Tharall, 20);
         }
@@ -196,7 +208,7 @@ namespace RPG.Boss.Movement
         public void conjureMeteor()
         {
             int value = Random.Range(0, 5);
-            GameObject meteor = Instantiate(Meteor[value], transform.position + new Vector3(0, 10f, 0), Quaternion.identity);
+            GameObject meteor = Instantiate(Meteor[value], transform.position + new Vector3(0, 10f, 0), Quaternion.identity, meteorsParent);
             ProjectileController projectile = meteor.GetComponent<ProjectileController>();
             projectile.SetTarget(tag, player.transform.position, "Player");
             projectile.Damage = bossAttack.MeteorDamage;
