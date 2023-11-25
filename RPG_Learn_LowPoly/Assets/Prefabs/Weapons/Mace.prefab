@@ -50,6 +50,7 @@ MonoBehaviour:
   damage: 40
   enemyTag: Player
   enemyTag2: Ally
+  newMaterial: {fileID: 2100000, guid: 186035be69f722b41a5fb4ae8fcff2ab, type: 2}
 --- !u!33 &7901973476605008670
 MeshFilter:
   m_ObjectHideFlags: 0

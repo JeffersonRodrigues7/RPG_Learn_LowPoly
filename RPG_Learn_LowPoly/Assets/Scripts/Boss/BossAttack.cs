@@ -33,6 +33,10 @@ namespace RPG.Boss.Attack
         [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
         [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
         [SerializeField] public BossAttackStage bossStage = BossAttackStage.Stage01;
+        [SerializeField] private SkinnedMeshRenderer Vampire;
+        [SerializeField] private GameObject Aura;
+        [SerializeField] private Material newFirstMaterial;
+        [SerializeField] private Material newSecondMaterial;
 
         private BossMovement bossMovement;
         private Animator animator;
@@ -61,6 +65,7 @@ namespace RPG.Boss.Attack
 
         private void Start()
         {
+            Aura.SetActive(false);
             shakeCamera = GameObject.Find("ShakeCamera").GetComponent<ShakeCamera>();
 
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
@@ -93,7 +98,28 @@ namespace RPG.Boss.Attack
                 spawnWeapon(swordPrefab, rightHandTransform);
                 isJumping = true;
                 animator.SetTrigger("TriggerJump");
-            } 
+            }
+
+            if (bossStage == BossAttackStage.Stage04)
+            {
+                bossMovement.currentBossState = BossState.SummoningMeteors;
+            }
+
+            if (bossStage == BossAttackStage.Stage05)
+            {
+                transform.localScale = new Vector3(3, 3, 3);
+                Aura.SetActive(true);
+                Material[] materialsCopy = Vampire.materials;
+
+                // Modifique os materiais na cópia
+                materialsCopy[0] = newFirstMaterial;
+                materialsCopy[1] = newSecondMaterial;
+
+                // Atribua a cópia modificada de volta ao SkinnedMeshRenderer
+                Vampire.materials = materialsCopy;
+
+                if (rightWeaponController != null) rightWeaponController.changeMaterial();
+            }
         }
 
         public void startAttackAnimation(Transform _target)
@@ -110,11 +136,10 @@ namespace RPG.Boss.Attack
                     if(!isJumping) animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage04:
-                    if (bossMovement.currentBossState != BossState.SummoningMeteors) bossMovement.currentBossState = BossState.SummoningMeteors;
-                    else animator.SetTrigger(meleeAttackingHash);
+                    animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage05:
-                    animator.SetTrigger(meleeAttackingHash);
+                    animator.SetTrigger("TriggerJump");
                     break;
             }
         }
