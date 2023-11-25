@@ -1576,7 +1576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordDamage: 0
   projectileDamage: 25
-  bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
+  bowPrefab: {fileID: 6663683016408734395, guid: 439f991fb12d66e4d9ea02b14725a5be, type: 3}
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
   projectileprefab: {fileID: 7650706926830519763, guid: 8437aa17fe757b84da0a96c2490a48dc, type: 3}

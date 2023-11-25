@@ -1940,14 +1940,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4846554727159614109}
   - component: {fileID: 1558886538520760551}
-  - component: {fileID: 3945363625544118493}
   - component: {fileID: 4986832705928918889}
   - component: {fileID: 8975150332655568491}
   - component: {fileID: 7251668351790208672}
   - component: {fileID: 7240410941759017177}
   - component: {fileID: 2302801579006375005}
-  - component: {fileID: 7277408124088122239}
   - component: {fileID: 2242102163382997867}
+  - component: {fileID: 745747140}
   m_Layer: 7
   m_Name: Besta
   m_TagString: Enemy
@@ -1994,19 +1993,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3945363625544118493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5190886153391607847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb28ac00c2b7a3b4185e39d1f3b4d894, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterData: {fileID: 11400000, guid: 41a945084a0cb8e46b3e35596b646105, type: 2}
 --- !u!114 &4986832705928918889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,8 +2020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257d557fcfded5047885c07033a55627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  chaseSpeed: 0
+  walkSpeed: 2
+  chaseSpeed: 4
   cooldownTimeAfterChase: 2
   minDistanceToTarget: 2
   patrolPoints:
@@ -2054,7 +2040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 25
-  projectileDamage: 15
+  projectileDamage: 0
   swordPrefab: {fileID: 3964347541132674574, guid: 223daaca244fbc044b88967b86d54a77, type: 3}
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 2230608317980948661}
@@ -2095,20 +2081,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &7277408124088122239
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5190886153391607847}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.26467
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.055619, z: -0}
 --- !u!195 &2242102163382997867
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2131,6 +2103,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &745747140
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190886153391607847}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.9666184, z: 1}
+  m_Center: {x: 0, y: 0.97286946, z: 0}
 --- !u!1 &5379193910211085315
 GameObject:
   m_ObjectHideFlags: 0

@@ -1427,17 +1427,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b568b82abf762b04c910fa6081d48411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingSpeed: 2
+  attackingSpeed: 1
   walkSpeed: 5
   runSpeed: 10
-  rollingSpeed: 15
+  rollingSpeed: 12
   rotationSpeed: 10
-  jumpForce: 2
+  jumpForce: 4
   jumpSlowdown: 1.5
   mouseInputDistance: 50
+  currentSpeed: 3
   isJumping: 0
   isFalling: 0
-  runningSound: {fileID: 8300000, guid: 0fbd9f9ea9dffeb4cb2e337c9f59d10d, type: 3}
 --- !u!114 &-4418741519796253928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1454,7 @@ MonoBehaviour:
   swordSecondAttackDamage: 30
   swordThirdAttackDamage: 35
   swordJumpAttackDamage: 50
-  projectileDamage: 15
+  projectileDamage: 100
   swordAnimator: {fileID: 22100000, guid: c41cfb7597e5d2e468ca458df50504d7, type: 2}
   bowAnimator: {fileID: 22100000, guid: 6df650b9d309c364f98511a848be3d1d, type: 2}
   swordPrefab: {fileID: 1032590170434083731, guid: 0d5dba551d6ce4a44ba5bda4e7f986aa, type: 3}
@@ -1470,6 +1470,7 @@ MonoBehaviour:
   buff: {fileID: 0}
   starEffect: {fileID: 0}
   actualAttackAnimation: 0
+  isMeleeAttacking: 0
   swordHitSound: {fileID: 8300000, guid: 66e16537aa41fa041a3960541d595b74, type: 3}
   swordDrawSound: {fileID: 8300000, guid: c5b6c1a53ddc994469b11a00af6fefc9, type: 3}
   bowShotSound: {fileID: 8300000, guid: 893df23872ddcfd4887828ed9bc93a3d, type: 3}
@@ -1485,7 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 500
   currentHealth: 0
   healthSlider: {fileID: 0}
   healing: {fileID: 0}
@@ -1513,7 +1514,7 @@ Rigidbody:
   m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -1525,7 +1526,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4241875920008531204}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
@@ -1538,7 +1539,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!1 &4525740800115610685
 GameObject:

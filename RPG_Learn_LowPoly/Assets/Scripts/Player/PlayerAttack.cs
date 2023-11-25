@@ -257,6 +257,7 @@ namespace RPG.Player.Attack
         // Desativar ataque - Chamado pela anima��o de ataque
         public void desactiveAttack()
         {
+            isMeleeAttacking = false;
             isRangedAttacking = false;
             weaponController.IsAttacking = false;
         }
