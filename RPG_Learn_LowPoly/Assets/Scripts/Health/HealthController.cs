@@ -52,7 +52,7 @@ namespace RPG.Health
             currentHealth -= damage; // Reduz a vida do personagem com base no dano recebido
             updateHealthUI();
 
-            if (bossAttack)
+            if (bossAttack != null)
             {
                 changeBossStage();
             }
@@ -79,6 +79,11 @@ namespace RPG.Health
             else if (allyDetection)
             {
                 allyDetection.reactToProjectile();
+            }
+
+            if (bossAttack != null)
+            {
+                changeBossStage();
             }
 
             if (currentHealth <= 0)
@@ -135,15 +140,15 @@ namespace RPG.Health
             }
             else if (perHealth <= 0.6 && perHealth > 0.4 && bossAttack.bossStage != BossAttackStage.Stage03)
             {
-                bossAttack.setStage(BossAttackStage.Stage02);
+                bossAttack.setStage(BossAttackStage.Stage03);
             }
             else if (perHealth <= 0.4 && perHealth > 0.2 && bossAttack.bossStage != BossAttackStage.Stage04)
             {
-                bossAttack.setStage(BossAttackStage.Stage02);
+                bossAttack.setStage(BossAttackStage.Stage04);
             }
             else if(perHealth <= 0.2 && bossAttack.bossStage != BossAttackStage.Stage05)
             {
-                bossAttack.setStage(BossAttackStage.Stage02);
+                bossAttack.setStage(BossAttackStage.Stage05);
             }
         }
 

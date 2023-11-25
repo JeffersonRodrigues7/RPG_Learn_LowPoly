@@ -2334,7 +2334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b276f73856b435a4299a5a3a6d97d94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 20
+  detectionRadius: 100
   attackDistance: 3
   chaseEnemyBehavior: 1
 --- !u!114 &1738703037822543868

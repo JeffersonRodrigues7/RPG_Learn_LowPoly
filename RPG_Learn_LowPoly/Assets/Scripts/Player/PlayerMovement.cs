@@ -36,7 +36,7 @@ namespace RPG.Player.Movement
         private Vector3 wantedMousePosition;
 
         private bool isWalking = false; //Flag que indica que o objetando est� se movendo
-        private float currentSpeed = 3.0f; //Velocidade atual do jogador
+        [SerializeField]  private float currentSpeed = 3.0f; //Velocidade atual do jogador
         private float currentjumpVelocity = 0; //Velocidade do objeto atual nop ar
         private bool navMeshRemainingPath = false; // Flag que indica se o objeto deve continuar a se movimentar com o navmesh
 
