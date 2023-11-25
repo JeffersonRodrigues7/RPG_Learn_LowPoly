@@ -11,7 +11,10 @@ namespace RPG.Projectile
         [SerializeField] private float speed = 1;
         [SerializeField] private string enemyTag = "";
         [SerializeField] private float damage = 15f;
+        [SerializeField] private bool isMeteor = false;
 
+
+        private Vector3 direction;
         private Vector3 target = Vector3.zero;
 
         HealthController healthController;
@@ -20,12 +23,24 @@ namespace RPG.Projectile
 
         public string EnemyTag { set { enemyTag = value; } }
 
+        private void Start()
+        {
+            //Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            //direction = (transform.position - player.position).normalized;
+        }
+
         void Update()
         {
             if(target != null)
             { 
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
             }
+
+            //if (isMeteor)
+            //{
+            //    transform.Translate(direction * speed * Time.deltaTime);
+            //}
+
         }
 
         public void SetTarget(string _ownerTag, Vector3 _target, string _enemyTag)

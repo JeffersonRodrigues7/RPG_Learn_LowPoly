@@ -2355,6 +2355,12 @@ MonoBehaviour:
   - {fileID: 0}
   TeleportEffect: {fileID: 358637981425055526, guid: 8eb503696b886e04faff8fc0f480d473, type: 3}
   Thrall: {fileID: 2576088012148106625, guid: 720136e6493fcb64284e8bfc0995a2ac, type: 3}
+  Meteor:
+  - {fileID: 2942051580892192243, guid: d57d6419728ca4fa486055a9b54eb326, type: 3}
+  - {fileID: 3539412230784186596, guid: 607f852e894b2474e8037bde96a3f38c, type: 3}
+  - {fileID: 8003495884289897023, guid: 2408f749a3ad04e23b2abe82997c4b61, type: 3}
+  - {fileID: 3712215468181072183, guid: e0cfb534d47614c7b825642df2d44a40, type: 3}
+  - {fileID: 6123279987556253554, guid: 543f85c367b24464098124fcc11a6955, type: 3}
   ThrallConjureEffect: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
   currentBossState: 0
   teleportSound: {fileID: 8300000, guid: 65eb7501ed3b201469112165e5a55059, type: 3}
@@ -2370,7 +2376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15c988973c8f71408eddfd1a342a769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handDamage: 25
+  handDamage: 20
   swordDamage: 35
   jumpDamage: 50
   swordPrefab: {fileID: 7901973476606195368, guid: 96a69130569cfbd47975ed8260a90e24, type: 3}

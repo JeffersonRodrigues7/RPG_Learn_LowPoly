@@ -1,8 +1,11 @@
+using RPG.Boss.Attack;
 using RPG.Boss.Detection;
+using RPG.Projectile;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 
 namespace RPG.Boss.Movement
 {
@@ -10,7 +13,9 @@ namespace RPG.Boss.Movement
     public enum BossState // Estados possiveis
     {
         Chasing,
-        Teleporting
+        Teleporting,
+        SummoningMeteors
+
     }
 
     public class BossMovement : MonoBehaviour
@@ -24,8 +29,10 @@ namespace RPG.Boss.Movement
         [SerializeField] private Transform[] patrolPoints; // Pontos de patrulha do personagem
         [SerializeField] private GameObject TeleportEffect; // Pontos de patrulha do personagem
         [SerializeField] private GameObject Thrall; // Pontos de patrulha do personagem
+        [SerializeField] private GameObject[] Meteor; // Pontos de patrulha do personagem
         [SerializeField] private GameObject ThrallConjureEffect; // Pontos de patrulha do personagem
 
+        private BossAttack bossAttack;
 
         public BossState currentBossState;
 
@@ -33,17 +40,15 @@ namespace RPG.Boss.Movement
         private NavMeshAgent navMeshAgent;
 
         private int isWalkingHash; // Hash da String que se refere � anima��o de Walk
-        private bool isWalking = false;
-
 
         private GameObject player;
         private GameObject teleportPoints;
         private bool isTeleporting = false;
         private Vector3 positionBeforeTeleport;
 
-        private BossDetection bossDetection;
+        private bool initMeteor = false;
 
-        public float ChaseSpeed { set { chaseSpeed = value; } }
+        public float ChaseSpeed { get { return chaseSpeed; } set { chaseSpeed = value; } }
         public float ArrivalDistance { set { arrivalDistance = value; } }
         public Transform[] PatrolPoints { set { patrolPoints = value; } }
 
@@ -53,7 +58,7 @@ namespace RPG.Boss.Movement
 
         private void Awake()
         {
-            bossDetection = GetComponent<BossDetection>();
+            bossAttack = GetComponent<BossAttack>();
             navMeshAgent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
         }
@@ -102,6 +107,7 @@ namespace RPG.Boss.Movement
                     navMeshAgent.ResetPath();
                     lookToPlayer();
                     setWalkingAnimation(false);
+
                     if (Vector3.Distance(transform.position, player.transform.position) < 20f && !isTeleporting)
                     {
                         animator.SetBool("Conjuring", false);
@@ -112,6 +118,30 @@ namespace RPG.Boss.Movement
                     else
                     {
                         animator.SetBool("Conjuring", true);
+                    }
+                    break;
+
+                case BossState.SummoningMeteors: // Personagem est� parado atento ao inimigo que saiu de seu alcance de perseguicao
+                    if (!initMeteor)
+                    {
+                        initMeteor = true;
+                        positionBeforeTeleport = transform.position;
+                        isTeleporting = true;
+                        animator.SetTrigger("TriggerTeleport");
+                    }
+
+                    navMeshAgent.ResetPath();
+                    lookToPlayer();
+                    setWalkingAnimation(false);
+
+                    if (Vector3.Distance(transform.position, player.transform.position) > 15f && !isTeleporting)
+                    {
+                        animator.SetBool("ConjuringMeteor", true);
+                    }
+                    else if(Vector3.Distance(transform.position, player.transform.position) <= 15f && !isTeleporting)
+                    {
+                        animator.SetBool("ConjuringMeteor", false);
+                        forceStartChase();
                     }
                     break;
 
@@ -132,13 +162,17 @@ namespace RPG.Boss.Movement
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity);
 
+
             Vector3 nextPosition = FindOtherPoint();
+
+            if (currentBossState == BossState.SummoningMeteors) nextPosition = FindFarthestPatrolPoint(player.transform).position;
+
             transform.position = nextPosition;
             isTeleporting = false;
         }
 
         //ConjuraMinion, chamada através de animação
-        void conjureThrall()
+        public void conjureThrall()
         {
             // Gera pos e rotacao aleatoria
             float angle = Random.Range(0f, 2f * Mathf.PI); 
@@ -158,13 +192,47 @@ namespace RPG.Boss.Movement
             Destroy(Tharall, 20);
         }
 
+
+        public void conjureMeteor()
+        {
+            int value = Random.Range(0, 5);
+            GameObject meteor = Instantiate(Meteor[value], transform.position + new Vector3(0, 10f, 0), Quaternion.identity);
+            ProjectileController projectile = meteor.GetComponent<ProjectileController>();
+            projectile.SetTarget(tag, player.transform.position, "Player");
+            projectile.Damage = bossAttack.MeteorDamage;
+            Destroy(meteor, 10);
+        }
+
+        Transform FindFarthestPatrolPoint(Transform referencePoint)
+        {
+            if (patrolPoints == null || patrolPoints.Length == 0)
+            {
+                Debug.LogError("Patrol points array is empty or not assigned.");
+                return null;
+            }
+
+            Transform farthestPoint = null;
+            float maxDistance = 0f;
+
+            foreach (Transform point in patrolPoints)
+            {
+                float currentDistance = Vector3.Distance(referencePoint.position, point.position);
+
+                if (currentDistance > maxDistance)
+                {
+                    maxDistance = currentDistance;
+                    farthestPoint = point;
+                }
+            }
+
+            return farthestPoint;
+        }
+
         private void lookToPlayer()
         {
-
-                Vector3 targetPosition = player.transform.position;
-                targetPosition.y = transform.position.y;
-                transform.LookAt(targetPosition);
-            
+            Vector3 targetPosition = player.transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
         }
 
         private void lookToPlayer(Transform _transform, Transform target)
@@ -176,8 +244,7 @@ namespace RPG.Boss.Movement
                 _transform.LookAt(targetPosition);
             }
         }
-
-        //Encontra ponto mais distante do player
+        
         public Vector3 FindOtherPoint()
         {
             if (patrolPoints == null || patrolPoints.Length == 0)

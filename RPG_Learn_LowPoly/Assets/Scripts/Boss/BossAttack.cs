@@ -5,6 +5,7 @@ using RPG.Boss.Movement;
 using Cinemachine;
 using Unity.VisualScripting;
 using RPG.CinemachineCamera;
+using UnityEngine.AI;
 
 namespace RPG.Boss.Attack
 {
@@ -23,6 +24,7 @@ namespace RPG.Boss.Attack
         [SerializeField] private float handDamage = 20f;
         [SerializeField] private float swordDamage = 35f;
         [SerializeField] private float jumpDamage = 50f;
+        [SerializeField] private float meteorDamage = 50f;
 
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
@@ -38,6 +40,8 @@ namespace RPG.Boss.Attack
         private WeaponController leftWeaponController; // Controlador da arma
         private WeaponController rightWeaponController; // Controlador da arma
 
+        private NavMeshAgent navMeshAgent;
+
         private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
         private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
 
@@ -45,9 +49,12 @@ namespace RPG.Boss.Attack
 
         private bool isJumping = false;
 
+        public float MeteorDamage { get { return meteorDamage; } }
+
 
         private void Awake()
         {
+            navMeshAgent = GetComponent<NavMeshAgent>();
             bossMovement = GetComponent<BossMovement>();
             animator = GetComponent<Animator>();
         }
@@ -87,7 +94,6 @@ namespace RPG.Boss.Attack
                 isJumping = true;
                 animator.SetTrigger("TriggerJump");
             } 
-            
         }
 
         public void startAttackAnimation(Transform _target)
@@ -104,7 +110,8 @@ namespace RPG.Boss.Attack
                     if(!isJumping) animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage04:
-                    animator.SetTrigger(meleeAttackingHash);
+                    if (bossMovement.currentBossState != BossState.SummoningMeteors) bossMovement.currentBossState = BossState.SummoningMeteors;
+                    else animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage05:
                     animator.SetTrigger(meleeAttackingHash);
@@ -124,6 +131,11 @@ namespace RPG.Boss.Attack
             rightWeaponController.IsAttacking = true; // Ativa o ataque da arma
         }
 
+        public void startJump()
+        {
+            navMeshAgent.speed = 30f;
+        }
+
         public void activeJumpAttack()
         {
             rightWeaponController.Damage = jumpDamage;
@@ -138,6 +150,7 @@ namespace RPG.Boss.Attack
         // Chamado pela animação de ataque
         public void desactiveAttack()
         {
+            navMeshAgent.speed = bossMovement.ChaseSpeed;
             leftWeaponController.IsAttacking = false; // Desativa o ataque da arma
             if(rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
         }
