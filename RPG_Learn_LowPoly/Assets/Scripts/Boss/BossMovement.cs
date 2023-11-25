@@ -142,7 +142,7 @@ namespace RPG.Boss.Movement
         {
             // Gera pos e rotacao aleatoria
             float angle = Random.Range(0f, 2f * Mathf.PI); 
-            float distance = Random.Range(10f, 25f); 
+            float distance = Random.Range(10f, 20f); 
 
             // Calcula a distancia
             float offsetX = distance * Mathf.Cos(angle);

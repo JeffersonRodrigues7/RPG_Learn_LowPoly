@@ -2,6 +2,9 @@ using UnityEngine;
 using RPG.Weapon;
 using RPG.Projectile;
 using RPG.Boss.Movement;
+using Cinemachine;
+using Unity.VisualScripting;
+using RPG.CinemachineCamera;
 
 namespace RPG.Boss.Attack
 {
@@ -38,6 +41,10 @@ namespace RPG.Boss.Attack
         private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
         private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
 
+        private ShakeCamera shakeCamera;
+
+        private bool isJumping = false;
+
 
         private void Awake()
         {
@@ -47,6 +54,8 @@ namespace RPG.Boss.Attack
 
         private void Start()
         {
+            shakeCamera = GameObject.Find("ShakeCamera").GetComponent<ShakeCamera>();
+
             meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
@@ -75,6 +84,7 @@ namespace RPG.Boss.Attack
             if (bossStage == BossAttackStage.Stage03) {
                 bossMovement.forceStartChase();
                 spawnWeapon(swordPrefab, rightHandTransform);
+                isJumping = true;
                 animator.SetTrigger("TriggerJump");
             } 
             
@@ -91,7 +101,7 @@ namespace RPG.Boss.Attack
                     bossMovement.currentBossState = BossState.Teleporting;
                     break;
                 case BossAttackStage.Stage03:
-                    animator.SetTrigger(meleeAttackingHash);
+                    if(!isJumping) animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage04:
                     animator.SetTrigger(meleeAttackingHash);
@@ -120,11 +130,22 @@ namespace RPG.Boss.Attack
             rightWeaponController.IsAttacking = true; // Ativa o ataque da arma
         }
 
+        public void shakeCameraEffect()
+        {
+            shakeCamera.startShaking(10f);
+        }
+
         // Chamado pela animação de ataque
         public void desactiveAttack()
         {
             leftWeaponController.IsAttacking = false; // Desativa o ataque da arma
             if(rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
+        }
+
+        // Chamado pela animação de ataque
+        public void stopJumpEffect()
+        {
+            isJumping = false;
         }
     }
 }

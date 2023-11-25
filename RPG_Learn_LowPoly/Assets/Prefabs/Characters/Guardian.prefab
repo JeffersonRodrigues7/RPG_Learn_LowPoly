@@ -2349,9 +2349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee95955f384ed2749ace806aa6bd5649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 7
   chaseSpeed: 10
-  cooldownTimeAfterChase: 0
   minDistanceToTarget: 2
   patrolPoints:
   - {fileID: 0}
@@ -2372,14 +2370,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15c988973c8f71408eddfd1a342a769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handDamage: 30
-  swordDamage: 50
-  projectileDamage: 15
+  handDamage: 25
+  swordDamage: 35
+  jumpDamage: 50
   swordPrefab: {fileID: 7901973476606195368, guid: 96a69130569cfbd47975ed8260a90e24, type: 3}
   handPrefab: {fileID: 8782240002588734737}
   leftHandTransform: {fileID: 1612996494651248115}
   rightHandTransform: {fileID: 6191125512206297080}
-  projectileprefab: {fileID: 0}
   isUsingSword: 0
   bossStage: 0
 --- !u!114 &6920343365046394103
