@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 79193
+  controlID: 333
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 79194
+  controlID: 305
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,8 +163,8 @@ MonoBehaviour:
     y: 0
     width: 1111
     height: 454
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -281,7 +281,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -625,8 +625,8 @@ MonoBehaviour:
     y: 454
     width: 1111
     height: 493
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -689,7 +689,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 79138
+  controlID: 334
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -750,7 +750,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: eaf4fbff127ffcff3293fcffe49cfcff06a7fcff5eaefcff0c56ffffa85fffff16fbffff84e7000024e80000f084080032850800
+      m_ExpandedIDs: a243fffff643ffff6c58ffff1a70ffff16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -841,23 +841,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Assets/AllSkyFree/Deep Dusk
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Assets/AllSkyFree/Deep Dusk
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Desktop\Trabalho\RPG_Learn_LowPoly\RPG_Learn_LowPoly
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 48.599976}
-    m_SelectedIDs: 88cb0900
-    m_LastClickedID: 641928
-    m_ExpandedIDs: 000000002ed2000030d2000032d2000034d2000036d2000038d200003ad200003cd200003ed2000040d2000042d2000044d2000046d2000048d200004ad200004cd200004ed2000050d2000052d20000d8dd0000eadd0000f0dd000028e3030056cb0900
+    scrollPos: {x: 0, y: 253}
+    m_SelectedIDs: 78da0000
+    m_LastClickedID: 55928
+    m_ExpandedIDs: 000000001cda00001eda000020da000022da000024da000026da000028da00002ada00002cda00002eda000030da000032da000034da000036da000038da00003ada00003cda00003eda000040da000042da000044da000046da000048da0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -885,7 +885,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002ed2000030d2000032d2000034d2000036d2000038d200003ad200003cd200003ed2000040d2000042d2000044d2000046d2000048d200004ad200004cd200004ed2000050d2000052d20000d8dd0000eadd0000f0dd000028e3030056cb0900
+    m_ExpandedIDs: 000000001cda00001eda000020da000022da000024da000026da000028da00002ada00002cda00002eda000030da000032da000034da000036da000038da00003ada00003cda00003eda000040da000042da000044da000046da000048da0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -910,9 +910,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ac840800
-    m_LastClickedInstanceID: 558252
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 4adc0000
+    m_LastClickedInstanceID: 56394
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: fc7b020000000000fe75000002760000fa7500009cd80400be3e0100c23e01008c740200aa790000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -989,8 +989,8 @@ MonoBehaviour:
     y: 0
     width: 336
     height: 947
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1032,7 +1032,7 @@ MonoBehaviour:
     m_CachedPref: 238
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 558252
+  m_LastInspectedObjectInstanceID: 56394
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
