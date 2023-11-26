@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43888456, g: 0.4870788, b: 0.56734246, a: 1}
+  m_IndirectSpecularColor: {r: 0.43888426, g: 0.4870783, b: 0.5673417, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +270,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 442104637}
   m_FillRect: {fileID: 1510696214}
   m_HandleRect: {fileID: 442104636}
@@ -780,6 +780,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1029,6 +1033,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 726412705}
+    - target: {fileID: 4249761085565180844, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161119578678976941, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1207,6 +1215,10 @@ PrefabInstance:
     - target: {fileID: 2669788780259592307, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: projectileDamage
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786342570408402770, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: patrolPoints.Array.size
@@ -2220,6 +2232,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1471875857}
+    - target: {fileID: 4249761085565180844, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161119578678976941, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3463,6 +3479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4049,6 +4069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4220,6 +4244,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2655243028010987070, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786342570408402770, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
@@ -4549,6 +4577,10 @@ PrefabInstance:
     - target: {fileID: 2669788780259592307, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: projectileDamage
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786342570408402770, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: patrolPoints.Array.size
@@ -5459,6 +5491,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1147069255}
+    - target: {fileID: 4249761085565180844, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161119578678976941, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5557,6 +5593,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 653275496}
+    - target: {fileID: 4249761085565180844, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161119578678976941, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5767,6 +5807,10 @@ PrefabInstance:
     - target: {fileID: 5190886153391607847, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_Name
       value: Besta (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6877,6 +6921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7053,6 +7101,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2655243028010987070, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4786342570408402770, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
@@ -7674,6 +7726,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4786342570408402770, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5437849217737881539, guid: 3c785f7b4338be945ac69ea007fc30ba, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 1
@@ -7840,6 +7896,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8330427179651512874, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c2d94c9ed2578a4ab40d3409cad2b9c, type: 3}
 --- !u!1001 &1312841739
@@ -7865,6 +7925,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 328345776}
+    - target: {fileID: 4249761085565180844, guid: d69004b3d046a3448af47d978f953973, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5161119578678976941, guid: d69004b3d046a3448af47d978f953973, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8690,6 +8754,10 @@ PrefabInstance:
     - target: {fileID: 5190886153391607847, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_Name
       value: Besta (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
@@ -9583,6 +9651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10437,6 +10509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Besta (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5669471609829845981, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5848872605700695804, guid: 0d484594a7e95b2498f9be83097b4bab, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10919,6 +10995,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4418741519796253928, guid: 0bed4466690979a488c3bf8f70bf8d33, type: 3}
+      propertyPath: buff
+      value: 
+      objectReference: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+    - target: {fileID: -4418741519796253928, guid: 0bed4466690979a488c3bf8f70bf8d33, type: 3}
+      propertyPath: starEffect
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 354b6251e950209409c75ab984acf000, type: 3}
     - target: {fileID: -2459926710300109186, guid: 0bed4466690979a488c3bf8f70bf8d33, type: 3}
       propertyPath: healing
       value: 
