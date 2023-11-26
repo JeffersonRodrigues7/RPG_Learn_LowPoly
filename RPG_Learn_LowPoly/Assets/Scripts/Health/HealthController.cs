@@ -7,11 +7,14 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 namespace RPG.Health
 {
     public class HealthController : MonoBehaviour
     {
+            // Adiciona um evento que será acionado quando o personagem morrer
+        public event Action OnDeath;
         [Header("CharacterData")]
         [SerializeField] private float maxHealth = 100f;
 
@@ -73,6 +76,8 @@ namespace RPG.Health
             if(currentHealth <= 0)
             {
                 animator.SetTrigger(deathHash);
+                // Dispara o evento OnDeath quando o personagem morre
+                OnDeath?.Invoke();
             }
         }
 

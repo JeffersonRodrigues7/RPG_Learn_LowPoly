@@ -16,15 +16,19 @@ namespace RPG.Boss
         [SerializeField] private Transform spawnLocation;
         [SerializeField] float riseSpeed = 0.5f;  // Velocidade de subida do boss
         [SerializeField] float initialPosition = -3.5f;  // Velocidade de subida do boss
-        [SerializeField] float maxYPosition = 0f;  // Altura m·xima que o boss atingir·
+        [SerializeField] float maxYPosition = 0f;  // Altura mÔøΩxima que o boss atingirÔøΩ
+        // Musicas
+        [SerializeField] private AudioClip bossMusic; // Adicione isso para a m√∫sica do boss
+
 
         private Transform player;
         private GameObject boss;
-        private bool isRising = false;  // Indica se o boss est· subindo
+        private bool isRising = false;  // Indica se o boss estÔøΩ subindo
         private bool alreadySpawned = false;
 
         private void Start()
         {
+        
             player = GameObject.FindGameObjectWithTag("Player").transform;
             rain.SetActive(false);
             gameLight.SetActive(true);
@@ -47,12 +51,12 @@ namespace RPG.Boss
                     boss.transform.LookAt(targetPosition);
                 }
 
-                // Verifica se atingiu a altura m·xima
+                // Verifica se atingiu a altura mÔøΩxima
                 if (boss.transform.position.y >= maxYPosition)
                 {
                     isRising = false;
 
-                    // Habilita os scripts do boss quando atinge a altura m·xima
+                    // Habilita os scripts do boss quando atinge a altura mÔøΩxima
                     EnableBossScripts();
                 }
             }
@@ -72,6 +76,41 @@ namespace RPG.Boss
             }
         }
 
+        void PlayBossMusic()
+        {
+            // Encontre o GameObject chamado "SongManager"
+            GameObject songManager = GameObject.Find("SongManager");
+
+            // Verifique se o GameObject foi encontrado
+            if (songManager != null)
+            {
+                // Acesse o componente AudioSource do SongManager
+                AudioSource audioSource = songManager.GetComponent<AudioSource>();
+
+                // Verifique se o componente AudioSource foi encontrado
+                if (audioSource != null)
+                {
+                    // Pare a m√∫sica atual
+                    audioSource.Stop();
+
+                    // Atribua a m√∫sica do boss ao AudioSource
+                    audioSource.clip = bossMusic;
+
+                    // Inicie a m√∫sica do boss
+                    audioSource.Play();
+                }
+                else
+                {
+                    Debug.LogError("AudioSource component not found on SongManager.");
+                }
+            }
+            else
+            {
+                Debug.LogError("SongManager GameObject not found.");
+            }
+        }
+
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") && boss == null && !alreadySpawned)
@@ -81,6 +120,7 @@ namespace RPG.Boss
                 boss.transform.position = new Vector3(boss.transform.position.x, initialPosition, boss.transform.position.z);
 
                 isRising = true;
+                PlayBossMusic();
             }
         }
 

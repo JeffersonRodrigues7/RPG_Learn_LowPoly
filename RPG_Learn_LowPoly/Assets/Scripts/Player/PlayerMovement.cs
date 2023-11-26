@@ -60,6 +60,9 @@ namespace RPG.Player.Movement
 
         #endregion
 
+        [SerializeField] private AudioSource walkAudioSource;  // AudioSource para áudio ao andar
+        [SerializeField] private AudioSource runAudioSource;   // AudioSource para áudio ao correr
+
         #region  BEGIN/END SCRIPT
 
         private void Awake()
@@ -79,7 +82,53 @@ namespace RPG.Player.Movement
             isJumpingHash = Animator.StringToHash("TriggerJump");
             isRollingHash = Animator.StringToHash("TriggerRoll");
             cam = Camera.main;
+
+                       // Configuração dos áudios
+            ConfigureAudio(walkAudioSource);
+            ConfigureAudio(runAudioSource);
         }
+
+        private void ConfigureAudio(AudioSource audioSource)
+        {
+            audioSource.spatialBlend = 0.5f;  // Valor entre 0 e 1 para controlar a mistura espacial entre 2D e 3D.
+            audioSource.loop = true;
+            audioSource.volume = 0.5f;
+            // Adicione outras configurações conforme necessário (pitch, clip, etc.).
+        }
+
+        
+        private void PlayWalkSound()
+        {
+            if (!walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Play();
+            }
+        }
+
+        private void StopWalkSound()
+        {
+            if (walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Stop();
+            }
+        }
+
+        private void PlayRunSound()
+        {
+            if (!runAudioSource.isPlaying)
+            {
+                runAudioSource.Play();
+            }
+        }
+
+        private void StopRunSound()
+        {
+            if (runAudioSource.isPlaying)
+            {
+                runAudioSource.Stop();
+            }
+        }
+
 
         #endregion
 
@@ -212,17 +261,23 @@ namespace RPG.Player.Movement
 
             isWalking = isKeyboardMoving || isMouseMoving || navMeshRemainingPath;
 
-            if (isWalking && isRunning) //Correndo
+           if (isWalking && isRunning)
             {
                 updateMoveAnimation(true, true);
+                PlayRunSound();   // Inicia áudio de corrida
+                StopWalkSound();  // Para áudio de andar
             }
-            else if (isWalking) //Andando
+            else if (isWalking)
             {
                 updateMoveAnimation(true, false);
+                PlayWalkSound();  // Inicia áudio de andar
+                StopRunSound();   // Para áudio de corrida
             }
-            else //Parado
+            else
             {
                 updateMoveAnimation(false, false);
+                StopWalkSound();  // Para áudio de andar
+                StopRunSound();   // Para áudio de corrida
             }
         }
 
@@ -323,12 +378,14 @@ namespace RPG.Player.Movement
         public void Run(InputAction.CallbackContext context)
         {
             isRunning = true;
+            PlayRunSound();  // Inicia áudio de corrida
         }
 
         // Para a anima��o de corrida, chamado quando usu�rio solta o shift ou quando para de andar
         public void StopRun(InputAction.CallbackContext context)
         {
             isRunning = false;
+            StopRunSound();  // Para áudio de corrida
         }
 
         //Inicia pulo

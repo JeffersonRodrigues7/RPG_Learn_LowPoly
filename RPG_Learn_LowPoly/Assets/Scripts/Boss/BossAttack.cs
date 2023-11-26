@@ -29,9 +29,9 @@ namespace RPG.Boss.Attack
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject handPrefab;
-        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
-        [SerializeField] private bool isUsingSword = false;//´true-> weapon atual é a espada; false -> weapon atua´l é o arco
+        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma serï¿½ anexada
+        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma serï¿½ anexada
+        [SerializeField] private bool isUsingSword = false;//ï¿½true-> weapon atual ï¿½ a espada; false -> weapon atuaï¿½l ï¿½ o arco
         [SerializeField] public BossAttackStage bossStage = BossAttackStage.Stage01;
         [SerializeField] private SkinnedMeshRenderer Vampire;
         [SerializeField] private GameObject Aura;
@@ -46,8 +46,8 @@ namespace RPG.Boss.Attack
 
         private NavMeshAgent navMeshAgent;
 
-        private int meleeAttackingHash; //Hash da String que se refere a animação de Melee Attacking
-        private int rangedAttackingHash; //Hash da String que se refere a animação de Melee Attacking
+        private int meleeAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
+        private int rangedAttackingHash; //Hash da String que se refere a animaï¿½ï¿½o de Melee Attacking
 
         private ShakeCamera shakeCamera;
 
@@ -55,6 +55,13 @@ namespace RPG.Boss.Attack
 
         public float MeteorDamage { get { return meteorDamage; } }
 
+        private AudioSource audioSource;
+        // SONS
+        [SerializeField] private AudioClip swordHitSound;
+        [SerializeField] private AudioClip roarSound;
+        [SerializeField] private AudioClip bossJump;
+        private float roarInterval = 5f; // Intervalo de tempo entre os rugidos
+        private bool canRoar = true;
 
         private void Awake()
         {
@@ -65,10 +72,15 @@ namespace RPG.Boss.Attack
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+            }
             Aura.SetActive(false);
             shakeCamera = GameObject.Find("ShakeCamera").GetComponent<ShakeCamera>();
 
-            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtém o hash da string da animação de ataque corpo a corpo
+            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obtï¿½m o hash da string da animaï¿½ï¿½o de ataque corpo a corpo
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
             leftWeaponController = handPrefab.GetComponent<WeaponController>();
@@ -82,12 +94,21 @@ namespace RPG.Boss.Attack
         private void spawnWeapon(GameObject weaponPrefab, Transform hand)
         {
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
-            rightWeaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
+            rightWeaponController = weapon.GetComponent<WeaponController>(); // Obtï¿½m o controlador da arma
             rightWeaponController.EnemyTag = "Player"; // Define a tag do inimigo
             rightWeaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
             rightWeaponController.Damage = swordDamage;
-        }
 
+        }
+        
+        private void PlaySwordAttackSound()
+        {
+            if (swordHitSound != null)
+            {
+                audioSource.PlayOneShot(swordHitSound);
+            }
+        }
+        
         public void setStage(BossAttackStage stage)
         {
             Debug.Log("Iniciando estado: " + stage);
@@ -111,11 +132,11 @@ namespace RPG.Boss.Attack
                 Aura.SetActive(true);
                 Material[] materialsCopy = Vampire.materials;
 
-                // Modifique os materiais na cópia
+                // Modifique os materiais na cï¿½pia
                 materialsCopy[0] = newFirstMaterial;
                 materialsCopy[1] = newSecondMaterial;
 
-                // Atribua a cópia modificada de volta ao SkinnedMeshRenderer
+                // Atribua a cï¿½pia modificada de volta ao SkinnedMeshRenderer
                 Vampire.materials = materialsCopy;
 
                 if (rightWeaponController != null) rightWeaponController.changeMaterial();
@@ -144,16 +165,35 @@ namespace RPG.Boss.Attack
             }
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void activeLeftAttack()
         {
             leftWeaponController.IsAttacking = true; // Ativa o ataque da arma
+
+            // Adicione isso para reproduzir o rugido a cada 5 segundos
+            if (canRoar && roarSound != null)
+            {
+                canRoar = false;
+                InvokeRepeating(nameof(PlayRoarSound), 0f, roarInterval);
+            }
+        }
+
+        private void PlayRoarSound()
+        {
+            if (roarSound != null)
+            {
+                audioSource.PlayOneShot(roarSound);
+            }
         }
 
         public void activeRightAttack()
         {
             rightWeaponController.Damage = swordDamage;
             rightWeaponController.IsAttacking = true; // Ativa o ataque da arma
+            if (swordHitSound != null)
+            {
+                audioSource.PlayOneShot(swordHitSound);
+            }
         }
 
         public void startJump()
@@ -165,6 +205,12 @@ namespace RPG.Boss.Attack
         {
             rightWeaponController.Damage = jumpDamage;
             rightWeaponController.IsAttacking = true; // Ativa o ataque da arma
+            if (bossJump != null)
+            {
+                audioSource.volume = 0.6f;
+                audioSource.PlayOneShot(bossJump);
+            }
+             audioSource.volume = 0.47f;
         }
 
         public void shakeCameraEffect()
@@ -172,7 +218,7 @@ namespace RPG.Boss.Attack
             shakeCamera.startShaking(10f);
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void desactiveAttack()
         {
             navMeshAgent.speed = bossMovement.ChaseSpeed;
@@ -180,7 +226,7 @@ namespace RPG.Boss.Attack
             if(rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
         }
 
-        // Chamado pela animação de ataque
+        // Chamado pela animaï¿½ï¿½o de ataque
         public void stopJumpEffect()
         {
             isJumping = false;

@@ -2281,11 +2281,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Musicas
-
-    Jo Blankenburg - Voyager
-
-    YOSHIKI Ft. Hyde - RED SWAN'
+  m_text: "Musicas\nJo Blankenburg - Voyager\nYOSHIKI Ft. Hyde - RED SWAN\nMedieval
+    Music - The Wandering Bard\nMedieval Music - Medieval Travelers\nBEYOND DESOLATION
+    -  Zuhaib Shahzada\nHollow Knight Gods & Nightmares OST The Grimm Troupe Boss
+    Theme \nRPG Victory Fanfare 2"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ca143f756c28714487108166b7739ac, type: 2}
   m_sharedMaterial: {fileID: -4254939907894864463, guid: 6ca143f756c28714487108166b7739ac, type: 2}
