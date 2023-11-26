@@ -95,7 +95,7 @@ namespace RPG.Boss
 
                     // Atribua a música do boss ao AudioSource
                     audioSource.clip = bossMusic;
-
+                    audioSource.volume = 0.6f;
                     // Inicie a música do boss
                     audioSource.Play();
                 }
