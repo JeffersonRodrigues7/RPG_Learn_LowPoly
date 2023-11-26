@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace RPG.Player.InputController
 {
@@ -15,12 +16,17 @@ namespace RPG.Player.InputController
         private PlayerMovement playerMovement;
         private PlayerAttack playerAttack;
 
+        public GameObject inventory;
+        public InventoryManager inventoryManager;
+
         private void Awake()
         {
             // Inicializa os componentes e vari�veis necess�rias quando o objeto � criado
             playerInput = new PlayerInput();
             playerMovement = GetComponent<PlayerMovement>();
             playerAttack = GetComponent<PlayerAttack>();
+
+
         }
 
         private void OnEnable()
@@ -54,6 +60,8 @@ namespace RPG.Player.InputController
             playerInput.CharacterControls.Attack.canceled += playerAttack.StopAttack; // Callback para indicar que soltamos bot�o de melee attack
             playerInput.CharacterControls.ChangeWeapon.started += playerAttack.ChangeWeapon; // Callback para iniciar a troca de arma
             playerInput.CharacterControls.ChangeWeapon.canceled += playerAttack.StopChangeWeapon; // Callback para indicar que soltamos bot�o de troca de arma
+
+            playerInput.CharacterControls.Inventory.started += openInventory;
         }
 
         // Cancela o registro de callbacks quando o script � desativado
@@ -74,9 +82,31 @@ namespace RPG.Player.InputController
             playerInput.CharacterControls.Attack.started -= playerAttack.Attack;
             playerInput.CharacterControls.Attack.canceled -= playerAttack.StopAttack;
             playerInput.CharacterControls.ChangeWeapon.started -= playerAttack.ChangeWeapon; 
-            playerInput.CharacterControls.ChangeWeapon.canceled -= playerAttack.StopChangeWeapon; 
+            playerInput.CharacterControls.ChangeWeapon.canceled -= playerAttack.StopChangeWeapon;
+
+            playerInput.CharacterControls.Inventory.started -= openInventory;
+
+        }
+
+
+        public void openInventory(InputAction.CallbackContext context)
+        {
+            inventoryManager = FindObjectOfType<InventoryManager>();
+            if (!inventory.active)
+            {
+                inventory.SetActive(true);
+                inventoryManager.ListItems();
+
+
+            }
+            else
+            {
+                inventory.SetActive(false);
+            }
 
         }
     }
+
+    
 
 }

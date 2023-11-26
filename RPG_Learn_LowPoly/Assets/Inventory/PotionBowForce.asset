@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 2
   itemName: Potion Bow Force
   value: 20
-  icon: {fileID: 21300000, guid: e8f4e1ea22c66c7478593a19e0add994, type: 3}
+  icon: {fileID: 21300000, guid: 530bcabb1501d8148a19a77465ecac03, type: 3}
   itemType: 1

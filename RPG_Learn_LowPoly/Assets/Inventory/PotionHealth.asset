@@ -15,4 +15,5 @@ MonoBehaviour:
   id: 1
   itemName: RedPotion
   value: 10
-  icon: {fileID: 21300000, guid: b7d19ec039fa7b141bd165aa95496c75, type: 3}
+  icon: {fileID: 21300000, guid: e8a68fd17ce42174e9b24babd0ae6629, type: 3}
+  itemType: 0
