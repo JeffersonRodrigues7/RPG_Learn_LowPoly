@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Abertura.unity
     guid: cb29d22e2fcfadd49b74bf9884fc6450
   - enabled: 1
-    path: Assets/Scenes/nextSceneName.unity
+    path: Assets/Scenes/Vila.unity
     guid: 17b18b4ece71e6f4a91484c79d176987
   - enabled: 1
     path: Assets/Scenes/Floresta.unity
