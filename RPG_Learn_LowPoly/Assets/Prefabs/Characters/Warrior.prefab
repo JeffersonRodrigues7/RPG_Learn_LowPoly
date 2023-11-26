@@ -2356,12 +2356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257d557fcfded5047885c07033a55627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  chaseSpeed: 0
+  walkSpeed: 3
+  chaseSpeed: 5
   cooldownTimeAfterChase: 2
   minDistanceToTarget: 2
   patrolPoints:
-  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &9208208121542246608
 MonoBehaviour:
@@ -2375,8 +2374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ba1234ff668e3408797e5405f49b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordDamage: 25
-  projectileDamage: 15
+  swordDamage: 50
+  projectileDamage: 0
   swordPrefab: {fileID: 1032590170434083731, guid: 0d5dba551d6ce4a44ba5bda4e7f986aa, type: 3}
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 3994212606361548335}
@@ -2397,7 +2396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   healthSlider: {fileID: 4249761085565180844}
   healing: {fileID: 0}

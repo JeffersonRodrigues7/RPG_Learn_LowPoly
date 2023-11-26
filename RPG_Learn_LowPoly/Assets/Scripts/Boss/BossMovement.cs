@@ -201,7 +201,7 @@ namespace RPG.Boss.Movement
             lookToPlayer(portal.transform, player.transform);
             GameObject Tharall = Instantiate(Thrall, pos, Quaternion.identity, thrallsParent);
             lookToPlayer(Tharall.transform, player.transform);
-            Destroy(Tharall, 20);
+            Destroy(Tharall, 15);
         }
 
 

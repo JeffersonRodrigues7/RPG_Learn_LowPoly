@@ -2377,10 +2377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15c988973c8f71408eddfd1a342a769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handDamage: 20
-  swordDamage: 35
-  jumpDamage: 50
-  meteorDamage: 50
+  handDamage: 50
+  swordDamage: 70
+  jumpDamage: 100
+  meteorDamage: 70
   swordPrefab: {fileID: 7901973476606195368, guid: 96a69130569cfbd47975ed8260a90e24, type: 3}
   handPrefab: {fileID: 8782240002588734737}
   leftHandTransform: {fileID: 1612996494651248115}
@@ -2403,7 +2403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 2000
   currentHealth: 0
   healthSlider: {fileID: 66686306}
   healing: {fileID: 0}

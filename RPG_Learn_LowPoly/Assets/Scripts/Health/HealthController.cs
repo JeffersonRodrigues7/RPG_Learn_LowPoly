@@ -40,6 +40,19 @@ namespace RPG.Health
             bossAttack = GetComponent<BossAttack>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && tag.Equals("Player"))
+            {
+                usePotion(0.2f);
+            }
+
+            if (currentHealth <= 0.3*maxHealth && tag.Equals("Ally"))
+            {
+                usePotion(0.2f);
+            }
+        }
+
         private void Start()
         {
             currentHealth = maxHealth;
@@ -101,21 +114,9 @@ namespace RPG.Health
 
         public void carregarEfeito()
         {
-
-            // Instanciar o prefab acoplado ao jogador
-            GameObject novoObjeto = Instantiate(healing, transform.position, Quaternion.identity);
-            novoObjeto.transform.parent = transform;
-
-            StartCoroutine(destroyEffect(novoObjeto));
+            Instantiate(healing, transform.position, Quaternion.identity, transform);
         }
 
-
-
-        IEnumerator destroyEffect(GameObject effect)
-        {
-            yield return new WaitForSeconds(2.0f);
-            Destroy(effect);
-        }
 
         private void updateHealthUI()
         {

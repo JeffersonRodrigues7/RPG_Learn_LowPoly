@@ -2061,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   healthSlider: {fileID: 5669471609829845981}
   healing: {fileID: 0}

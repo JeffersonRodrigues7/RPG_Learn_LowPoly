@@ -2820,7 +2820,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &2669788780259592307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2834,7 +2833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 0
-  projectileDamage: 15
+  projectileDamage: 30
   swordPrefab: {fileID: 3964347541132674574, guid: 223daaca244fbc044b88967b86d54a77, type: 3}
   bowPrefab: {fileID: 6663683016408734395, guid: 09aa14290a4eefd4bbbf6a5a22b0449c, type: 3}
   leftHandTransform: {fileID: 4158756939626166525}
@@ -2855,7 +2854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 75
+  maxHealth: 150
   currentHealth: 0
   healthSlider: {fileID: 4786342570408402770}
   healing: {fileID: 0}
@@ -2908,8 +2907,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9407654, z: 1}
-  m_Center: {x: 0, y: 0.9548872, z: 0}
+  m_Size: {x: 1, y: 2.35, z: 1}
+  m_Center: {x: 0, y: 1.22, z: 0}
 --- !u!1 &8151457013936315091
 GameObject:
   m_ObjectHideFlags: 0
