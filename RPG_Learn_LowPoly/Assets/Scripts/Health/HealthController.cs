@@ -165,16 +165,16 @@ namespace RPG.Health
 
         private void destroyObject()
         {
-            Destroy(gameObject);
-
             if (tag.Equals("Player") && deathPanel)
             {
                 deathPanel.SetActive(true);
             }
             if (artefact)
             {
-                Instantiate(artefact, transform);
+                Instantiate(artefact, transform.position, Quaternion.identity, transform.parent);
             }
+
+            Destroy(gameObject);
         }
     }
 }

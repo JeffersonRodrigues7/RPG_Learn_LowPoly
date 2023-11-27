@@ -230,7 +230,7 @@ namespace RPG.Boss.Movement
             foreach (Transform point in patrolPoints)
             {
                 float currentDistance = Vector3.Distance(referencePoint.position, point.position);
-                Debug.Log(currentDistance);
+                //Debug.Log(currentDistance);
                 if (currentDistance > maxDistance)
                 {
                     maxDistance = currentDistance;
