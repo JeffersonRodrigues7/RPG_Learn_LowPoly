@@ -1540,7 +1540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a3b602caf6ac144ae03e9443f160f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 20
+  detectionRadius: 30
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 0
-  projectileDamage: 35
+  projectileDamage: 50
   bowPrefab: {fileID: 6663683016408734395, guid: 439f991fb12d66e4d9ea02b14725a5be, type: 3}
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
@@ -1632,6 +1632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathPanel: {fileID: 0}
   maxHealth: 500
   currentHealth: 0
   healthSlider: {fileID: 8330427179651512874}
@@ -1743,8 +1744,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.55796814, y: 1.9131743, z: 0.4456253}
-  m_Center: {x: 0.006126404, y: 0.79710025, z: -0.03739643}
+  m_Size: {x: 1, y: 1.9666184, z: 1}
+  m_Center: {x: 0, y: 0.97286946, z: 0}
 --- !u!1 &3284555193264165315
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,8 +13,9 @@ namespace RPG.Health
 {
     public class HealthController : MonoBehaviour
     {
-            // Adiciona um evento que será acionado quando o personagem morrer
         public event Action OnDeath;
+        // Adiciona um evento que será acionado quando o personagem morrer
+        public GameObject deathPanel;
         [Header("CharacterData")]
         [SerializeField] private float maxHealth = 100f;
 
@@ -78,6 +79,7 @@ namespace RPG.Health
                 animator.SetTrigger(deathHash);
                 // Dispara o evento OnDeath quando o personagem morre
                 OnDeath?.Invoke();
+
             }
         }
 
@@ -163,6 +165,11 @@ namespace RPG.Health
         private void destroyObject()
         {
             Destroy(gameObject);
+
+            if (tag.Equals("Player") && deathPanel)
+            {
+                deathPanel.SetActive(true);
+            }
         }
     }
 }
