@@ -135,7 +135,7 @@ namespace RPG.Health
         private void changeBossStage()
         {
             float perHealth = (currentHealth / maxHealth);
-            Debug.Log(perHealth);
+            //Debug.Log(perHealth);
 
             if(perHealth > 0.8 && bossAttack.bossStage != BossAttackStage.Stage01)
             {

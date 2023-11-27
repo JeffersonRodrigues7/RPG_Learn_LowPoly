@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 100
-  attackDistance: 1.5
+  attackDistance: 2
   chaseEnemyBehavior: 1
 --- !u!114 &3387115613074946631
 MonoBehaviour:

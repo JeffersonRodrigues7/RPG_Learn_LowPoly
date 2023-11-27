@@ -175,9 +175,10 @@ namespace RPG.Boss.Movement
             Instantiate(TeleportEffect, positionBeforeTeleport, Quaternion.identity, effectsParent);
 
 
-            Vector3 nextPosition = FindOtherPoint();
+            Vector3 nextPosition;
 
             if (currentBossState == BossState.SummoningMeteors) nextPosition = FindFarthestPatrolPoint(player.transform).position;
+            else nextPosition = FindOtherPoint();
 
             transform.position = nextPosition;
             isTeleporting = false;
@@ -229,14 +230,14 @@ namespace RPG.Boss.Movement
             foreach (Transform point in patrolPoints)
             {
                 float currentDistance = Vector3.Distance(referencePoint.position, point.position);
-
+                Debug.Log(currentDistance);
                 if (currentDistance > maxDistance)
                 {
                     maxDistance = currentDistance;
                     farthestPoint = point;
                 }
             }
-
+            //Debug.Log("Final: " + farthestPoint.position);
             return farthestPoint;
         }
 

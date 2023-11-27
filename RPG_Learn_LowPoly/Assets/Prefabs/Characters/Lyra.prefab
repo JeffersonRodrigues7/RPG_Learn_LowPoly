@@ -1478,10 +1478,10 @@ GameObject:
   - component: {fileID: 428715542685881112}
   - component: {fileID: 3116864467279428630}
   - component: {fileID: 3831385985572265550}
-  - component: {fileID: 916631096282418643}
   - component: {fileID: 5239921898680337858}
   - component: {fileID: 279473914240133546}
   - component: {fileID: -5395609361573242398}
+  - component: {fileID: 1292978959}
   m_Layer: 0
   m_Name: Lyra
   m_TagString: Ally
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordDamage: 0
-  projectileDamage: 25
+  projectileDamage: 35
   bowPrefab: {fileID: 6663683016408734395, guid: 439f991fb12d66e4d9ea02b14725a5be, type: 3}
   leftHandTransform: {fileID: 8929833131839951040}
   rightHandTransform: {fileID: 4063632206455438027}
@@ -1598,20 +1598,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &916631096282418643
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247146929443453010}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.9267161
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.886642, z: 0}
 --- !u!195 &5239921898680337858
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1646,10 +1632,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d96d26a5dc63146a94ccb61f6d3c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 500
   currentHealth: 0
   healthSlider: {fileID: 8330427179651512874}
-  healing: {fileID: 0}
+  healing: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
 --- !u!82 &-5395609361573242398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1746,6 +1732,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1292978959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3247146929443453010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.55796814, y: 1.9131743, z: 0.4456253}
+  m_Center: {x: 0.006126404, y: 0.79710025, z: -0.03739643}
 --- !u!1 &3284555193264165315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,7 +2061,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 713452930873598695}
   m_FillRect: {fileID: 1146662344511180001}
   m_HandleRect: {fileID: 7257080816543512493}
