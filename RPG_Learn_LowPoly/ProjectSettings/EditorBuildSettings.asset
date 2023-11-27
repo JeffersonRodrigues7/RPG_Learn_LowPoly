@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Floresta.unity
     guid: dd008fb3cf0564b4bb60dac1fadc7326
   - enabled: 1
+    path: Assets/Scenes/Fim.unity
+    guid: fc9907f221716df4aa01feec7abc9d16
+  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 65869c9f3c9d85c428ae56368ef582d5
   m_configObjects: {}

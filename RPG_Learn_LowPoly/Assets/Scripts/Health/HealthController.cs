@@ -16,6 +16,7 @@ namespace RPG.Health
         public event Action OnDeath;
         // Adiciona um evento que será acionado quando o personagem morrer
         public GameObject deathPanel;
+        public GameObject artefact;
         [Header("CharacterData")]
         [SerializeField] private float maxHealth = 100f;
 
@@ -169,6 +170,10 @@ namespace RPG.Health
             if (tag.Equals("Player") && deathPanel)
             {
                 deathPanel.SetActive(true);
+            }
+            if (artefact)
+            {
+                Instantiate(artefact, transform);
             }
         }
     }
