@@ -672,27 +672,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Era uma vez um reino chamado Cornetopolis , com o Rei Victor Cornettos,
+  m_text: "Era uma vez um reino chamado Cornetopolis, com o Rei Victor Cornettos,
     que diferente de todos os outros reinos, tinha compaix\xE3o por todas as classes,
     desde a mais alta, at\xE9 um simples alde\xE3o. Suas terras eram cheias de vida,
     com colheitas magn\xEDficas, onde todos, nem mesmo o mais simples, imaginava
-    um dia passar fome ou cede.\nPor\xE9m, como estamos falando da realidade e n\xE3o
-    em si um conto de fadas, nada dura para sempre. Uma guerra iminente entre 4 reinos,
-    estava por vir. O Rei sabia que precisaria garantir a paz e a prote\xE7\xE3o
+    um dia passar fome ou sede.\r\nPor\xE9m, como estamos falando da realidade e
+    n\xE3o em si um conto de fadas, nada dura para sempre. Uma guerra iminente entre
+    4 reinos, estava por vir. O Rei sabia que precisaria garantir a paz e a prote\xE7\xE3o
     de seu reino. Ent\xE3o desesperado, teve que tomar uma decis\xE3o r\xE1pida,
     escolheu o seu melhor guerreiro \u201CRobert\u201D, o mais forte, e mandou em
-    uma miss\xE3o. \nEle havia lembrado de uma hist\xF3ria que seu pai o contava
-    quando crian\xE7a, em que na floresta perto de um santu\xE1rio reside um monstro.
+    uma miss\xE3o. \r\nEle havia lembrado de uma hist\xF3ria que seu pai o contava
+    quando crian\xE7a, que na floresta perto de um santu\xE1rio reside um monstro.
     Esse monstro, seria o guardi\xE3o de um artefato t\xE3o poderoso, que quem o
     possu\xEDa, teria tamanho poder e for\xE7a, podendo at\xE9 mesmo acabar com guerras
-    e vilas. \n Com medo pelo seu povo implorou ao guerreiro: \u201CEsta \xE9 a nossa
-    \xFAnica salva\xE7\xE3o, n\xE3o fa\xE7a isso por mim, mas por sua fam\xEDlia,
+    e vilas. \r\n Com medo pelo seu povo implorou ao guerreiro: \u201CEsta \xE9 a
+    nossa \xFAnica salva\xE7\xE3o, n\xE3o fa\xE7a isso por mim, mas por sua fam\xEDlia,
     por seus amigos e pelo seu reino. Proteja e garanta a paz que todos os dias s\xE3o
     motivos de alegria e satisfa\xE7\xE3o. Deixo a ti, o futuro n\xE3o s\xF3 de um
-    velho sentado no trono, mas deixo a ti, o futuro de uma na\xE7\xE3o.\u201D\nO
-    Guerreiro ent\xE3o lembrou-se de sua amiga de infancia Lyra, e \xE0 chamou para
-    lhe acompanhar nessa jornada. Ele saberia que n\xE3o seria uma miss\xE3o f\xE1cil,
-    mas precisava ser feita!"
+    velho sentado no trono, mas deixo a ti, o futuro de uma na\xE7\xE3o.\u201D\r\nO
+    Guerreiro ent\xE3o lembrou-se de sua amiga de inf\xE2ncia Lyra, e \xE0 chamou
+    para lhe acompanhar nessa jornada. Ele saberia que n\xE3o seria uma miss\xE3o
+    f\xE1cil, mas precisava ser feita!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 784171a0ec0c56c4c96fec7c48b3d249, type: 2}
   m_sharedMaterial: {fileID: 1800420616675153218, guid: 784171a0ec0c56c4c96fec7c48b3d249, type: 2}
