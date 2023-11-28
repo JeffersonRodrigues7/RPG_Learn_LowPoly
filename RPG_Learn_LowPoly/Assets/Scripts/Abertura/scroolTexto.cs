@@ -5,7 +5,7 @@ using UnityEngine;
 public class scroolTexto : MonoBehaviour
 {
     // velocidade de scroll na 'distância'
-    public float scrollSpeed = 8;
+    public float scrollSpeed = 7;
     public float callNextSceneTime = 130;
     public SceneManagerRPG sceneManagerRPG;
     public string nextSceneName = "Vila";
