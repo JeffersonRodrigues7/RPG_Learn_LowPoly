@@ -14,7 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkScript:
   - name: Guarda
-    text: "Alto l\xE1, viajante! Quem se atreve a se aproximar do Port\xE3o do Reino?"
+    text: "Alto l\xE1, viajante! Este \xE9 o Port\xE3o da Morte, que leva \xE0 Floresta
+      Sombria. Dificilmente voc\xEA voltar\xE1 com vida."
   - name: Guerreiro
-    text: " Sou Sir Gareth, o Bravo, em uma miss\xE3o urgente do Rei. Preciso passar
-      para alertar sobre a amea\xE7a iminente que se aproxima."
+    text: 'Estou ciente dos riscos. '
+  - name: Guarda
+    text: "A Floresta Sombria \xE9 trai\xE7oeira, e muitos j\xE1 se perderam nela.
+      Sem contar que talvez voc\xEA tenha que enfrent\xE1-lo."
+  - name: Guerreiro
+    text: "Enfrent\xE1-lo?"
+  - name: Guarda
+    text: "Sim. A floresta \xE9 guardada por uma terr\xEDvel for\xE7a maligna. A
+      propria personifica\xE7\xE3o de todo o mal existente."
+  - name: Guerreiro
+    text: "O destino do reino est\xE1 em jogo, e n\xE3o posso recuar agora."
+  - name: Guarda
+    text: "Que assim seja. Mantenha seus sentidos agu\xE7ados, e que a coragem que
+      o trouxe at\xE9 aqui permane\xE7a forte. Se realmente for o salvador que precisamos,
+      que os deuses o guiem."
