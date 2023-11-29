@@ -22,7 +22,7 @@ public class chamaMenu : MonoBehaviour
     {
         print(t);
         t += Time.deltaTime;
-        if (t > 38 && primeira) {
+        if (t > 45 && primeira) {
             primeira = false;
             SceneManager.LoadScene("MainMenu");
         }

@@ -96,15 +96,6 @@ namespace RPG.Player.Attack
             spawnWeapon(swordPrefab, rightHandTransform);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                // Faça algo quando a tecla "Space" for solta
-                Debug.Log("Tecla Space foi solta!");
-            }
-        }
-
         private void spawnWeapon(GameObject weaponPrefab, Transform hand)
         {
             // Alternar entre o uso de espada e arco
