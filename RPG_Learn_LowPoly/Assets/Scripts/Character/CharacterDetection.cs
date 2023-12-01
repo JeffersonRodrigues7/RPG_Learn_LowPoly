@@ -34,20 +34,20 @@ namespace RPG.Character.Detection
 
         private void Update()
         {
-            if(target != null)
+            if (target != null)
             {
                 float distance = Vector3.Distance(target.position, transform.position);
 
                 if (distance > detectionRadius)
                 {
                     target = null; // Remove o alvo.
-                    if (!chaseEnemyBehavior) characterMovement.lookAt(target); //Se for arqueiro, ele só vai parar de olhar
+                    if (!chaseEnemyBehavior) characterMovement.lookAt(target); // Se for arqueiro, ele só vai parar de olhar
                     if (chaseEnemyBehavior) characterMovement.stopChase(); // Interrompe a perseguição se o comportamento de perseguição estiver ativado.
                 }
-                
+
             }
 
-            if(target == null)
+            if (target == null)
             {
                 Collider[] enemies = Physics.OverlapSphere(transform.position, detectionRadius);
 
@@ -81,13 +81,14 @@ namespace RPG.Character.Detection
                     characterAttack.startAttackAnimation(target); // Inicia a animação de ataque no componente de ataque.
                 }
 
-                if (!chaseEnemyBehavior) //Se for um inimigo que fica parado, ele vai ficar sempre olhando pro alvo
+                if (!chaseEnemyBehavior) // Se for um inimigo que fica parado, ele vai ficar sempre olhando pro alvo
                 {
                     characterMovement.lookAt(target);
                 }
             }
         }
 
+        //Função que retorna o inimgio mais próximo de um array de colliders
         private Transform FindClosestEnemy(Collider[] enemies)
         {
             Transform closestEnemy = null;
@@ -107,15 +108,15 @@ namespace RPG.Character.Detection
             return closestEnemy;
         }
 
-        //Quando o inimigo é atingido ele aumenta seu raio de detecção
+        // Quando o inimigo é atingido ele aumenta seu raio de detecção
         public void reactToProjectile(Transform _target)
         {
-            if (!target) //Se não tivemos um target, significa que ele levou um golpe sem estar em batalha, logo precisamos aumentar seu raio de detecção
+            if (!target) // Se não tivemos um target, significa que ele levou um golpe sem estar em batalha, logo precisamos aumentar seu raio de detecção
             {
                 float newDetectionRadius = Vector3.Distance(_target.position, transform.position);
                 detectionRadius = newDetectionRadius + 5f;
 
-                if (!chaseEnemyBehavior)//se for arqueiro
+                if (!chaseEnemyBehavior) // se for arqueiro
                     attackDistance = detectionRadius;
             }
         }

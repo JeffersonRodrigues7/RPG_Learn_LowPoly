@@ -6,6 +6,7 @@ public class HotkeysController : MonoBehaviour
 {
     public GameObject hotkeys;
 
+    //aTIVA/DESATIVA TELA DE ATALHOS
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))

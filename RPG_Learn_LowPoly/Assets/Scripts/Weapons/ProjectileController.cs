@@ -31,6 +31,7 @@ namespace RPG.Projectile
 
         void Update()
         {
+            //movimentando flecha
             if(target != null)
             { 
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -51,6 +52,7 @@ namespace RPG.Projectile
             transform.LookAt(target);
         }
 
+        //Ativado quando flecha entra em contato com inimigo
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag.Equals(enemyTag))

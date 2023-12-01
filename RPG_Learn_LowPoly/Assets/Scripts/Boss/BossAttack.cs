@@ -9,7 +9,8 @@ using UnityEngine.AI;
 
 namespace RPG.Boss.Attack
 {
-    public enum BossAttackStage // Estados possiveis
+    // Enumeração dos estágios de ataque do chefe
+    public enum BossAttackStage
     {
         Stage01,
         Stage02,
@@ -17,21 +18,24 @@ namespace RPG.Boss.Attack
         Stage04,
         Stage05
     }
+
+    // Classe responsável pelos ataques do chefe
     public class BossAttack : MonoBehaviour
     {
-
+        // Dados de dano para diferentes tipos de ataque
         [Header("DATA")]
         [SerializeField] private float handDamage = 20f;
         [SerializeField] private float swordDamage = 35f;
         [SerializeField] private float jumpDamage = 50f;
         [SerializeField] private float meteorDamage = 50f;
 
+        // Outras configurações e referências
         [Header("Other")]
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private GameObject handPrefab;
-        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma ser� anexada
-        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma ser� anexada
-        [SerializeField] private bool isUsingSword = false;//�true-> weapon atual � a espada; false -> weapon atua�l � o arco
+        [SerializeField] private Transform leftHandTransform; // Transform do ponto onde a arma será anexada
+        [SerializeField] private Transform rightHandTransform; // Transform do ponto onde a arma será anexada
+        [SerializeField] private bool isUsingSword = false; // true -> weapon atual é a espada; false -> weapon atual é o arco
         [SerializeField] public BossAttackStage bossStage = BossAttackStage.Stage01;
         [SerializeField] private SkinnedMeshRenderer Vampire;
         [SerializeField] private GameObject Aura;
@@ -46,8 +50,8 @@ namespace RPG.Boss.Attack
 
         private NavMeshAgent navMeshAgent;
 
-        private int meleeAttackingHash; //Hash da String que se refere a anima��o de Melee Attacking
-        private int rangedAttackingHash; //Hash da String que se refere a anima��o de Melee Attacking
+        private int meleeAttackingHash; // Hash da String que se refere a animação de Melee Attacking
+        private int rangedAttackingHash; // Hash da String que se refere a animação de Melee Attacking
 
         private ShakeCamera shakeCamera;
 
@@ -56,7 +60,7 @@ namespace RPG.Boss.Attack
         public float MeteorDamage { get { return meteorDamage; } }
 
         private AudioSource audioSource;
-        // SONS
+        // Sons
         [SerializeField] private AudioClip swordHitSound;
         [SerializeField] private AudioClip roarSound;
         [SerializeField] private AudioClip bossJump;
@@ -65,6 +69,7 @@ namespace RPG.Boss.Attack
 
         private void Awake()
         {
+            // Inicializa os componentes
             navMeshAgent = GetComponent<NavMeshAgent>();
             bossMovement = GetComponent<BossMovement>();
             animator = GetComponent<Animator>();
@@ -72,6 +77,7 @@ namespace RPG.Boss.Attack
 
         private void Start()
         {
+            // Configuração do áudio
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null)
             {
@@ -80,27 +86,31 @@ namespace RPG.Boss.Attack
             Aura.SetActive(false);
             shakeCamera = GameObject.Find("ShakeCamera").GetComponent<ShakeCamera>();
 
-            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack"); // Obt�m o hash da string da anima��o de ataque corpo a corpo
+            // Conversão das strings dos nomes das animações em hash para melhor performance
+            meleeAttackingHash = Animator.StringToHash("TriggerMeleeAttack");
             rangedAttackingHash = Animator.StringToHash("TriggerRangedAttack");
 
+            // Configuração do controlador da arma para a mão esquerda
             leftWeaponController = handPrefab.GetComponent<WeaponController>();
             leftWeaponController.EnemyTag = "Player"; // Define a tag do inimigo
             leftWeaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
             leftWeaponController.Damage = handDamage;
 
+            // Força o início da perseguição
             bossMovement.forceStartChase();
         }
 
+        // Método para instanciar a arma
         private void spawnWeapon(GameObject weaponPrefab, Transform hand)
         {
             weapon = Instantiate(weaponPrefab, hand); // Instancia a arma no ponto especificado
-            rightWeaponController = weapon.GetComponent<WeaponController>(); // Obt�m o controlador da arma
+            rightWeaponController = weapon.GetComponent<WeaponController>(); // Obtém o controlador da arma
             rightWeaponController.EnemyTag = "Player"; // Define a tag do inimigo
             rightWeaponController.EnemyTag2 = "Ally"; // Define a tag do inimigo
             rightWeaponController.Damage = swordDamage;
-
         }
-        
+
+        // Método para reproduzir o som de ataque da espada
         private void PlaySwordAttackSound()
         {
             if (swordHitSound != null)
@@ -108,13 +118,15 @@ namespace RPG.Boss.Attack
                 audioSource.PlayOneShot(swordHitSound);
             }
         }
-        
+
+        // Define o estágio atual do ataque do chefe
         public void setStage(BossAttackStage stage)
         {
             Debug.Log("Iniciando estado: " + stage);
             bossStage = stage;
 
-            if (bossStage == BossAttackStage.Stage03) {
+            if (bossStage == BossAttackStage.Stage03)
+            {
                 bossMovement.forceStartChase();
                 spawnWeapon(swordPrefab, rightHandTransform);
                 isJumping = true;
@@ -132,29 +144,30 @@ namespace RPG.Boss.Attack
                 Aura.SetActive(true);
                 Material[] materialsCopy = Vampire.materials;
 
-                // Modifique os materiais na c�pia
+                // Modifica os materiais na cópia
                 materialsCopy[0] = newFirstMaterial;
                 materialsCopy[1] = newSecondMaterial;
 
-                // Atribua a c�pia modificada de volta ao SkinnedMeshRenderer
+                // Atribui a cópia modificada de volta ao SkinnedMeshRenderer
                 Vampire.materials = materialsCopy;
 
                 if (rightWeaponController != null) rightWeaponController.changeMaterial();
             }
         }
 
+        // Inicia a animação de ataque com base no estágio atual
         public void startAttackAnimation(Transform _target)
         {
             switch (bossStage)
             {
                 case BossAttackStage.Stage01:
-                    animator.SetTrigger(rangedAttackingHash); 
+                    animator.SetTrigger(rangedAttackingHash);
                     break;
                 case BossAttackStage.Stage02:
                     bossMovement.currentBossState = BossState.Teleporting;
                     break;
                 case BossAttackStage.Stage03:
-                    if(!isJumping) animator.SetTrigger(meleeAttackingHash);
+                    if (!isJumping) animator.SetTrigger(meleeAttackingHash);
                     break;
                 case BossAttackStage.Stage04:
                     animator.SetTrigger(meleeAttackingHash);
@@ -165,12 +178,12 @@ namespace RPG.Boss.Attack
             }
         }
 
-        // Chamado pela anima��o de ataque
+        // Chamado pela animação de ataque para ativar o ataque da mão esquerda
         public void activeLeftAttack()
         {
             leftWeaponController.IsAttacking = true; // Ativa o ataque da arma
 
-            // Adicione isso para reproduzir o rugido a cada 5 segundos
+            // Adiciona isso para reproduzir o rugido a cada 5 segundos
             if (canRoar && roarSound != null)
             {
                 canRoar = false;
@@ -178,6 +191,7 @@ namespace RPG.Boss.Attack
             }
         }
 
+        // Reproduz o som de rugido
         private void PlayRoarSound()
         {
             if (roarSound != null)
@@ -186,6 +200,7 @@ namespace RPG.Boss.Attack
             }
         }
 
+        // Ativa o ataque da mão direita
         public void activeRightAttack()
         {
             rightWeaponController.Damage = swordDamage;
@@ -196,11 +211,13 @@ namespace RPG.Boss.Attack
             }
         }
 
+        // Inicia o pulo do chefe
         public void startJump()
         {
             navMeshAgent.speed = 30f;
         }
 
+        // Ativa o ataque durante o pulo
         public void activeJumpAttack()
         {
             rightWeaponController.Damage = jumpDamage;
@@ -210,23 +227,24 @@ namespace RPG.Boss.Attack
                 audioSource.volume = 0.6f;
                 audioSource.PlayOneShot(bossJump);
             }
-             audioSource.volume = 0.47f;
+            audioSource.volume = 0.47f;
         }
 
+        // Ativa o efeito de tremor na câmera
         public void shakeCameraEffect()
         {
             shakeCamera.startShaking(10f);
         }
 
-        // Chamado pela anima��o de ataque
+        // Chamado pela animação de ataque para desativar o ataque
         public void desactiveAttack()
         {
             navMeshAgent.speed = bossMovement.ChaseSpeed;
             leftWeaponController.IsAttacking = false; // Desativa o ataque da arma
-            if(rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
+            if (rightWeaponController != null) rightWeaponController.IsAttacking = false; // Desativa o ataque da arma
         }
 
-        // Chamado pela anima��o de ataque
+        // Chamado pela animação de ataque para parar o efeito de pulo
         public void stopJumpEffect()
         {
             isJumping = false;
